@@ -131,13 +131,27 @@ Formato de carrusel para presentar a un artista emergente.
 
 ---
 
+## Mantener este archivo
+
+Tengo permiso de escritura en el repo desde el 21 de septiembre de 2026.
+
+**Cada vez que Mia corrija algo —una palabra que no le gustó, una regla de tono
+nueva, un formato, un criterio— se agrega acá y se commitea en el momento.** No
+hay que esperar a que ella lo pida ni preguntarle si quiere guardarlo: se guarda.
+Ese es el trato, y es la razón por la que este archivo existe.
+
+Al agregar: buscar primero si ya hay una regla parecida y afinarla en vez de
+duplicarla. Este archivo se lee entero en cada sesión, así que tiene que quedar
+corto y sin repeticiones.
+
+---
+
 ## Limitaciones del entorno
 
-- **No tengo permiso de escritura en este repo** (403). No puedo commitear ni
-  pushear. Todo lo que quede solo en disco se pierde cuando se recicla el contenedor
-  — ya pasó una vez y se perdieron plantillas y scripts.
-- **Lo que sobrevive son los artifacts publicados**, porque viven del lado del
-  servidor. Si algo vale la pena conservar, va ahí.
+- **Todo lo que quede solo en disco se pierde cuando se recicla el contenedor.**
+  Ya pasó una vez y se perdieron plantillas y scripts. Lo que valga la pena
+  conservar se commitea o se publica como artifact.
+- **Los artifacts publicados sobreviven**, porque viven del lado del servidor.
 - Instagram, YouTube y la mayoría de los medios están bloqueados para lectura
   directa. La investigación sale de búsquedas web, así que las citas textuales
   conviene que ella las confirme en la fuente antes de leerlas al aire.

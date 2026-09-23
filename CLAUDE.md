@@ -111,6 +111,12 @@ ancho al pintarlo.
 
 **Formatos**: portada (1080×1350), lámina de carrusel (1080×1350), historia (1080×1920).
 
+**El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real
+(`ctx.filter`), no achicando y estirando la imagen. Achicar y estirar se ve bien con
+poco desenfoque, pero al subir el control deja cuadrados. Queda un achique suave
+—solo para que salga barato— más el gaussiano encima, y un camino alternativo por
+mitades para los Safari anteriores al 17.4, que no tienen `ctx.filter`.
+
 ---
 
 ## Herramientas

@@ -95,6 +95,12 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
 **Colores**: negro `#0A0A0A`, morado `#7B2CFF`, blanco.
 **Tipografías**: Anton para títulos, Montserrat para bajadas y texto.
 
+**La bajada del post va en Montserrat 700 (negrita)** desde el 23 de septiembre de
+2026. Mia la pidió así porque en Instagram, de lejos, en peso normal se veía
+difusa. No devolverla a 400. Si se cambia el peso, hay que cambiarlo también en
+la fuente con la que se **mide** para repartir las líneas, o el texto se pasa de
+ancho al pintarlo.
+
 **Reglas que Mia marcó como intocables:**
 - **Nunca cambiar la tipografía oficial.** Ni por legibilidad.
 - **Nunca ponerle borde, sombra ni contorno al texto.** Si algo no se lee, se
@@ -111,7 +117,10 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
 
 **Generador de gráficas** — hace portadas, láminas e historias con la plantilla de
 marca, sin depender de mí:
-https://claude.ai/code/artifact/290b938e-abdc-4c9f-bb41-5b2274b8c7a4
+https://claude.ai/artifact/64yEEGEqBWUxbxeLtdcmCX
+
+(Antes vivía en `claude.ai/code/artifact/290b938e-…`; la plataforma cambió el
+formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuevo.)
 
 ---
 

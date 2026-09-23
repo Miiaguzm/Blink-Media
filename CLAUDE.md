@@ -221,6 +221,32 @@ mitades para los Safari anteriores al 17.4, que no tienen `ctx.filter`.
 
 ---
 
+## Las dos cuentas
+
+Mia trabaja con dos marcas conectadas. Saber cuál es cuál antes de proponer
+contenido, porque no va lo mismo en las dos.
+
+**@blinkmedia — el medio.** 100% informativo: noticias, agenda, Blink Radar,
+concursos. Todos los reels que se le escriben son informativos. Nunca lip sync,
+chascarros ni vida personal. En septiembre de 2026 tenía ~70 seguidores.
+
+**@miablink — la creadora.** Es ella: vlogs de conciertos, lip sync, story times,
+chascarros, su colección de merch. Más los reels informativos de Blink Media, que
+se publican **en colaboración** y aparecen en las dos cuentas. Tiene ~1.100
+seguidores, bastante más que el medio, así que hoy **es el motor que levanta al
+medio**, no al revés.
+
+En TikTok solo existe @miablink; el medio no tiene cuenta ahí y por ahora no la
+necesita.
+
+**Consecuencias prácticas:** una publicación colaborativa es *una sola*, con una
+sola portada, así que se ve igual en las dos grillas — conviene que la portada de
+los reels lleve la cara de Mia con el logo chico, para que sirva a las dos. Y el
+collab entre sus propias cuentas tiene techo, porque solo alcanza a quien ya la
+sigue: para público nuevo hay que colaborar con artistas, recintos o productoras.
+
+---
+
 ## Herramientas
 
 **Generador de gráficas** — hace portadas, láminas e historias con la plantilla de

@@ -197,6 +197,13 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
 **Colores**: negro `#0A0A0A`, morado `#7B2CFF`, blanco.
 **Tipografías**: Anton para títulos, Montserrat para bajadas y texto.
 
+**El logo está en `logo-blink.png`** (569×398, fondo transparente): la palabra BLINK
+en blanco con el destello morado sobre la I. Es el logo de verdad, el mismo que trae
+el generador embebido. **Nunca escribir "BLINK" con una tipografía como reemplazo
+del logo** — se ve parecido y no lo es. Y ojo: Anton no tiene cursiva, así que
+inclinarla con `font-style:italic` es el navegador falsificándola, o sea cambiar la
+tipografía oficial. No va.
+
 **La bajada del post va en Montserrat 700 (negrita)** desde el 23 de septiembre de
 2026. Mia la pidió así porque en Instagram, de lejos, en peso normal se veía
 difusa. No devolverla a 400. Si se cambia el peso, hay que cambiarlo también en
@@ -298,3 +305,16 @@ corto y sin repeticiones.
 - Instagram, YouTube y la mayoría de los medios están bloqueados para lectura
   directa. La investigación sale de búsquedas web, así que las citas textuales
   conviene que ella las confirme en la fuente antes de leerlas al aire.
+- **Google Fonts está bloqueado acá**, así que cualquier imagen que yo renderice
+  con el navegador sale con una tipografía cualquiera si no instalo las fuentes
+  antes. Se sacan del repo público de Google y se instalan en el sistema:
+  `git clone --depth 1 --filter=blob:none --sparse https://github.com/google/fonts.git`
+  → `git sparse-checkout set ofl/anton ofl/montserrat` → copiar los `.ttf` a
+  `/usr/share/fonts/truetype/blink/` y `fc-cache -f`. Hay que rehacerlo cada vez
+  que se recicla el contenedor.
+- **`document.fonts.check()` miente**: devuelve `true` aunque la fuente no haya
+  cargado. La única forma de saberlo es medir: si Anton y Montserrat dan el mismo
+  ancho en `measureText`, ninguna cargó — Anton es condensada y tiene que medir
+  bastante menos. Verificar así antes de dar una gráfica por buena.
+- Esto **no afecta al generador**, que corre en el navegador de Mia y ahí las
+  fuentes cargan bien. Solo afecta a lo que renderizo yo acá.

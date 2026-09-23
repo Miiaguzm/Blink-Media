@@ -127,8 +127,28 @@ ordenar**, no en todos los copies.
 
 ### Extensión
 
-Cortos o medianos. **El copy complementa el reel, no lo transcribe.** Si el reel
-dura dos minutos y cuenta la historia completa, el copy abre la conversación.
+Cortos. **El copy complementa el reel, no lo transcribe.** Si el reel o la gráfica
+ya entregan la información, el copy no la repite: la nombra y abre la conversación.
+
+**El error más común es meter la ficha de datos en el copy.** Si el reel muestra
+doce fechas, el copy no lleva las doce fechas — dice que están en el reel y pide
+que lo guarden. Cuatro o cinco líneas suelen bastar.
+
+**Ejemplo de referencia** (copy del reel de la agenda de fin de año, el largo y la
+forma a los que hay que apuntar):
+
+> 🔥 EL URBANO CHILENO ESTÁ CERRANDO EL 2026 EN GRANDE. 🇨🇱
+>
+> Easykid, Katteyes, Jere Klein y Kidd Voodoo se preparan para enfrentar algunos de
+> los shows más importantes de sus carreras, mientras Santiago recibe una agenda
+> cargada de conciertos de aquí a diciembre. 👀🎤
+>
+> 📌 Guarda este reel porque acá te dejamos algunos de los shows que van a marcar
+> el cierre de año.
+> ¿A cuál ya tienes tu entrada? 👀🔥
+
+Nótese: nombra a los cuatro sin explicar a cada uno, no pone ni una fecha, y el
+"algunos de los shows más importantes" es preciso sin inflar.
 
 ### Formato de entrega
 

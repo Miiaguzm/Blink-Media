@@ -20,6 +20,10 @@ admira, no como los mide un crítico.
 **2. Nunca repetir una crítica o un prejuicio sobre el artista, ni para desmentirlo.**
 Escribir "le decían la tiktoker que canta" deja el insulto sonando igual.
 Si el punto es que se ganó su lugar, se cuenta lo que se ganó — no lo que le dijeron.
+*La excepción que Mia pidió (reel de Cami, sept 2026):* citar lo que se dice **de la
+música** —no de la persona— para darlo vuelta al toque. Solo funciona si es corto y
+seco: tres frases, corte, y se acabó. Si se adorna o se estira, el reel se da vuelta
+y termina siendo el video de la gente criticando al artista.
 
 **3. Nada de hedging. Si vale la pena decirlo, se dice con fuerza.**
 Fuera "capaz que", "a lo mejor", "quizás". En su lugar: "hay posibilidad real de",
@@ -64,6 +68,10 @@ una idea, el cierre la tiene que pagar.
 - **Nunca ordenar por fecha ni por lista.** Eso es lo que hace que suene a punteo.
   Agrupar por idea: lo de afuera versus lo de acá, lo que ya pasó versus lo que viene.
 - **La tesis va en los primeros diez segundos**, para que la gente se quede.
+- **Si el reel es sobre la era actual de un artista, va 100% sobre esa era.** El pasado
+  entra como punto de referencia en una línea —las canciones que todos conocen— y nada
+  más. Nada de por dónde empezó, quién lo descubrió ni qué premios ganó hace años: eso
+  convierte el reel en biografía y se pierde el tema.
 - **El b-roll acompaña, no manda**: entra *después* de que dijo la idea, nunca encima.
   Marcar siempre dos o tres momentos donde no se corta a nada — ahí sostiene su cara.
 - **El primer frame es ella**, nunca una captura de titulares.

@@ -188,6 +188,10 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   canción de esta era", "agotó todas sus fechas" o "regresa después de X años",
   hay que verificarlo. Si no se puede, no se incluye. La credibilidad vale más
   que hacer sonar la noticia más grande.
+- **Lo que solo se ve en los comentarios no es un dato, es una observación de Mia.** Si el
+  sentimiento del fandom no está en ninguna nota, no se escribe "los fans están molestos"
+  —eso habría que respaldarlo— sino "cada vez que sube algo yo veo los mismos comentarios".
+  En primera persona es cierto, es suyo, y es justo lo que un medio no puede decir.
 - Decirle siempre de dónde salió cada dato y qué le conviene confirmar antes de grabar.
 
 ---

@@ -76,6 +76,10 @@ una idea, el cierre la tiene que pagar.
   entra como punto de referencia en una línea —las canciones que todos conocen— y nada
   más. Nada de por dónde empezó, quién lo descubrió ni qué premios ganó hace años: eso
   convierte el reel en biografía y se pierde el tema.
+- **Nombrar una obra sin decir qué es la deja colgando.** "Y de ahí salió ANNA" y punto
+  no significa nada para quien no la escuchó. Va una línea de qué es: a qué suena, o
+  mejor, qué representa. El dato bueno casi nunca es la etiqueta de género — que además
+  suele venir de la prensa y no del artista — sino algo concreto de la obra.
 - **El b-roll acompaña, no manda**: entra *después* de que dijo la idea, nunca encima.
   Marcar siempre dos o tres momentos donde no se corta a nada — ahí sostiene su cara.
 - **El primer frame es ella**, nunca una captura de titulares.
@@ -200,6 +204,9 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   canción de esta era", "agotó todas sus fechas" o "regresa después de X años",
   hay que verificarlo. Si no se puede, no se incluye. La credibilidad vale más
   que hacer sonar la noticia más grande.
+  *Y ojo con los absolutos que suenan lindos pero son falsos por un pelo*: "no borró
+  nada de lo anterior" se cae con una sola canción que ya no toque. "No todo quedó en
+  el pasado" dice lo mismo, es cierto, y encima suena a secreto.
 - **Dos datos ciertos puestos juntos no son una causa.** Escribir "ahora produce ella,
   **por eso** suena distinto" afirma que antes no la dejaban, y eso no está en ninguna
   parte. Cada hecho se cuenta por separado y el espectador saca sus conclusiones. Ojo

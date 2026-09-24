@@ -24,6 +24,10 @@ Si el punto es que se ganó su lugar, se cuenta lo que se ganó — no lo que le
 música** —no de la persona— para darlo vuelta al toque. Solo funciona si es corto y
 seco: tres frases, corte, y se acabó. Si se adorna o se estira, el reel se da vuelta
 y termina siendo el video de la gente criticando al artista.
+*Y al elegir una cita del artista, mirar también cómo se puede recortar.* Mia sacó
+"siento que maté a mi antigua yo" porque se presta para que la usen en contra de ella.
+Una frase puede ser real, potente y aun así no convenir: si sacada de contexto sirve
+de munición, no va.
 
 **3. Nada de hedging. Si vale la pena decirlo, se dice con fuerza.**
 Fuera "capaz que", "a lo mejor", "quizás". En su lugar: "hay posibilidad real de",
@@ -196,6 +200,13 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   canción de esta era", "agotó todas sus fechas" o "regresa después de X años",
   hay que verificarlo. Si no se puede, no se incluye. La credibilidad vale más
   que hacer sonar la noticia más grande.
+- **Dos datos ciertos puestos juntos no son una causa.** Escribir "ahora produce ella,
+  **por eso** suena distinto" afirma que antes no la dejaban, y eso no está en ninguna
+  parte. Cada hecho se cuenta por separado y el espectador saca sus conclusiones. Ojo
+  con "por eso", "gracias a" y "desde que": son los que amarran sin permiso.
+- **Al hablar de la música antigua de un artista, la que importa es la que la gente
+  conoce**, no la que el catálogo dice que es vieja. Nombrar un tema que el público no
+  tiene asociado delata que el dato salió de una lista y no de escuchar al fandom.
 - **Lo que solo se ve en los comentarios no es un dato, es una observación de Mia.** Si el
   sentimiento del fandom no está en ninguna nota, no se escribe "los fans están molestos"
   —eso habría que respaldarlo— sino "cada vez que sube algo yo veo los mismos comentarios".

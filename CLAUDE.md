@@ -248,6 +248,12 @@ ancho al pintarlo.
 - Dato técnico: `#7B2CFF` sobre negro llega como máximo a 3.65:1 de contraste, así
   que el morado solo va en texto de tamaño titular, nunca en cuerpo.
 
+**Ojo con los tildes en Anton.** Las mayúsculas acentuadas —Á, Í— se salen por
+arriba de la caja de línea, así que con dos líneas apretadas el tilde de abajo
+choca con la letra de arriba. Ya pasó con "SÍGUENOS / PARA MÁS". Se arregla con
+margen entre las dos líneas, **no** subiendo el `line-height`: eso también
+separa lo de adentro de cada línea y afloja el titular.
+
 **Formatos**: portada (1080×1350), lámina de carrusel (1080×1350), historia (1080×1920).
 
 **El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real

@@ -263,9 +263,14 @@ mitades para los Safari anteriores al 17.4, que no tienen `ctx.filter`.
 Mia trabaja con dos marcas conectadas. Saber cuál es cuál antes de proponer
 contenido, porque no va lo mismo en las dos.
 
-**@blinkmedia — el medio.** 100% informativo: noticias, agenda, Blink Radar,
-concursos. Todos los reels que se le escriben son informativos. Nunca lip sync,
-chascarros ni vida personal. En septiembre de 2026 tenía ~70 seguidores.
+**@blinkmediacl — el medio.** Ojo con el `cl` del final: la cuenta no es
+"@blinkmedia". 100% informativo: noticias, agenda, Blink Radar, concursos. Todos
+los reels que se le escriben son informativos. Nunca lip sync, chascarros ni vida
+personal. En septiembre de 2026 tenía ~70 seguidores.
+
+Su **frase de biografía es "Parpadeas y te lo pierdes"**, y esa sí se escribe: va
+en las gráficas. No confundirla con la frase de posicionamiento —"Acercamos la
+música a quienes la viven"—, que es interna y no se publica.
 
 **@miablink — la creadora.** Es ella: vlogs de conciertos, lip sync, story times,
 chascarros, su colección de merch. Más los reels informativos de Blink Media, que

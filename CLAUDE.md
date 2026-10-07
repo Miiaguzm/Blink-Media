@@ -54,12 +54,27 @@ conversación y no a punteo.
 **8. Cerrar invitando, no despidiendo.**
 "Quédate por acá", "si quieres seguir esta era conmigo". Y si el reel abrió con
 una idea, el cierre la tiene que pagar.
+*Pero el cierre no es una tarea ni un recordatorio.* Mia cerró así el reel de
+Lollapalooza: *"esperemos que esta nueva edición nos traiga esa misma vara de
+artistas nacionales y nos sorprenda con los internacionales. No te olvides que
+mañana a las doce en punto se acabará la intriga."* Tres cosas que copiar de ahí:
+cierra en la espera y no en un "compra" ni en un "sígueme"; arma una frase de dos
+lados que repite la estructura del reel (lo de acá contra lo de afuera); y **sube
+medio punto el registro en la última línea** —"se acabará la intriga", "a las doce
+en punto"—. Lo potente de Blink se consigue poniéndose un poco más formal al
+final, no más entusiasta. La precisión pesa más que un adjetivo.
 
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)
 - "te acordái" y el voseo chileno marcado
 - "pibe" — prefiere "chico"
 - "capaz que"
+- **El femenino plural para hablarle al público**: "lo gritamos juntas", "nos vemos
+  todas", "amigas". Deja fuera a medio público sin ninguna razón. Blink le habla a
+  **una persona**, de tú, sin suponer quién es.
+- **La euforia vacía de fan**: "gritamos", "nos vuelve locas", "muero", "no puedo".
+  Cercanía de fan no es histeria de fan: eso no dice nada y suena a relleno. La
+  emoción se muestra con un dato preciso o con una opinión afirmada, no con grititos.
 - Repetir una palabra clave dos veces en el mismo bloque: siempre revisar
   repeticiones antes de entregar.
 

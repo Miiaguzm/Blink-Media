@@ -67,6 +67,28 @@ medio punto el registro en la última línea** —"se acabará la intriga", "a l
 en punto"—. Lo potente de Blink se consigue poniéndose un poco más formal al
 final, no más entusiasta. La precisión pesa más que un adjetivo.
 
+### El léxico de Mia: sus palabras, no las mías
+
+**Este es el error que más repito.** Le devuelvo el guion con mi forma de hablar
+—más seca, más de jerga, con frases cortadas— en vez de la suya. Ella escribe con
+oraciones completas, enlazadas con "que", cálidas y un poco formales. Se corrige
+usando lo que ella ya escribió:
+
+| Ella dice | Yo le pongo, y está mal |
+|---|---|
+| "por si no lo conocen" | "por si no lo ubican" |
+| "tenemos a…", "hoy tenemos" | "parto por…", "llega el otro" |
+| "nada más y nada menos que el gran…" | fórmulas mías de relleno |
+| "tiene tres discos" | "tres discos encima" |
+| "llega el segundo estreno" | "llega el otro" |
+| "a través de sus redes sociales" | "en redes" |
+| "estoy segura de que…" | hedging o entusiasmo vacío |
+| las horas en números: 19:00, 21:00 | "a las siete", "a las nueve" |
+
+Nada de jerga inventada por mí: **"es de los que hay que tener", "parte la cosa"**
+y parecidas no son suyas y encima no se entienden. Si una expresión no aparece en
+algo que ella haya escrito, no va.
+
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)
 - "te acordái" y el voseo chileno marcado

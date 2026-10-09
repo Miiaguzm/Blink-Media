@@ -230,9 +230,15 @@
     border:2px solid rgba(255,255,255,.26);
     border-radius:14px;
   }
-  .video p{
-    font-weight:600; font-size:31px; line-height:1.38;
-    color:rgba(255,255,255,.94); text-align:center;
+  .video .texto-video{ text-align:center; }
+  .video .texto-video b{
+    display:block; font-weight:700; font-size:32px; line-height:1.3;
+    color:#FFFFFF;
+  }
+  .video .texto-video span{
+    display:block; margin-top:8px;
+    font-weight:500; font-size:29px; line-height:1.3;
+    color:rgba(255,255,255,.82);
   }
 
   /* el cierre */
@@ -386,7 +392,8 @@ const LAMINAS = {
     '<div class="cuerpo medio">' +
       '<div class="video">' +
         '<div class="marco"></div>' +
-        '<p>Teaser oficial de “LOST TAPE”, ya disponible</p>' +
+        '<div class="texto-video"><b>Teaser oficial de “LOST TAPE”</b>' +
+          '<span>Ya disponible en Spotify</span></div>' +
       '</div>' +
     '</div>' },
 

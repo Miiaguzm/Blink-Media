@@ -379,6 +379,11 @@ corta y todo lo demás va al disco.
   encima de un nombre de canción no le dice nada a nadie.
 - Nada de cronologías tipo Canva: los hitos van como bloques sueltos, no como
   línea de tiempo con numeritos.
+- **Si un dato no da para lámina propia, se menciona donde encaje.** No se estira
+  un solo hecho a pantalla completa para rellenar.
+- **Antes del cierre va una lámina con un extracto de la música**: un video o un
+  fragmento de una canción, que Mia monta después. Yo entrego solo el fondo con
+  el texto que ella me pase.
 - Las cifras van solas y grandes, no dentro de un párrafo. Pero la cifra sola
   necesita abajo una línea que diga de qué es.
 - El género que se le asigne al artista tiene que salir del artista o de su

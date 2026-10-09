@@ -96,6 +96,7 @@
   /* ------------------------------------- el cuerpo de las interiores */
   .cuerpo{
     position:absolute; z-index:5; left:72px; right:72px; top:0; bottom:0;
+    padding:212px 0 110px;
     display:flex; flex-direction:column; justify-content:center; gap:32px;
   }
   .titular{
@@ -119,13 +120,20 @@
   /* --------------------------- las fotos que salen del fondo --------- */
   /* Una foto ladeada al lado del texto, como una copia pegada encima. */
   .conFoto{ display:flex; align-items:flex-start; gap:34px; }
-  .conFoto .texto{ flex:1; }
+  .conFoto .columna{ flex:1; display:flex; flex-direction:column; gap:26px; }
   .conFoto .carta{
     flex:none; width:276px; height:360px; overflow:hidden;
     border:5px solid rgba(255,255,255,.94); border-radius:3px;
     transform:rotate(3.2deg);
   }
   .conFoto .carta img{ width:100%; height:100%; object-fit:cover; object-position:50% 24%; }
+
+  .cartaAncha{
+    width:100%; height:340px; overflow:hidden;
+    border:5px solid rgba(255,255,255,.94); border-radius:3px;
+    transform:rotate(-1.4deg);
+  }
+  .cartaAncha img{ width:100%; height:100%; object-fit:cover; object-position:50% 40%; }
 
   /* La tira de VHS: la cinta con sus perforaciones y cuatro ventanas. */
   .cinta{
@@ -257,13 +265,15 @@ const LAMINAS = {
     '<div class="cuerpo">' +
       titular("Más de diez años", "en el trap chileno") +
       '<div class="conFoto">' +
-        '<p class="texto">TANE es Tomás Gutiérrez, de Santiago, y lleva más de diez ' +
-        'años haciendo trap: ya estaba dando vueltas cuando la escena chilena recién ' +
-        'se armaba.</p>' +
+        '<div class="columna">' +
+          '<p class="texto">TANE es Tomás Gutiérrez, de Santiago, y lleva más de diez ' +
+          'años haciendo trap: ya estaba dando vueltas cuando la escena chilena ' +
+          'recién se armaba.</p>' +
+          '<p class="texto">Hoy tiene su propio estudio, CARO RÉCORDS, y quiere subir ' +
+          'de nivel, pero con la intención de conectar con más gente.</p>' +
+        '</div>' +
         '<div class="carta"><img src="TANE 2.png" alt=""></div>' +
       '</div>' +
-      '<p class="texto">Hoy tiene su propio estudio, CARO RÉCORDS, y quiere subir de ' +
-      'nivel, pero con la intención de conectar con más gente.</p>' +
     '</div>' },
 
   3: { html:
@@ -281,11 +291,11 @@ const LAMINAS = {
 
   4: { html:
     '<div class="cuerpo">' +
-      titular("LOST TAPE salió", "armando el VOL. 2") +
+      titular("De dónde nació", "LOST TAPE") +
       '<p class="texto">CARO VOL. 2 es el disco que TANE está preparando ahora y que ' +
-      'todavía no sale. Mientras lo armaba grabó muchas más canciones de las que cabían, ' +
-      'y diez quedaron fuera. En vez de dejarlas guardadas las reunió en una cinta ' +
-      'aparte, presentada en formato VHS.</p>' +
+      'todavía no sale. Mientras lo armaba grabó muchas más canciones de las que ' +
+      'cabían, y diez quedaron fuera de ese disco. En vez de dejarlas guardadas las ' +
+      'reunió en una cinta aparte, presentada en formato VHS.</p>' +
       cinta(["TANE 1.png", "TANE 7.JPEG", "TANE 9.JPEG", "TANE 8.JPEG"],
             "Lost Tape · Road to Caro Vol.2") +
     '</div>' },
@@ -297,9 +307,9 @@ const LAMINAS = {
       '</div>' +
       '<div class="cifras">' +
         '<div class="caja"><div class="numero">10</div>' +
-          '<div class="que">canciones en LOST TAPE</div></div>' +
+          '<div class="que">quedaron fuera del VOL. 2</div></div>' +
         '<div class="caja morada"><div class="numero">6</div>' +
-          '<div class="que">canciones en CARO VOL. 1</div></div>' +
+          '<div class="que">tuvo el primer CARO</div></div>' +
       '</div>' +
     '</div>' },
 
@@ -316,13 +326,14 @@ const LAMINAS = {
 
   7: { html:
     '<div class="cuerpo">' +
-      titular("No son invitados", "sueltos") +
-      '<p class="texto">En LOST TAPE cantan Baby Jey, Jamez Manuel, Kuroh, ALBLACK, ' +
-      'Poison Kid, Pablo Diablo y el mexicano Sleezy O. Cinco de ellos ya habían estado ' +
-      'en CARO VOL. 1.</p>' +
-      '<p class="texto">Buena parte del disco se grabó en La Sede, la casa-estudio que ' +
-      'se armó en pandemia y donde TANE vivió con varios de ellos. La producción la ' +
-      'firma él mismo junto a Loose, Killua97 y Discan.</p>' +
+      titular("Los que acompañan", "a TANE en LOST TAPE") +
+      '<p class="texto">Cantan con él Baby Jey, Jamez Manuel, Kuroh, ALBLACK, Poison ' +
+      'Kid, Pablo Diablo y el mexicano Sleezy O. Cinco de ellos ya habían estado en ' +
+      'CARO VOL. 1, y buena parte del disco se grabó en La Sede, la casa-estudio que ' +
+      'se armó en pandemia y donde TANE vivió con varios.</p>' +
+      '<div class="cartaAncha"><img src="TANE 9.JPEG" alt=""></div>' +
+      '<p class="texto">La producción la firma él mismo junto a Loose, Killua97 y ' +
+      'Discan.</p>' +
     '</div>' },
 
   8: { html:"" },

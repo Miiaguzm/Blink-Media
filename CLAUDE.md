@@ -103,6 +103,8 @@ entregar: contar los puntos seguidos y los "y" de un mismo párrafo.
 - "te acordái" y el voseo chileno marcado
 - "pibe" — prefiere "chico"
 - "capaz que"
+- "invitados sueltos" — para presentar a los que colaboran en un disco, el
+  modelo que Mia eligió es "Los que acompañan a <artista> en <disco>"
 - **El femenino plural para hablarle al público**: "lo gritamos juntas", "nos vemos
   todas", "amigas". Deja fuera a medio público sin ninguna razón. Blink le habla a
   **una persona**, de tú, sin suponer quién es.
@@ -406,6 +408,16 @@ explicativo, nunca como punteo. Dos consecuencias de forma:
 - **El titular da el contexto antes de la bajada.** "No es un disco, es el
   proyecto" no dice de qué proyecto; "CARO no es un disco, es su serie entera"
   sí. Leído solo, el titular tiene que situar de qué se está hablando.
+- **Pero el titular no adelanta el dato de la bajada.** "LOST TAPE salió armando
+  el VOL. 2" ya contaba lo que venía abajo; "De dónde nació LOST TAPE" plantea
+  la pregunta y deja que el texto la responda.
+- **Todos los textos de una lámina van al mismo ancho.** Mezclar un párrafo
+  angosto —al lado de una foto— con otro que cruza la lámina entera se ve
+  desordenado. La foto va al lado de la columna completa, no de un párrafo.
+- **Si dos cosas se llaman parecido, hay que decir cuál es cuál en cada
+  mención**, incluso en el rótulo de una cifra. Con CARO VOL. 1 y VOL. 2
+  mezclados en dos láminas seguidas no se entendía de cuál salieron las diez
+  canciones.
 - **La portada lleva el nombre del artista en el titular**, no solo en un
   rótulo chico: "TANE ESTÁ DE ESTRENO".
 

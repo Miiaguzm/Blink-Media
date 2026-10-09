@@ -41,9 +41,13 @@ De dónde es el artista, qué día de la semana cae el show, su edad: nada de es
 entra salvo que diga algo. "Llenó doce veces el Arena antes de atreverse con un
 estadio" sí dice algo.
 
-**5. Primera persona, siempre.**
+**5. Primera persona, siempre — en lo que ella dice con su voz.**
 "Lo que más me gusta", "me parece lo más lindo", "lo que quiero que te quedes",
 "yo creo". Un medio dice qué pasó; Blink dice qué le pasó a ella con lo que pasó.
+*Pero eso es del reel y del copy, no de la gráfica.* El texto de una lámina es
+informativo: ahí "por si no lo conocen" o "lo que más me gusta es esto" quedan
+fuera de lugar, porque nadie está hablando. La lámina conserva el criterio —qué
+dato se elige, cómo se conecta— sin la voz conversacional.
 
 **6. Cero fórmulas de prensa.**
 Fuera "el artista nacional", "cabe destacar", "se presentará", "dicho recinto".
@@ -80,6 +84,7 @@ usando lo que ella ya escribió:
 | "tenemos a…", "hoy tenemos" | "parto por…", "llega el otro" |
 | "nada más y nada menos que el gran…" | fórmulas mías de relleno |
 | "tiene tres discos" | "tres discos encima" |
+| **"canciones"** | "temas" |
 | "llega el segundo estreno" | "llega el otro" |
 | "a través de sus redes sociales" | "en redes" |
 | "estoy segura de que…" | hedging o entusiasmo vacío |
@@ -88,6 +93,10 @@ usando lo que ella ya escribió:
 Nada de jerga inventada por mí: **"es de los que hay que tener", "parte la cosa"**
 y parecidas no son suyas y encima no se entienden. Si una expresión no aparece en
 algo que ella haya escrito, no va.
+
+**Variar la puntuación.** Una seguidilla de frases cortas unidas con "y" suena a
+punteo disfrazado. Ella enlaza con "que", con comas, con punto y coma. Antes de
+entregar: contar los puntos seguidos y los "y" de un mismo párrafo.
 
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)
@@ -263,6 +272,10 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   sentimiento del fandom no está en ninguna nota, no se escribe "los fans están molestos"
   —eso habría que respaldarlo— sino "cada vez que sube algo yo veo los mismos comentarios".
   En primera persona es cierto, es suyo, y es justo lo que un medio no puede decir.
+- **Lo que yo veo en una foto no es información.** Me pasó con un letrero de neón
+  del estudio: lo noté revisando la imagen y lo escribí como si fuera un dato.
+  Nadie necesita saber que hay un letrero rojo. Si una línea solo se sostiene en
+  algo que observé en el material, se cae.
 - Decirle siempre de dónde salió cada dato y qué le conviene confirmar antes de grabar.
 
 ---

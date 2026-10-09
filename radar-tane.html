@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Blink Radar TANE</title>
+<style>
+  *{ margin:0; padding:0; }
+  html,body{ background:#0A0A0A; }
+  canvas{ display:block; width:1080px; height:1350px; }
+</style>
+</head>
+<body>
+<canvas id="vista" width="1080" height="1350"></canvas>
+
+<script>
+// Las láminas del carrusel. Cada una son los mismos campos del generador, para
+// que salgan idénticas a las que hace Mia a mano.
+const LAMINAS = {
+
+  1: { modo:"post", collage:"radar",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"NUEVO ÁLBUM",
+       linea1:"TANE", linea2:"LOST TAPE",
+       bajada:"Las diez canciones que quedaron fuera de su próximo disco, y que decidió no perder.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.74, pos:0.5, zoom:1, clara:false },
+
+  2: { modo:"lamina", imagen:"PORTADA TANE.jpg",
+       texto:"Portada oficial de “LOST TAPE (ROAD TO CARO VOL.2)”, afuera desde el 8 de octubre",
+       tam:88, desenfoque:14, brilloFondo:1.05 },
+
+  3: { modo:"post", imagen:"TANE 2.png",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"QUIÉN ES TANE",
+       linea1:"MÁS DE DIEZ AÑOS", linea2:"EN EL TRAP CHILENO",
+       bajada:"Tomás Gutiérrez está entre los nombres que ya estaban dando vueltas cuando la escena recién se armaba. Hoy tiene su propio estudio, CARO RÉCORDS, y quiere subir de nivel, pero con la intención de conectar con más gente.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.9, pos:0.2, posx:0.5, zoom:1, clara:false },
+
+  4: { modo:"post", imagen:"TANE 1.png",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"LA SERIE CARO",
+       linea1:"NO ES UN DISCO,", linea2:"ES EL PROYECTO",
+       bajada:"El primer volumen llegó en diciembre de 2023 con seis canciones; el segundo viene en camino y él dijo que tendría “una propuesta un poco más seria”. Que la serie siga también es decisión suya: “Caro 2, 3, 4, 5, todos los que saquemos”.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.9, pos:0.28, posx:0.5, zoom:1, clara:false },
+
+  5: { modo:"post", imagen:"TANE 7.JPEG",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"QUÉ ES LOST TAPE",
+       linea1:"DIEZ CANCIONES", linea2:"EN FORMATO VHS",
+       bajada:"Son las que hizo mientras armaba CARO VOL. 2 y que finalmente quedaron fuera del disco. En vez de dejarlas guardadas las reunió en una cinta aparte, porque para él siguen siendo parte de su historia.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.88, pos:0.22, posx:0.5, zoom:1, clara:false },
+
+  6: { modo:"post", imagen:"TANE 8.JPEG",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"EN SUS PALABRAS",
+       linea1:"NO SE PODÍAN", linea2:"PERDER",
+       bajada:"“La idea de hacer este LOST TAPE fue armando mi próximo disco. Hice muchos temas y creo que estos diez temas, aunque no estén dentro de CARO VOL. 2, no se podían perder.”",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.82, pos:0.3, posx:0.5, zoom:1, clara:false },
+
+  7: { modo:"post", imagen:"TANE 9.JPEG",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"PARA DIMENSIONARLO",
+       linea1:"DIEZ AFUERA,", linea2:"SEIS ADENTRO",
+       bajada:"CARO VOL. 1, el disco con el que abrió la serie, tiene seis canciones. Lo que quedó fuera del segundo volumen suma más que el disco con el que partió todo.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.82, pos:0.55, posx:0.5, zoom:1, clara:false },
+
+  8: { modo:"post", imagen:"TANE 9.JPEG",
+       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
+       pildora:"QUIÉNES ESTÁN",
+       linea1:"LOS MISMOS", linea2:"DE SIEMPRE",
+       bajada:"Baby Jey, Jamez Manuel, Kuroh, ALBLACK, Poison Kid, Pablo Diablo y el mexicano Sleezy O. Cinco de ellos ya habían estado en CARO VOL. 1, y buena parte del disco se grabó en La Sede, la casa-estudio donde vivió con varios. En la producción está él mismo junto a Loose, Killua97 y Discan.",
+       pie:"DESLIZA PARA VER MÁS",
+       brillo:0.82, pos:0.24, posx:0.5, zoom:1, clara:false },
+
+  9: { modo:"collage", collage:"radar" }
+};
+
+const N = parseInt(new URLSearchParams(location.search).get("n") || "1", 10);
+const L = LAMINAS[N];
+
+// El generador lee sus campos del formulario. Acá se los damos desde la lámina,
+// con los mismos nombres, para no tocar su código.
+const VALORES = {
+  categoria: L.categoria || "", fecha: L.fecha || "",
+  pildora: L.pildora || "", linea1: L.linea1 || "", linea2: L.linea2 || "",
+  bajada: L.bajada || "", pie: L.pie || "",
+  zoom: L.zoom || 1, pos: (L.pos !== undefined ? L.pos : 0.22) * 100,
+  posx: (L.posx !== undefined ? L.posx : 0.5) * 100,
+  brillo: L.brillo !== undefined ? L.brillo : 0.88,
+  clara: !!L.clara,
+  "l-texto": L.texto || "", "l-tam": L.tam || 88,
+  "l-fondotipo": "misma", "l-desenfoque": L.desenfoque || 14,
+  "l-brillo": L.brilloFondo || 1.05
+};
+const $ = id => ({ value: String(VALORES[id] ?? ""), checked: !!VALORES[id] });
+
+let modo = L.modo === "lamina" ? "lamina" : "post";
+let foto = null, imgLamina = null, fondoLamina = null;
+let videoPortada = null, videoLamina = null;
+
+// Lo que el generador declara fuera de los tramos que copié.
+const cv = document.getElementById("vista");
+const cx = cv.getContext("2d");
+const logo = new Image();
+
+window.onerror = (m, f, l) => { document.title = "ERROR " + m + " @" + l; };
+</script>
+
+<script src="plantilla-generador.js"></script>
+
+<script>
+function cargar(src){
+  return new Promise((ok, mal) => {
+    const i = new Image();
+    i.onload = () => ok(i);
+    i.onerror = mal;
+    i.src = src;
+  });
+}
+
+(async function(){
+  await document.fonts.load("132px Anton");
+  await document.fonts.load("700 30px Montserrat");
+  await document.fonts.ready;
+
+  // La lámina 9 es solo el fondo: va el collage tal cual, sin plantilla encima.
+  if (L.modo === "collage"){
+    const c = await cargar("collage-radar.png");
+    cx.drawImage(c, 0, 0, W, H);
+    document.title = "listo";
+    return;
+  }
+
+  await new Promise(r => { logo.onload = r; logo.src = "data:image/png;base64," + LOGO_B64; });
+
+  if (L.modo === "lamina"){
+    imgLamina = await cargar(L.imagen);
+    dibujarLamina();
+  } else {
+    foto = await cargar(L.collage ? "collage.png" : L.imagen);
+    dibujar();
+  }
+  document.title = "listo";
+})();
+</script>
+</body>
+</html>

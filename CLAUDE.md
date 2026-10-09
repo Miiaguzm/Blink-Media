@@ -402,6 +402,9 @@ publicación. La base viene del Radar de Kittkatta y es así:
   que explica que el disco salió en ese formato. Mia rechazó una primera
   versión hecha de tiras con perforaciones: "parece muy de Canva, se ve pobre".
   Si el objeto existe de verdad, hay que dibujarlo como es.
+- **Cada foto metida en un marco necesita su propio encuadre vertical.** El
+  centrado por defecto corta las cabezas, sobre todo en las fotos verticales.
+  Hay que mirarlas una por una antes de dar la lámina por buena.
 - **Las fotos van agrupadas y proporcionales, nunca intercaladas.** Texto,
   imagen gigante, texto otra vez se ve saturado. O la foto va al lado de la
   columna de texto, o van dos del mismo tamaño debajo de todo el texto.

@@ -388,8 +388,26 @@ publicación. La base viene del Radar de Kittkatta y es así:
   izquierda; y filas separadas por líneas finas, con el nombre en Anton y una
   etiqueta en pastilla a la derecha.
 
+- **El tinte morado va al 68%, no más.** Si se pasa, el fondo se aplana y deja
+  de distinguirse el radar, que es justo lo que le da el nombre al formato.
+- **Algunas láminas llevan fotos encima del fondo**, para que no sean puro
+  texto. Pero con una idea detrás, no de relleno: la tira de VHS con cuatro
+  ventanas va en la lámina que explica que el disco salió en ese formato.
+
 El código está en `radar-tane.html`, y el collage del fondo en
 `radar-tane-collage.html`.
+
+**El Radar se escribe para alguien que no conoce al artista.** Es el error que
+Mia marcó más fuerte acá: yo escribía como si ya se supiera quién es y qué es
+su proyecto. Hay que explicar cada cosa —quién es, qué es la serie de discos,
+cuál es el disco que viene, de dónde salió este— y hacerlo directo y
+explicativo, nunca como punteo. Dos consecuencias de forma:
+
+- **El titular da el contexto antes de la bajada.** "No es un disco, es el
+  proyecto" no dice de qué proyecto; "CARO no es un disco, es su serie entera"
+  sí. Leído solo, el titular tiene que situar de qué se está hablando.
+- **La portada lleva el nombre del artista en el titular**, no solo en un
+  rótulo chico: "TANE ESTÁ DE ESTRENO".
 
 Formato de carrusel para presentar a un artista emergente. A veces el foco es el
 artista (el de Kittkatta) y a veces un disco: ahí la introducción del artista es

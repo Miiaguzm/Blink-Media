@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Blink Radar TANE — fondo del extracto</title>
+<style>
+  @font-face { font-family: "Anton"; src: local("Anton"); }
+  @font-face { font-family: "Montserrat"; src: local("Montserrat"); }
+
+  :root{
+    --negro:  #0A0A0A;
+    --morado: #7B2CFF;
+    --blanco: #FFFFFF;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html,body{ background:var(--negro); }
+
+  .lamina{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--negro);
+    overflow:hidden;
+  }
+
+  /* ---------- el collage ---------- */
+  .collage{ position:absolute; inset:0; }
+
+  .collage img{
+    position:absolute;
+    object-fit:cover;
+    border:3px solid rgba(255,255,255,.92);
+    filter:brightness(.74) saturate(.88) contrast(1.06);
+  }
+
+  /* arriba, tres */
+  .p1{ left:-46px;  top:-56px;  width:452px; height:632px; object-position:50% 0%;  transform:rotate(-2.4deg); z-index:3; filter:brightness(.74) saturate(.72) contrast(1.06); }
+  .p2{ left:344px;  top:-88px;  width:432px; height:618px; object-position:50% 30%; transform:rotate(2.2deg);  z-index:2; }
+  .p3{ left:718px;  top:-46px;  width:424px; height:600px; object-position:50% 22%; transform:rotate(-2.8deg); z-index:4; }
+  /* abajo, dos más anchas */
+  .p4{ left:-52px;  top:436px;  width:612px; height:586px; object-position:50% 16%; transform:rotate(2.6deg);  z-index:6; }
+  .p5{ left:506px;  top:404px;  width:638px; height:622px; object-position:50% 62%; transform:rotate(-2.2deg); z-index:5; filter:brightness(.74) saturate(.72) contrast(1.06); }
+
+  /* el negro que devuelve la marca al fondo */
+  .fundido{
+    position:absolute; inset:0; z-index:10;
+    background:
+      linear-gradient(180deg,
+        rgba(10,10,10,.94) 0%,
+        rgba(10,10,10,.70) 8%,
+        rgba(10,10,10,.14) 20%,
+        rgba(10,10,10,.14) 44%,
+        rgba(10,10,10,.80) 63%,
+        var(--negro) 77%,
+        var(--negro) 100%);
+  }
+
+  /* ---------- el círculo de radar ---------- */
+  .radar{
+    position:absolute; z-index:11;
+    left:50%; top:452px; transform:translate(-50%,-50%);
+    width:690px; height:690px;
+    pointer-events:none;
+  }
+  .radar .halo{
+    position:absolute; inset:-16%;
+    background:radial-gradient(circle,
+      rgba(123,44,255,.26) 0%,
+      rgba(123,44,255,.09) 48%,
+      rgba(123,44,255,0) 70%);
+  }
+  .radar .barrido{
+    position:absolute; inset:0; border-radius:50%;
+    background:conic-gradient(from 208deg,
+      rgba(123,44,255,.58) 0deg,
+      rgba(123,44,255,.20) 30deg,
+      rgba(123,44,255,0) 78deg,
+      rgba(123,44,255,0) 360deg);
+    mask-image:radial-gradient(circle, #000 0 99%, transparent 100%);
+  }
+  .radar svg{ position:absolute; inset:0; }
+
+  /* ---------- la cabecera ---------- */
+  .cabecera{
+    position:absolute; z-index:14;
+    left:72px; top:64px;
+    display:flex; align-items:center; gap:18px;
+  }
+  .cabecera img{ width:150px; display:block; }
+  .cabecera .palabra{
+    font-family:"Anton", sans-serif;
+    font-size:54px; line-height:.78;
+    color:var(--blanco);
+    letter-spacing:.02em;
+    padding-top:6px;
+  }
+
+  /* ---------- el bloque de texto ---------- */
+  .texto{
+    position:absolute; z-index:14;
+    left:72px; right:72px; bottom:84px;
+  }
+  .artista{
+    font-family:"Anton", sans-serif;
+    font-size:132px; line-height:.86;
+    color:var(--blanco);
+    letter-spacing:.005em;
+  }
+  .disco{
+    font-family:"Anton", sans-serif;
+    font-size:132px; line-height:.86;
+    color:var(--morado);
+    letter-spacing:.005em;
+    margin-top:10px;
+  }
+  .bajada{
+    font-family:"Montserrat", sans-serif;
+    font-weight:700;
+    font-size:31px; line-height:1.34;
+    color:var(--blanco);
+    margin-top:38px;
+    max-width:880px;
+  }
+  .firma{
+    font-family:"Montserrat", sans-serif;
+    font-weight:700;
+    font-size:21px; line-height:1;
+    color:rgba(255,255,255,.62);
+    letter-spacing:.14em;
+    margin-top:34px;
+    text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="lamina">
+
+  <div class="collage">
+    <img class="p1" src="TANE 8.JPEG" alt="">
+    <img class="p2" src="TANE 1.png"  alt="">
+    <img class="p3" src="TANE 7.JPEG" alt="">
+    <img class="p4" src="TANE 2.png"  alt="">
+    <img class="p5" src="TANE 9.JPEG" alt="">
+  </div>
+
+  <div class="fundido"></div>
+
+  <div class="radar">
+    <div class="halo"></div>
+    <div class="barrido"></div>
+    <svg viewBox="0 0 700 700" fill="none">
+      <circle cx="350" cy="350" r="348" stroke="#7B2CFF" stroke-width="2.5" opacity=".85"/>
+      <circle cx="350" cy="350" r="262" stroke="#7B2CFF" stroke-width="2"   opacity=".62"/>
+      <circle cx="350" cy="350" r="176" stroke="#7B2CFF" stroke-width="2"   opacity=".48"/>
+      <circle cx="350" cy="350" r="90"  stroke="#7B2CFF" stroke-width="2"   opacity=".38"/>
+      <line x1="350" y1="2"   x2="350" y2="698" stroke="#7B2CFF" stroke-width="1.6" opacity=".30"/>
+      <line x1="2"   y1="350" x2="698" y2="350" stroke="#7B2CFF" stroke-width="1.6" opacity=".30"/>
+      <circle cx="350" cy="350" r="7" fill="#7B2CFF"/>
+    </svg>
+  </div>
+
+
+</div>
+</body>
+</html>

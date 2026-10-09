@@ -219,6 +219,22 @@
     color:rgba(255,255,255,.94); text-align:center; text-wrap:balance;
   }
 
+  /* Esta lámina es casi puro recuadro, así que se centra en todo el alto. */
+  .cuerpo.medio{ padding:160px 0; }
+
+  /* el recuadro donde Mia monta el video, en 16:9 */
+  .video{ display:flex; flex-direction:column; align-items:center; gap:30px; }
+  .video .marco{
+    width:936px; height:527px;
+    background:#000;
+    border:2px solid rgba(255,255,255,.26);
+    border-radius:14px;
+  }
+  .video p{
+    font-weight:600; font-size:31px; line-height:1.38;
+    color:rgba(255,255,255,.94); text-align:center;
+  }
+
   /* el cierre */
   .cierre{
     position:absolute; z-index:5; inset:0;
@@ -366,7 +382,13 @@ const LAMINAS = {
       '</div>' +
     '</div>' },
 
-  7: { html:"" },
+  7: { html:
+    '<div class="cuerpo medio">' +
+      '<div class="video">' +
+        '<div class="marco"></div>' +
+        '<p>Teaser oficial de “LOST TAPE”, ya disponible</p>' +
+      '</div>' +
+    '</div>' },
 
   8: { html:
     '<div class="cierre">' +

@@ -366,6 +366,16 @@ formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuev
 
 ## Blink Radar
 
+**Las láminas se arman con la plantilla del generador, no con un diseño nuevo.**
+Me equivoqué una vez inventando una: la base ya existía desde el Radar de
+Kittkatta y es la plantilla de "Publicación" del generador —estrella morada,
+BLINK RADAR y fecha arriba a la izquierda, logo arriba a la derecha, píldora,
+titular de dos líneas en blanco y morado, bajada y pie con la flecha—. Para
+renderizar acá está `plantilla-generador.js`, que es el `dibujar()` y el
+`dibujarLamina()` copiados tal cual, y `radar-tane.html` como ejemplo de cómo
+se le pasan los textos. La portada entra como una sola imagen: el collage se
+arma aparte (`radar-tane-collage.html`) y se le da al campo de foto.
+
 Formato de carrusel para presentar a un artista emergente. A veces el foco es el
 artista (el de Kittkatta) y a veces un disco: ahí la introducción del artista es
 corta y todo lo demás va al disco.

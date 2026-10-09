@@ -4,147 +4,337 @@
 <meta charset="utf-8">
 <title>Blink Radar TANE</title>
 <style>
-  *{ margin:0; padding:0; }
-  html,body{ background:#0A0A0A; }
-  canvas{ display:block; width:1080px; height:1350px; }
+  :root{
+    --negro:  #0A0A0A;
+    --morado: #7B2CFF;
+    --blanco: #FFFFFF;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:var(--negro); }
+
+  .lamina{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--negro);
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+
+  /* ---------------------------------------------------------------- FONDO
+     El mismo collage en todas las láminas, en duotono morado: la foto en
+     escala de grises pone la luminancia y la capa morada el color. Las
+     interiores llevan un velo más oscuro para que el texto mande. */
+  .fondo{ position:absolute; inset:0; z-index:0; }
+  .fondo img{
+    position:absolute; inset:0; width:1080px; height:1350px;
+    filter:grayscale(1) contrast(1.32) brightness(.68);
+  }
+  .fondo .tinte{ position:absolute; inset:0; background:var(--morado); mix-blend-mode:color; }
+  .fondo .fuerza{ position:absolute; inset:0; background:var(--morado);
+                  mix-blend-mode:overlay; opacity:.30; }
+  .fondo .velo{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,.90) 0%,  rgba(10,10,10,.34) 15%,
+                              rgba(10,10,10,.16) 36%, rgba(10,10,10,.56) 55%,
+                              rgba(10,10,10,.78) 72%, rgba(10,10,10,.82) 100%);
+  }
+  .lamina.interior .fondo img{ filter:grayscale(1) contrast(1.22) brightness(.6); }
+  .lamina.interior .fondo .fuerza{ opacity:.20; }
+  .lamina.interior .fondo .velo{ background:rgba(10,10,10,.70); }
+
+  /* ---------------------------------------------- el círculo de radar */
+  .radar{ position:absolute; inset:0; z-index:1; }
+  .lamina.interior .radar{ opacity:.78; }
+
+  /* --------------------------------------------------------- el logo */
+  .logo{ position:absolute; top:40px; right:64px; width:208px; z-index:4; }
+
+  /* ------------------------------------------- la cabecera de la portada */
+  .cabecera{ position:absolute; top:92px; left:72px; z-index:4; }
+  .cabecera .fila{ display:flex; align-items:center; gap:22px; }
+  .cabecera .destello{ width:38px; height:38px; }
+  .cabecera .rotulo{
+    font-weight:800; font-size:31px; letter-spacing:5px;
+    color:var(--morado); text-transform:uppercase;
+  }
+  .cabecera .edicion{
+    margin-top:14px; margin-left:60px;
+    font-weight:600; font-size:27px; letter-spacing:3.4px;
+    color:rgba(255,255,255,.88); text-transform:uppercase;
+  }
+
+  /* --------------------------------------- el centro de la portada */
+  .centro{ position:absolute; z-index:4; left:72px; right:72px; bottom:262px; text-align:center; }
+  .centro .genero{
+    font-weight:800; font-size:27px; letter-spacing:8px;
+    color:var(--morado); text-transform:uppercase; margin-bottom:18px;
+  }
+  .centro .nombre{
+    font-family:"Anton", sans-serif;
+    font-size:178px; line-height:.92; color:var(--blanco); letter-spacing:1px;
+  }
+  .centro .bajada{
+    margin:26px auto 0; max-width:900px;
+    font-weight:500; font-size:31px; line-height:1.42;
+    color:rgba(255,255,255,.95); text-wrap:balance;
+  }
+
+  /* --------------------------------------------------------------- el pie */
+  .pie{
+    position:absolute; z-index:4; left:0; right:0; bottom:84px;
+    border-top:1.5px solid rgba(255,255,255,.18); padding-top:46px;
+    display:flex; align-items:center; justify-content:center; gap:20px;
+  }
+  .pie span{
+    font-weight:800; font-size:26px; letter-spacing:3.4px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .pie svg{ width:42px; height:26px; }
+
+  /* ------------------------------------- el cuerpo de las interiores */
+  .cuerpo{
+    position:absolute; z-index:4; left:72px; right:72px; top:0; bottom:0;
+    display:flex; flex-direction:column; justify-content:center; gap:34px;
+  }
+  .cuerpo.arriba{ justify-content:flex-start; padding-top:226px; }
+
+  .titular{ font-family:"Anton", sans-serif; font-size:97px; line-height:1.02;
+          letter-spacing:.5px; text-transform:uppercase; }
+  .titular .uno{ color:var(--blanco); display:block; }
+  .titular .dos{ color:var(--morado); display:block; margin-top:12px; }
+
+  .texto{ font-weight:700; font-size:34px; line-height:1.4; color:rgba(255,255,255,.95); }
+
+  /* el bloque destacado, con la barra morada y el destello */
+  .destacado{
+    display:flex; align-items:flex-start; gap:22px;
+    border-left:4px solid var(--morado); padding-left:26px;
+  }
+  .destacado .destello{ width:30px; height:30px; flex:none; margin-top:6px; }
+  .destacado p{ font-weight:700; font-size:32px; line-height:1.38; color:rgba(255,255,255,.95); }
+
+  /* las cifras, en cajas */
+  .cifras{ display:flex; gap:28px; }
+  .cifras .caja{
+    flex:1; text-align:center;
+    border:1.5px solid rgba(255,255,255,.22); border-radius:20px;
+    background:rgba(10,10,10,.40); padding:34px 18px 30px;
+  }
+  .cifras .numero{ font-family:"Anton", sans-serif; font-size:100px; line-height:.94; color:var(--blanco); }
+  .cifras .caja.morada .numero{ color:var(--morado); }
+  .cifras .que{
+    margin-top:14px; font-weight:800; font-size:21px; letter-spacing:2.2px;
+    color:rgba(255,255,255,.80); text-transform:uppercase;
+  }
+
+  /* las filas con separador */
+  .filas{ display:flex; flex-direction:column; }
+  .filas .fila{ border-top:1.5px solid rgba(255,255,255,.18); padding:28px 0 26px; }
+  .filas .fila:last-child{ border-bottom:1.5px solid rgba(255,255,255,.18); }
+  .filas .arriba{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .filas .nombre{ font-family:"Anton", sans-serif; font-size:58px; line-height:1;
+                color:var(--blanco); text-transform:uppercase; }
+  .filas .fila.morada .nombre{ color:var(--morado); }
+  .filas .etiqueta{
+    flex:none; border:1.5px solid rgba(255,255,255,.34); border-radius:999px;
+    padding:12px 26px; font-weight:800; font-size:19px; letter-spacing:2.4px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .filas .detalle{
+    margin-top:14px; font-weight:600; font-size:28px; line-height:1.36;
+    color:rgba(255,255,255,.90);
+  }
+
+  /* la portada del disco */
+  .disco{
+    position:absolute; z-index:4; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:44px; padding:230px 90px 150px;
+  }
+  .disco img{
+    width:740px; height:740px; border-radius:26px; display:block;
+    border:1.5px solid rgba(255,255,255,.18);
+  }
+  .disco p{
+    font-weight:600; font-size:31px; line-height:1.38;
+    color:rgba(255,255,255,.92); text-align:center; text-wrap:balance;
+  }
+
+  /* el cierre */
+  .cierre{
+    position:absolute; z-index:4; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px;
+  }
+  .cierre .remate{
+    font-family:"Anton", sans-serif; font-size:132px; line-height:1.02;
+    color:var(--blanco); text-align:center; text-transform:uppercase;
+  }
+  .cierre .remate em{ color:var(--morado); font-style:normal; display:block; margin-top:34px; }
+  .cierre .cuenta{
+    border:1.5px solid rgba(255,255,255,.34); border-radius:999px; padding:16px 38px;
+    font-weight:800; font-size:30px; letter-spacing:2.6px; color:var(--blanco);
+  }
+  .cierre .lema{
+    font-weight:600; font-size:27px; letter-spacing:3px;
+    color:rgba(255,255,255,.70); text-transform:uppercase;
+  }
 </style>
 </head>
 <body>
-<canvas id="vista" width="1080" height="1350"></canvas>
+<div class="lamina" id="lamina"></div>
 
 <script>
-// Las láminas del carrusel. Cada una son los mismos campos del generador, para
-// que salgan idénticas a las que hace Mia a mano.
+const DESTELLO =
+  '<svg class="destello" viewBox="0 0 24 24" fill="#7B2CFF">' +
+  '<path d="M 12 0.94 L 12.57 10.61 L 13.99 10.01 L 13.39 11.43 L 23.06 12 ' +
+  'L 13.39 12.57 L 13.99 13.99 L 12.57 13.39 L 12 23.06 L 11.43 13.39 ' +
+  'L 10.01 13.99 L 10.61 12.57 L 0.94 12 L 10.61 11.43 L 10.01 10.01 ' +
+  'L 11.43 10.61 Z"/></svg>';
+
+const FLECHA =
+  '<svg viewBox="0 0 42 26" fill="none" stroke="#7B2CFF" stroke-width="3.4" ' +
+  'stroke-linecap="round" stroke-linejoin="round">' +
+  '<path d="M2 13 H38 M28 4 L38 13 L28 22"/></svg>';
+
+// Los anillos: el mismo dibujo en todas las láminas, para que el carrusel se
+// lea como una sola pieza.
+function radar(){
+  const radios = [152, 298, 452, 612, 782, 962, 1150];
+  const anillos = radios.map((r, i) =>
+    '<circle cx="540" cy="700" r="' + r + '" stroke="#7B2CFF" ' +
+    'stroke-width="' + (i < 3 ? 2.4 : 2) + '" ' +
+    'opacity="' + (0.46 - i * 0.045).toFixed(3) + '" fill="none"/>').join("");
+  return '<svg class="radar" viewBox="0 0 1080 1350">' + anillos + '</svg>';
+}
+
+function fondo(){
+  return '<div class="fondo"><img src="collage.png" alt="">' +
+    '<div class="tinte"></div><div class="fuerza"></div><div class="velo"></div></div>';
+}
+
+function titular(a, b){
+  return '<div class="titular"><span class="uno">' + a + '</span>' +
+         '<span class="dos">' + b + '</span></div>';
+}
+
 const LAMINAS = {
 
-  1: { modo:"post", collage:"radar",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"NUEVO ÁLBUM",
-       linea1:"TANE", linea2:"LOST TAPE",
-       bajada:"Las diez canciones que quedaron fuera de su próximo disco, y que decidió no perder.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.74, pos:0.5, zoom:1, clara:false },
+  1: { portada:true, html:
+    '<div class="cabecera">' +
+      '<div class="fila">' + DESTELLO + '<div class="rotulo">Blink Radar</div></div>' +
+      '<div class="edicion">Edición octubre 2026</div>' +
+    '</div>' +
+    '<div class="centro">' +
+      '<div class="genero">TANE · Trap chileno</div>' +
+      '<div class="nombre">LOST TAPE</div>' +
+      '<div class="bajada">Las diez canciones que quedaron fuera de su próximo disco, ' +
+        'y que decidió no perder</div>' +
+    '</div>' +
+    '<div class="pie"><span>Desliza para conocerlo</span>' + FLECHA + '</div>' },
 
-  2: { modo:"lamina", imagen:"PORTADA TANE.jpg",
-       texto:"Portada oficial de “LOST TAPE (ROAD TO CARO VOL.2)”, afuera desde el 8 de octubre",
-       tam:88, desenfoque:14, brilloFondo:1.05 },
+  2: { html:
+    '<div class="disco"><img src="PORTADA TANE.jpg" alt="">' +
+      '<p>Portada oficial de “LOST TAPE (ROAD TO CARO VOL.2)”, afuera desde el 8 de octubre</p>' +
+    '</div>' },
 
-  3: { modo:"post", imagen:"TANE 2.png",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"QUIÉN ES TANE",
-       linea1:"MÁS DE DIEZ AÑOS", linea2:"EN EL TRAP CHILENO",
-       bajada:"Tomás Gutiérrez está entre los nombres que ya estaban dando vueltas cuando la escena recién se armaba. Hoy tiene su propio estudio, CARO RÉCORDS, y quiere subir de nivel, pero con la intención de conectar con más gente.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.9, pos:0.2, posx:0.5, zoom:1, clara:false },
+  3: { html:
+    '<div class="cuerpo">' +
+      titular("Más de diez años", "en el trap chileno") +
+      '<p class="texto">Tomás Gutiérrez está entre los nombres que ya estaban dando ' +
+      'vueltas cuando la escena recién se armaba. Hoy tiene su propio estudio, ' +
+      'CARO RÉCORDS, y quiere subir de nivel, pero con la intención de conectar ' +
+      'con más gente.</p>' +
+    '</div>' },
 
-  4: { modo:"post", imagen:"TANE 1.png",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"LA SERIE CARO",
-       linea1:"NO ES UN DISCO,", linea2:"ES EL PROYECTO",
-       bajada:"El primer volumen llegó en diciembre de 2023 con seis canciones; el segundo viene en camino y él dijo que tendría “una propuesta un poco más seria”. Que la serie siga también es decisión suya: “Caro 2, 3, 4, 5, todos los que saquemos”.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.9, pos:0.28, posx:0.5, zoom:1, clara:false },
+  4: { html:
+    '<div class="cuerpo">' +
+      titular("No es un disco,", "es el proyecto") +
+      '<p class="texto">El primer volumen llegó en diciembre de 2023 con seis canciones, ' +
+      'y el segundo viene en camino: él dijo que tendría “una propuesta un poco más seria”.</p>' +
+      '<div class="destacado">' + DESTELLO +
+        '<p>Que la serie siga también es decisión suya: “Caro 2, 3, 4, 5, todos los que saquemos”</p>' +
+      '</div>' +
+    '</div>' },
 
-  5: { modo:"post", imagen:"TANE 7.JPEG",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"QUÉ ES LOST TAPE",
-       linea1:"DIEZ CANCIONES", linea2:"EN FORMATO VHS",
-       bajada:"Son las que hizo mientras armaba CARO VOL. 2 y que finalmente quedaron fuera del disco. En vez de dejarlas guardadas las reunió en una cinta aparte, porque para él siguen siendo parte de su historia.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.88, pos:0.22, posx:0.5, zoom:1, clara:false },
+  5: { html:
+    '<div class="cuerpo">' +
+      titular("Diez canciones", "en formato VHS") +
+      '<p class="texto">Son las que hizo mientras armaba CARO VOL. 2 y que finalmente ' +
+      'quedaron fuera del disco. En vez de dejarlas guardadas las reunió en una cinta ' +
+      'aparte, porque para él siguen siendo parte de su historia.</p>' +
+      '<div class="cifras">' +
+        '<div class="caja"><div class="numero">10</div><div class="que">en LOST TAPE</div></div>' +
+        '<div class="caja morada"><div class="numero">6</div><div class="que">en CARO VOL. 1</div></div>' +
+      '</div>' +
+    '</div>' },
 
-  6: { modo:"post", imagen:"TANE 8.JPEG",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"EN SUS PALABRAS",
-       linea1:"NO SE PODÍAN", linea2:"PERDER",
-       bajada:"“La idea de hacer este LOST TAPE fue armando mi próximo disco. Hice muchos temas y creo que estos diez temas, aunque no estén dentro de CARO VOL. 2, no se podían perder.”",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.82, pos:0.3, posx:0.5, zoom:1, clara:false },
+  6: { html:
+    '<div class="cuerpo">' +
+      titular("No se podían", "perder") +
+      '<div class="destacado">' + DESTELLO +
+        '<p>“La idea de hacer este LOST TAPE fue armando mi próximo disco. Hice muchos ' +
+        'temas y creo que estos diez temas, aunque no estén dentro de CARO VOL. 2, ' +
+        'no se podían perder”</p>' +
+      '</div>' +
+    '</div>' },
 
-  7: { modo:"post", imagen:"TANE 9.JPEG",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"PARA DIMENSIONARLO",
-       linea1:"DIEZ AFUERA,", linea2:"SEIS ADENTRO",
-       bajada:"CARO VOL. 1, el disco con el que abrió la serie, tiene seis canciones. Lo que quedó fuera del segundo volumen suma más que el disco con el que partió todo.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.82, pos:0.55, posx:0.5, zoom:1, clara:false },
+  7: { html:
+    '<div class="cuerpo arriba">' +
+      titular("Los mismos", "de siempre") +
+      '<div class="filas">' +
+        '<div class="fila"><div class="arriba">' +
+          '<div class="nombre">Los invitados</div>' +
+          '<div class="etiqueta">Siete nombres</div></div>' +
+          '<div class="detalle">Baby Jey, Jamez Manuel, Kuroh, ALBLACK, Poison Kid, ' +
+          'Pablo Diablo y el mexicano Sleezy O.</div></div>' +
+        '<div class="fila morada"><div class="arriba">' +
+          '<div class="nombre">CARO VOL. 1</div>' +
+          '<div class="etiqueta">Cinco repiten</div></div>' +
+          '<div class="detalle">Cinco de ellos ya habían estado en el disco con el ' +
+          'que abrió la serie.</div></div>' +
+        '<div class="fila"><div class="arriba">' +
+          '<div class="nombre">La Sede</div>' +
+          '<div class="etiqueta">Dónde se grabó</div></div>' +
+          '<div class="detalle">La casa-estudio donde vivió con varios de ellos. En la ' +
+          'producción está él mismo junto a Loose, Killua97 y Discan.</div></div>' +
+      '</div>' +
+    '</div>' },
 
-  8: { modo:"post", imagen:"TANE 9.JPEG",
-       categoria:"BLINK RADAR", fecha:"08.OCT.2026",
-       pildora:"QUIÉNES ESTÁN",
-       linea1:"LOS MISMOS", linea2:"DE SIEMPRE",
-       bajada:"Baby Jey, Jamez Manuel, Kuroh, ALBLACK, Poison Kid, Pablo Diablo y el mexicano Sleezy O. Cinco de ellos ya habían estado en CARO VOL. 1, y buena parte del disco se grabó en La Sede, la casa-estudio donde vivió con varios. En la producción está él mismo junto a Loose, Killua97 y Discan.",
-       pie:"DESLIZA PARA VER MÁS",
-       brillo:0.82, pos:0.24, posx:0.5, zoom:1, clara:false },
+  8: { html:"" },
 
-  9: { modo:"collage", collage:"radar" }
+  9: { html:
+    '<div class="cierre">' +
+      '<div class="remate">Síguenos<em>para más</em></div>' +
+      '<div class="cuenta">@blinkmediacl</div>' +
+      '<div class="lema">Parpadeas y te lo pierdes</div>' +
+    '</div>' }
 };
 
 const N = parseInt(new URLSearchParams(location.search).get("n") || "1", 10);
 const L = LAMINAS[N];
-
-// El generador lee sus campos del formulario. Acá se los damos desde la lámina,
-// con los mismos nombres, para no tocar su código.
-const VALORES = {
-  categoria: L.categoria || "", fecha: L.fecha || "",
-  pildora: L.pildora || "", linea1: L.linea1 || "", linea2: L.linea2 || "",
-  bajada: L.bajada || "", pie: L.pie || "",
-  zoom: L.zoom || 1, pos: (L.pos !== undefined ? L.pos : 0.22) * 100,
-  posx: (L.posx !== undefined ? L.posx : 0.5) * 100,
-  brillo: L.brillo !== undefined ? L.brillo : 0.88,
-  clara: !!L.clara,
-  "l-texto": L.texto || "", "l-tam": L.tam || 88,
-  "l-fondotipo": "misma", "l-desenfoque": L.desenfoque || 14,
-  "l-brillo": L.brilloFondo || 1.05
-};
-const $ = id => ({ value: String(VALORES[id] ?? ""), checked: !!VALORES[id] });
-
-let modo = L.modo === "lamina" ? "lamina" : "post";
-let foto = null, imgLamina = null, fondoLamina = null;
-let videoPortada = null, videoLamina = null;
-
-// Lo que el generador declara fuera de los tramos que copié.
-const cv = document.getElementById("vista");
-const cx = cv.getContext("2d");
-const logo = new Image();
-
-window.onerror = (m, f, l) => { document.title = "ERROR " + m + " @" + l; };
-</script>
-
-<script src="plantilla-generador.js"></script>
-
-<script>
-function cargar(src){
-  return new Promise((ok, mal) => {
-    const i = new Image();
-    i.onload = () => ok(i);
-    i.onerror = mal;
-    i.src = src;
-  });
-}
+const caja = document.getElementById("lamina");
+if (!L.portada) caja.classList.add("interior");
+caja.innerHTML = fondo() + radar() +
+  '<img class="logo" src="logo-blink.png" alt="Blink">' + L.html;
 
 (async function(){
-  await document.fonts.load("132px Anton");
-  await document.fonts.load("700 30px Montserrat");
+  await document.fonts.load("178px Anton");
+  await document.fonts.load("700 34px Montserrat");
   await document.fonts.ready;
 
-  // La lámina 9 es solo el fondo: va el collage tal cual, sin plantilla encima.
-  if (L.modo === "collage"){
-    const c = await cargar("collage-radar.png");
-    cx.drawImage(c, 0, 0, W, H);
-    document.title = "listo";
-    return;
+  // El nombre de la portada se achica si no cabe en una línea.
+  const n = caja.querySelector(".centro .nombre");
+  if (n){
+    let t = 178;
+    while (t > 80 && n.scrollWidth > 936){ t -= 2; n.style.fontSize = t + "px"; }
   }
+  // Los titulares de las interiores, igual.
+  caja.querySelectorAll(".titular span").forEach(s => {
+    let t = 97;
+    while (t > 52 && s.scrollWidth > 936){ t -= 1; s.style.fontSize = t + "px"; }
+  });
 
-  await new Promise(r => { logo.onload = r; logo.src = "data:image/png;base64," + LOGO_B64; });
-
-  if (L.modo === "lamina"){
-    imgLamina = await cargar(L.imagen);
-    dibujarLamina();
-  } else {
-    foto = await cargar(L.collage ? "collage.png" : L.imagen);
-    dibujar();
-  }
   document.title = "listo";
 })();
 </script>

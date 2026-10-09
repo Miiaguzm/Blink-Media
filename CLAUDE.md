@@ -366,15 +366,30 @@ formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuev
 
 ## Blink Radar
 
-**Las láminas se arman con la plantilla del generador, no con un diseño nuevo.**
-Me equivoqué una vez inventando una: la base ya existía desde el Radar de
-Kittkatta y es la plantilla de "Publicación" del generador —estrella morada,
-BLINK RADAR y fecha arriba a la izquierda, logo arriba a la derecha, píldora,
-titular de dos líneas en blanco y morado, bajada y pie con la flecha—. Para
-renderizar acá está `plantilla-generador.js`, que es el `dibujar()` y el
-`dibujarLamina()` copiados tal cual, y `radar-tane.html` como ejemplo de cómo
-se le pasan los textos. La portada entra como una sola imagen: el collage se
-arma aparte (`radar-tane-collage.html`) y se le da al campo de foto.
+**El Radar tiene su propia plantilla, que no es la del generador.** Me equivoqué
+dos veces acá: primero inventando una gráfica y después usando la plantilla de
+publicación. La base viene del Radar de Kittkatta y es así:
+
+- **Un solo fondo para todo el carrusel**: un collage de fotos del artista en
+  duotono morado —la foto en escala de grises y el morado encima en
+  `mix-blend-mode:color`—, el mismo en las nueve láminas, con un velo más
+  oscuro en las interiores. Eso es lo que hace que se lea como una sola pieza.
+- **Encima van los anillos del radar**: círculos concéntricos morados de línea
+  fina, centrados bajo el medio, que se salen del lienzo. Idénticos en todas.
+- **El logo va arriba a la derecha en todas.**
+- **La portada**: estrella + BLINK RADAR y "EDICIÓN <MES> <AÑO>" arriba a la
+  izquierda; abajo y centrado, un rótulo morado espaciado con el artista y su
+  género, el titular enorme en Anton, la bajada en dos líneas; y el pie con una
+  línea fina arriba, "DESLIZA PARA CONOCERLO" y una flecha morada.
+- **Las interiores**: sin píldora y sin pie. Titular a la izquierda en dos
+  líneas, blanco y morado, en mayúsculas, y la bajada debajo en Montserrat 700.
+- **Los recursos que se repiten**: cajas de cifras con borde redondeado y el
+  número en Anton; el bloque destacado con barra morada y destello a la
+  izquierda; y filas separadas por líneas finas, con el nombre en Anton y una
+  etiqueta en pastilla a la derecha.
+
+El código está en `radar-tane.html`, y el collage del fondo en
+`radar-tane-collage.html`.
 
 Formato de carrusel para presentar a un artista emergente. A veces el foco es el
 artista (el de Kittkatta) y a veces un disco: ahí la introducción del artista es

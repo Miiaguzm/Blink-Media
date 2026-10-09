@@ -300,6 +300,10 @@ difusa. No devolverla a 400. Si se cambia el peso, hay que cambiarlo también en
 la fuente con la que se **mide** para repartir las líneas, o el texto se pasa de
 ancho al pintarlo.
 
+**Todo lo que dijo el artista va en cursiva.** Vale para la cita completa y
+para una frase suya metida dentro de un párrafo. Es lo que separa de un vistazo
+su voz de la nuestra.
+
 **Reglas que Mia marcó como intocables:**
 - **Nunca cambiar la tipografía oficial.** Ni por legibilidad.
 - **Nunca ponerle borde, sombra ni contorno al texto.** Si algo no se lee, se
@@ -393,8 +397,15 @@ publicación. La base viene del Radar de Kittkatta y es así:
 - **El tinte morado va al 68%, no más.** Si se pasa, el fondo se aplana y deja
   de distinguirse el radar, que es justo lo que le da el nombre al formato.
 - **Algunas láminas llevan fotos encima del fondo**, para que no sean puro
-  texto. Pero con una idea detrás, no de relleno: la tira de VHS con cuatro
-  ventanas va en la lámina que explica que el disco salió en ese formato.
+  texto. Pero con una idea detrás, no de relleno: el casete de VHS —carcasa,
+  etiqueta arriba, ventana con tres fotos y los dos carretes— va en la lámina
+  que explica que el disco salió en ese formato. Mia rechazó una primera
+  versión hecha de tiras con perforaciones: "parece muy de Canva, se ve pobre".
+  Si el objeto existe de verdad, hay que dibujarlo como es.
+- **Las fotos van agrupadas y proporcionales, nunca intercaladas.** Texto,
+  imagen gigante, texto otra vez se ve saturado. O la foto va al lado de la
+  columna de texto, o van dos del mismo tamaño debajo de todo el texto.
+- **En la portada todo va centrado y al medio del alto**, no apoyado abajo.
 
 El código está en `radar-tane.html`, y el collage del fondo en
 `radar-tane-collage.html`.

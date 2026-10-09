@@ -36,9 +36,9 @@
   .fondo .velo{
     position:absolute; inset:0;
     background:linear-gradient(180deg,
-      rgba(10,10,10,.88) 0%,  rgba(10,10,10,.30) 15%,
-      rgba(10,10,10,.14) 36%, rgba(10,10,10,.52) 56%,
-      rgba(10,10,10,.76) 74%, rgba(10,10,10,.82) 100%);
+      rgba(10,10,10,.88) 0%,  rgba(10,10,10,.32) 14%,
+      rgba(10,10,10,.22) 28%, rgba(10,10,10,.56) 44%,
+      rgba(10,10,10,.70) 62%, rgba(10,10,10,.78) 100%);
   }
   .lamina.interior .fondo img{ filter:grayscale(1) contrast(1.18) brightness(.54); }
   .lamina.interior .fondo .velo{ background:rgba(10,10,10,.60); }
@@ -64,7 +64,12 @@
   }
 
   /* ------------------------------------------- el centro de la portada */
-  .centro{ position:absolute; z-index:5; left:72px; right:72px; bottom:252px; text-align:center; }
+  .centro{
+    position:absolute; z-index:5; left:72px; right:72px; top:0; bottom:0;
+    padding:230px 0 220px;
+    display:flex; flex-direction:column; justify-content:center;
+    text-align:center;
+  }
   .centro .genero{
     font-weight:800; font-size:27px; letter-spacing:8px;
     color:var(--morado); text-transform:uppercase; margin-bottom:20px;
@@ -128,35 +133,63 @@
   }
   .conFoto .carta img{ width:100%; height:100%; object-fit:cover; object-position:50% 24%; }
 
-  .cartaAncha{
-    width:100%; height:340px; overflow:hidden;
+  .parDeFotos{ display:flex; gap:26px; }
+  .parDeFotos figure{
+    flex:1; height:316px; overflow:hidden;
     border:5px solid rgba(255,255,255,.94); border-radius:3px;
-    transform:rotate(-1.4deg);
   }
-  .cartaAncha img{ width:100%; height:100%; object-fit:cover; object-position:50% 40%; }
+  .parDeFotos figure:first-child{ transform:rotate(-1.8deg); }
+  .parDeFotos figure:last-child{ transform:rotate(1.8deg); }
+  .parDeFotos img{ width:100%; height:100%; object-fit:cover; }
+  .parDeFotos figure:first-child img{ object-position:50% 40%; }
+  .parDeFotos figure:last-child img{ object-position:50% 34%; }
 
-  /* La tira de VHS: la cinta con sus perforaciones y cuatro ventanas. */
+  /* El casete: carcasa, etiqueta arriba, ventana con la cinta y los carretes. */
   .cinta{
-    transform:rotate(-1.6deg);
-    background:rgba(10,10,10,.82);
-    border:1.5px solid rgba(255,255,255,.26);
-    border-radius:12px;
-    padding:16px;
+    transform:rotate(-1.2deg);
+    background:linear-gradient(180deg, #1A1620 0%, #0C0A10 100%);
+    border:2px solid rgba(255,255,255,.16);
+    border-radius:16px;
+    padding:20px 22px 18px;
   }
-  .cinta .dientes{
-    height:16px;
-    background:repeating-linear-gradient(90deg,
-      rgba(255,255,255,.34) 0 16px, transparent 16px 40px);
-    border-radius:3px;
+  .cinta .etiqueta{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    background:rgba(255,255,255,.92); border-radius:5px; padding:11px 18px;
   }
-  .cinta .ventanas{ display:flex; gap:12px; margin:14px 0; }
-  .cinta .ventanas div{ flex:1; height:188px; overflow:hidden; border-radius:4px; }
-  .cinta .ventanas img{ width:100%; height:100%; object-fit:cover; filter:saturate(.5); }
-  .cinta .nombre{
-    margin-top:4px; text-align:center;
-    font-weight:800; font-size:19px; letter-spacing:4px;
-    color:rgba(255,255,255,.70); text-transform:uppercase;
+  .cinta .etiqueta b{
+    font-weight:800; font-size:19px; letter-spacing:2.6px;
+    color:#0A0A0A; text-transform:uppercase;
   }
+  .cinta .etiqueta i{
+    font-style:normal; font-weight:800; font-size:16px; letter-spacing:2.6px;
+    color:rgba(10,10,10,.52); text-transform:uppercase;
+  }
+  .cinta .ventana{
+    margin-top:18px; display:flex; gap:14px;
+    background:#000; border:1px solid rgba(255,255,255,.14);
+    border-radius:9px; padding:13px;
+  }
+  .cinta .ventana div{ flex:1; height:210px; overflow:hidden; border-radius:3px; }
+  .cinta .ventana img{ width:100%; height:100%; object-fit:cover; }
+  .cinta .carretes{
+    margin-top:16px; display:flex; align-items:center; justify-content:space-between;
+    padding:0 42px;
+  }
+  .cinta .carrete{
+    width:46px; height:46px; border-radius:50%;
+    border:3px solid rgba(255,255,255,.26); position:relative;
+  }
+  .cinta .carrete::after{
+    content:""; position:absolute; inset:13px; border-radius:50%;
+    background:rgba(255,255,255,.26);
+  }
+  .cinta .marca{
+    font-weight:800; font-size:17px; letter-spacing:5px;
+    color:rgba(255,255,255,.46);
+  }
+  /* Todo lo que dijo el artista va en cursiva. */
+  .dijo{ font-style:italic; }
+  .citaChica{ font-weight:500; font-size:27px; line-height:1.4; color:rgba(255,255,255,.88); }
 
   /* las cifras, en cajas */
   .cifras{ display:flex; gap:28px; }
@@ -173,9 +206,9 @@
   }
 
   /* la portada del disco */
-  .disco{ display:flex; flex-direction:column; align-items:center; gap:34px; }
+  .disco{ display:flex; flex-direction:column; align-items:center; gap:30px; }
   .disco img{
-    width:600px; height:600px; border-radius:22px; display:block;
+    width:530px; height:530px; border-radius:22px; display:block;
     border:1.5px solid rgba(255,255,255,.20);
   }
   .disco p{
@@ -240,10 +273,14 @@ function titular(a, b){
 }
 
 function cinta(fotos, nombre){
-  return '<div class="cinta"><div class="dientes"></div><div class="ventanas">' +
-    fotos.map(f => '<div><img src="' + f + '" alt=""></div>').join("") +
-    '</div><div class="dientes"></div>' +
-    (nombre ? '<div class="nombre">' + nombre + '</div>' : '') + '</div>';
+  return '<div class="cinta">' +
+    '<div class="etiqueta"><b>' + nombre + '</b><i>VHS</i></div>' +
+    '<div class="ventana">' +
+      fotos.map(f => '<div><img src="' + f + '" alt=""></div>').join("") +
+    '</div>' +
+    '<div class="carretes"><div class="carrete"></div>' +
+      '<div class="marca">TANE</div><div class="carrete"></div></div>' +
+  '</div>';
 }
 
 const LAMINAS = {
@@ -282,10 +319,10 @@ const LAMINAS = {
       '<p class="texto">CARO es la serie numerada con la que TANE viene ordenando todo ' +
       'lo que publica, y lleva el mismo nombre que su estudio. El primer volumen salió ' +
       'en diciembre de 2023 con seis canciones, y del segundo él dijo que iba a tener ' +
-      '“una propuesta un poco más seria”.</p>' +
+      '<span class="dijo">“una propuesta un poco más seria”</span>.</p>' +
       '<div class="destacado">' + DESTELLO +
-        '<p>Que la serie siga también es decisión suya: “Caro 2, 3, 4, 5, todos los ' +
-        'que saquemos”</p>' +
+        '<p>Que la serie siga también es decisión suya: <span class="dijo">“Caro 2, ' +
+        '3, 4, 5, todos los que saquemos”</span></p>' +
       '</div>' +
     '</div>' },
 
@@ -296,49 +333,38 @@ const LAMINAS = {
       'todavía no sale. Mientras lo armaba grabó muchas más canciones de las que ' +
       'cabían, y diez quedaron fuera de ese disco. En vez de dejarlas guardadas las ' +
       'reunió en una cinta aparte, presentada en formato VHS.</p>' +
-      cinta(["TANE 1.png", "TANE 7.JPEG", "TANE 9.JPEG", "TANE 8.JPEG"],
+      cinta(["TANE 2.png", "TANE 8.JPEG", "TANE 7.JPEG"],
             "Lost Tape · Road to Caro Vol.2") +
     '</div>' },
 
   5: { html:
     '<div class="cuerpo">' +
       '<div class="disco"><img src="PORTADA TANE.jpg" alt="">' +
-        '<p>Así se ve “LOST TAPE (ROAD TO CARO VOL.2)”, que salió el jueves 8 de octubre</p>' +
-      '</div>' +
-      '<div class="cifras">' +
-        '<div class="caja"><div class="numero">10</div>' +
-          '<div class="que">quedaron fuera del VOL. 2</div></div>' +
-        '<div class="caja morada"><div class="numero">6</div>' +
-          '<div class="que">tuvo el primer CARO</div></div>' +
+        '<p>Así se ve la portada de “LOST TAPE (ROAD TO CARO VOL.2)”, que salió el ' +
+        'jueves 8 de octubre</p>' +
+        '<p class="citaChica dijo">“La idea de hacer este LOST TAPE fue armando mi ' +
+        'próximo disco. Hice muchos temas y creo que estos diez temas, aunque no ' +
+        'estén dentro de CARO VOL. 2, no se podían perder”</p>' +
       '</div>' +
     '</div>' },
 
   6: { html:
     '<div class="cuerpo">' +
-      titular("Por qué no las", "dejó guardadas") +
-      '<p class="texto">Él lo explicó así cuando salió el disco:</p>' +
-      '<div class="destacado">' + DESTELLO +
-        '<p>“La idea de hacer este LOST TAPE fue armando mi próximo disco. Hice muchos ' +
-        'temas y creo que estos diez temas, aunque no estén dentro de CARO VOL. 2, ' +
-        'no se podían perder”</p>' +
-      '</div>' +
-    '</div>' },
-
-  7: { html:
-    '<div class="cuerpo">' +
       titular("Los que acompañan", "a TANE en LOST TAPE") +
       '<p class="texto">Cantan con él Baby Jey, Jamez Manuel, Kuroh, ALBLACK, Poison ' +
       'Kid, Pablo Diablo y el mexicano Sleezy O. Cinco de ellos ya habían estado en ' +
       'CARO VOL. 1, y buena parte del disco se grabó en La Sede, la casa-estudio que ' +
-      'se armó en pandemia y donde TANE vivió con varios.</p>' +
-      '<div class="cartaAncha"><img src="TANE 9.JPEG" alt=""></div>' +
-      '<p class="texto">La producción la firma él mismo junto a Loose, Killua97 y ' +
-      'Discan.</p>' +
+      'se armó en pandemia y donde TANE vivió con varios. La producción la firma él ' +
+      'mismo junto a Loose, Killua97 y Discan.</p>' +
+      '<div class="parDeFotos">' +
+        '<figure><img src="TANE 9.JPEG" alt=""></figure>' +
+        '<figure><img src="TANE 5.JPEG" alt=""></figure>' +
+      '</div>' +
     '</div>' },
 
-  8: { html:"" },
+  7: { html:"" },
 
-  9: { html:
+  8: { html:
     '<div class="cierre">' +
       '<div class="remate">Síguenos<em>para más</em></div>' +
       '<div class="cuenta">@blinkmediacl</div>' +

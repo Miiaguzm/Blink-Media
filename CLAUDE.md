@@ -44,10 +44,7 @@ estadio" sí dice algo.
 **5. Primera persona, siempre — en lo que ella dice con su voz.**
 "Lo que más me gusta", "me parece lo más lindo", "lo que quiero que te quedes",
 "yo creo". Un medio dice qué pasó; Blink dice qué le pasó a ella con lo que pasó.
-*Pero eso es del reel y del copy, no de la gráfica.* El texto de una lámina es
-informativo: ahí "por si no lo conocen" o "lo que más me gusta es esto" quedan
-fuera de lugar, porque nadie está hablando. La lámina conserva el criterio —qué
-dato se elige, cómo se conecta— sin la voz conversacional.
+*Pero eso es del reel y del copy, no de la gráfica* — ver el bloque de abajo.
 
 **6. Cero fórmulas de prensa.**
 Fuera "el artista nacional", "cabe destacar", "se presentará", "dicho recinto".
@@ -94,9 +91,25 @@ Nada de jerga inventada por mí: **"es de los que hay que tener", "parte la cosa
 y parecidas no son suyas y encima no se entienden. Si una expresión no aparece en
 algo que ella haya escrito, no va.
 
-**Variar la puntuación.** Una seguidilla de frases cortas unidas con "y" suena a
-punteo disfrazado. Ella enlaza con "que", con comas, con punto y coma. Antes de
-entregar: contar los puntos seguidos y los "y" de un mismo párrafo.
+### El texto de una gráfica no es el de un reel
+
+El reel y el copy los dice ella con su voz. **En una lámina no habla nadie**, así
+que la primera persona conversacional queda fuera de lugar: "por si no lo conocen",
+"lo que más me gusta es esto", "y ojo con…" son de reel. La gráfica conserva el
+criterio de Blink —qué dato se elige, cómo se conecta, qué se deja afuera— en
+registro informativo.
+
+Eso no la vuelve un comunicado. Lo que la separa de una cuenta de noticias:
+
+- **Explica, no enumera.** Una seguidilla de frases cortas unidas con "y" suena a
+  punteo disfrazado; ella enlaza con "que", con comas, con punto y coma. Esto vale
+  para todo lo que escribo, no solo para las gráficas: antes de entregar, contar
+  los puntos seguidos y los "y" de un mismo párrafo.
+- **Da el contexto que falta.** Se escribe para alguien que no conoce al artista.
+- **Las cifras se escriben como ella las escribe**: en el cuerpo del texto puede ir
+  "10 años" en número si ella lo puso así; en los titulares va la palabra.
+- **Nada de adornos que no sean información.** Si una línea solo se sostiene en
+  algo que yo vi en una foto, se cae.
 
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)
@@ -372,97 +385,128 @@ formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuev
 
 ## Blink Radar
 
+Carrusel mensual que presenta a un artista emergente. Dos variantes: **foco en el
+artista** (el de Kittkatta) o **foco en un disco** (el de TANE). En el segundo, la
+presentación del artista es una lámina y todo lo demás va al disco. Ocho o nueve
+láminas; más que eso se hace largo.
+
+### Cómo se ve
+
 **El Radar tiene su propia plantilla, que no es la del generador.** Me equivoqué
-dos veces acá: primero inventando una gráfica y después usando la plantilla de
-publicación. La base viene del Radar de Kittkatta y es así:
+dos veces acá: primero inventé una gráfica y después usé la plantilla de
+publicación. La base viene del Radar de Kittkatta.
 
-- **Un solo fondo para todo el carrusel**: un collage de fotos del artista en
-  duotono morado —la foto en escala de grises y el morado encima en
-  `mix-blend-mode:color`—, el mismo en las nueve láminas, con un velo más
-  oscuro en las interiores. Eso es lo que hace que se lea como una sola pieza.
-- **Encima van los anillos del radar**: círculos concéntricos morados de línea
-  fina, centrados bajo el medio, que se salen del lienzo. Idénticos en todas.
-- **El logo va arriba a la derecha en todas.**
-- **La portada**: estrella + BLINK RADAR y "EDICIÓN <MES> <AÑO>" arriba a la
-  izquierda; abajo y centrado, un rótulo morado espaciado con el artista y su
-  género, el titular enorme en Anton, la bajada en dos líneas; y el pie con una
-  línea fina arriba, "DESLIZA PARA CONOCERLO" y una flecha morada.
-- **Las interiores**: sin píldora y sin pie. Titular a la izquierda en dos
-  líneas, blanco y morado, en mayúsculas, y la bajada debajo en Montserrat 700.
-- **Los recursos que se repiten**: cajas de cifras con borde redondeado y el
-  número en Anton; el bloque destacado con barra morada y destello a la
-  izquierda; y filas separadas por líneas finas, con el nombre en Anton y una
-  etiqueta en pastilla a la derecha.
+- **Un solo fondo para todo el carrusel**, idéntico en todas las láminas: un
+  collage de fotos del artista —paneles rectangulares ladeados, superpuestos,
+  que tapan el lienzo entero— en duotono morado. La foto va en escala de grises y
+  el morado encima en `mix-blend-mode:color`. Eso es lo que hace que las láminas
+  se lean como una sola pieza y no como gráficas sueltas.
+- **El tinte morado va al 68%, no más.** Si se pasa, el fondo se aplana, dejan de
+  distinguirse las fotos y se pierde el radar, que es justo lo que le da el nombre
+  al formato.
+- **Encima van los anillos del radar**: siete círculos concéntricos morados de
+  línea fina, centrados bajo el medio del lienzo y saliéndose por los bordes.
+  Idénticos en todas las láminas.
+- **El velo**: la portada lleva un degradado que oscurece arriba y abajo; las
+  interiores, un velo parejo más oscuro para que el texto mande.
+- **El logo va arriba a la derecha en todas**, y ninguna lámina mete texto debajo
+  de él: el cuerpo arranca unos 210px más abajo.
+- **La portada**: estrella morada + BLINK RADAR y `EDICIÓN <MES> <AÑO>` arriba
+  a la izquierda; al medio del alto y centrado, un rótulo morado muy espaciado con
+  el género, el titular enorme en Anton con el nombre del artista, y la bajada en
+  dos líneas; abajo una línea fina, "DESLIZA PARA CONOCERLO" y una flecha morada.
+  **Todo centrado y al medio, nunca apoyado abajo.**
+- **Las interiores**: sin píldora y sin pie. Titular a la izquierda en dos líneas,
+  la primera blanca y la segunda morada, en mayúsculas; la bajada debajo.
 
-- **El tinte morado va al 68%, no más.** Si se pasa, el fondo se aplana y deja
-  de distinguirse el radar, que es justo lo que le da el nombre al formato.
-- **Algunas láminas llevan fotos encima del fondo**, para que no sean puro
-  texto. Pero con una idea detrás, no de relleno: el casete de VHS —carcasa,
-  etiqueta arriba, ventana con tres fotos y los dos carretes— va en la lámina
-  que explica que el disco salió en ese formato. Mia rechazó una primera
-  versión hecha de tiras con perforaciones: "parece muy de Canva, se ve pobre".
-  Si el objeto existe de verdad, hay que dibujarlo como es.
-- **Cada foto metida en un marco necesita su propio encuadre vertical.** El
-  centrado por defecto corta las cabezas, sobre todo en las fotos verticales.
-  Hay que mirarlas una por una antes de dar la lámina por buena.
-- **Las fotos van agrupadas y proporcionales, nunca intercaladas.** Texto,
-  imagen gigante, texto otra vez se ve saturado. O la foto va al lado de la
-  columna de texto, o van dos del mismo tamaño debajo de todo el texto.
-- **En la portada todo va centrado y al medio del alto**, no apoyado abajo.
+**Los recursos que se repiten**, para no inventar uno nuevo cada vez:
+
+- **Cajas de cifras**: borde redondeado, el número en Anton —uno blanco y otro
+  morado— y abajo un rótulo corto que diga de qué es.
+- **El bloque destacado**: barra morada a la izquierda, destello y el texto al
+  lado. Es donde va una cita.
+- **Filas con separadores**: línea fina arriba de cada una, el nombre en Anton y
+  una etiqueta en pastilla a la derecha.
+- **El casete de VHS**: carcasa, etiqueta blanca arriba con el nombre del disco,
+  ventana negra con tres fotos y los dos carretes abajo.
+- **El recuadro de video**: 16:9 exacto (936×527), centrado en todo el alto, con
+  dos líneas debajo —qué es, en negrita, y dónde escucharlo, más chico—.
 
 El código está en `radar-tane.html`, y el collage del fondo en
 `radar-tane-collage.html`.
 
-**El Radar se escribe para alguien que no conoce al artista.** Es el error que
-Mia marcó más fuerte acá: yo escribía como si ya se supiera quién es y qué es
-su proyecto. Hay que explicar cada cosa —quién es, qué es la serie de discos,
-cuál es el disco que viene, de dónde salió este— y hacerlo directo y
-explicativo, nunca como punteo. Dos consecuencias de forma:
+### Cómo se escribe
 
-- **El titular da el contexto antes de la bajada.** "No es un disco, es el
-  proyecto" no dice de qué proyecto; "CARO no es un disco, es su serie entera"
-  sí. Leído solo, el titular tiene que situar de qué se está hablando.
-- **Pero el titular no adelanta el dato de la bajada.** "LOST TAPE salió armando
-  el VOL. 2" ya contaba lo que venía abajo; "De dónde nació LOST TAPE" plantea
-  la pregunta y deja que el texto la responda.
-- **Todos los textos de una lámina van al mismo ancho.** Mezclar un párrafo
-  angosto —al lado de una foto— con otro que cruza la lámina entera se ve
-  desordenado. La foto va al lado de la columna completa, no de un párrafo.
-- **Si dos cosas se llaman parecido, hay que decir cuál es cuál en cada
-  mención**, incluso en el rótulo de una cifra. Con CARO VOL. 1 y VOL. 2
-  mezclados en dos láminas seguidas no se entendía de cuál salieron las diez
-  canciones.
-- **La portada lleva el nombre del artista en el titular**, no solo en un
-  rótulo chico: "TANE ESTÁ DE ESTRENO".
+**El Radar se escribe para alguien que no conoce al artista.** Es el error que Mia
+marcó más fuerte: yo escribía como si ya se supiera quién es y qué es su proyecto.
+Hay que explicar cada cosa —quién es, qué es su serie de discos, cuál es el que
+viene, de dónde salió este— directo y explicativo.
 
-Formato de carrusel para presentar a un artista emergente. A veces el foco es el
-artista (el de Kittkatta) y a veces un disco: ahí la introducción del artista es
-corta y todo lo demás va al disco.
-
-- **Las láminas se escriben con tono, no como ficha.** Este es el error que Mia
-  marcó más fuerte: un carrusel de puros datos sueltos "parece un cuestionario de
-  Google Forms". Cada lámina se escribe en primera persona y con las mismas reglas
-  de tono del resto del archivo. Y **cada lámina se tiene que entender sola**: si
-  se lee suelta y no se sabe de qué está hablando, le falta contexto.
-- Los rótulos tienen que decir **qué es** la cosa que nombran. "El underground"
-  encima de un nombre de canción no le dice nada a nadie.
-- Nada de cronologías tipo Canva: los hitos van como bloques sueltos, no como
-  línea de tiempo con numeritos.
+- **El titular da el contexto, pero no adelanta el dato.** "No es un disco, es el
+  proyecto" no dice de qué proyecto. "LOST TAPE salió armando el VOL. 2" ya contaba
+  lo que venía abajo. Lo que funciona es plantear de qué se habla y dejar que el
+  texto responda: "CARO no es un disco, es su serie entera", "De dónde nació LOST
+  TAPE".
+- **Cada lámina se entiende sola.** Si se lee suelta y no se sabe de qué se está
+  hablando, le falta contexto.
+- **Si dos cosas se llaman parecido, hay que decir cuál es cuál en cada mención**,
+  incluso en el rótulo de una cifra. Con CARO VOL. 1 y VOL. 2 mezclados en dos
+  láminas seguidas no se entendía de cuál salieron las diez canciones.
+- **Nada de punteo.** Un carrusel de datos sueltos "parece un cuestionario de
+  Google Forms". Tampoco cronologías tipo Canva con numeritos.
 - **Si un dato no da para lámina propia, se menciona donde encaje.** No se estira
   un solo hecho a pantalla completa para rellenar.
-- **Antes del cierre va una lámina con un extracto de la música**: un video o un
-  fragmento de una canción, que Mia monta después. Yo entrego solo el fondo con
-  el texto que ella me pase.
-- Las cifras van solas y grandes, no dentro de un párrafo. Pero la cifra sola
-  necesita abajo una línea que diga de qué es.
-- El género que se le asigne al artista tiene que salir del artista o de su
-  sello, nunca de cómo lo etiquetó otro medio.
-- **La portada es un collage de varias fotos del artista**, con el titular y la
-  bajada apuntando al foco del carrusel. Puede llevar un dato de origen (ciudad,
-  años de carrera) **solo si está confirmado**. Si el Radar es de un disco, la
-  portada del disco va en la **segunda** lámina, no en la primera.
+- Los rótulos tienen que decir **qué es** la cosa que nombran.
+- Las cifras van solas y grandes, nunca dentro de un párrafo, y con una línea
+  abajo que diga de qué son.
+- El género que se le asigne al artista sale del artista o de su sello, nunca de
+  cómo lo etiquetó otro medio.
 
----
+### Las fotos
+
+- **Las fotos encima del fondo van con una idea detrás, no de relleno.** El casete
+  va en la lámina que explica que el disco salió en VHS. Mia rechazó una primera
+  versión hecha de tiras con perforaciones: *"parece muy de Canva, se ve pobre"*.
+  Si el objeto existe de verdad, hay que dibujarlo como es.
+- **Agrupadas y proporcionales, nunca intercaladas.** Texto, imagen gigante, texto
+  otra vez se ve saturado. O la foto va al lado de la columna de texto completa, o
+  van dos del mismo tamaño debajo de todo el texto.
+- **Cada foto enmarcada necesita su encuadre calculado, no a ojo.** El centrado por
+  defecto corta las cabezas y moverlo a tanteo se pasa para el otro lado. Se saca
+  así: la escala es `ancho de la ventana / ancho de la foto`; el sobrante vertical
+  es `alto de la foto × escala − alto de la ventana`; y
+  `object-position = (alto de la cabeza × escala − 18px) / sobrante`. Deja la
+  cabeza pegada al borde de arriba sin cortarla, que es como Mia la quiere.
+- **Qué fotos dejar fuera.** Las que tengan droga o fajos y máquinas de contar
+  billetes sobre la mesa. Son press kits reales y el artista las manda, pero a
+  Mia le complican la cuenta sin aportar nada.
+- Cuando una lámina habla de más de una persona, la foto tiene que mostrar a más
+  de una persona.
+
+### El orden que funcionó (TANE, octubre 2026)
+
+1. Portada — el nombre del artista en el titular
+2. Quién es — trayectoria, de dónde es, qué tiene hoy
+3. Qué es su proyecto/serie — con una cita en el bloque destacado
+4. De dónde salió este disco — con el casete
+5. La portada del disco — con lo que dijo él, en cursiva y más chico
+6. Quiénes lo acompañan — invitados, producción y dónde se grabó
+7. El teaser — recuadro 16:9 para el video que monta Mia
+8. Cierre — síguenos para más
+
+**La portada del disco no va al principio**: va una vez que ya se explicó qué es
+el disco, si no llega sin contexto.
+
+### Antes de entregar
+
+1. **El semáforo primero.** Qué está en fuentes independientes, qué sale solo del
+   press kit y qué es lenguaje inflado del equipo. Eso se entrega antes que
+   cualquier gráfica.
+2. **Después los textos de cada lámina**, para que ella los corrija en texto y no
+   sobre imágenes ya renderizadas.
+3. **Al final las imágenes**, y recién ahí se revisa encuadre, aire y alineación.
+4. Decirle siempre qué le conviene confirmar antes de publicar.
+
 
 ## Mantener este archivo
 
@@ -501,3 +545,7 @@ corto y sin repeticiones.
   bastante menos. Verificar así antes de dar una gráfica por buena.
 - Esto **no afecta al generador**, que corre en el navegador de Mia y ahí las
   fuentes cargan bien. Solo afecta a lo que renderizo yo acá.
+- **Cómo renderizo una lámina**: Chromium sin cabeza con `--window-size=1080,1437`
+  —1437 y no 1350 porque pinta de menos— y después recortar el PNG a 1080×1350.
+  No hay Pillow ni numpy, así que el recorte va con un script propio de zlib y
+  struct que deshace los filtros del PNG y lo vuelve a empaquetar.

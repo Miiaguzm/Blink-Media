@@ -228,6 +228,11 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   semáforo: qué está en fuentes independientes y qué no.
 - **Nunca atribuirle a un artista algo que no dijo él.** Ya pasó con un género que
   saqué de otro medio y no del artista. Si es interpretación de prensa, se dice así.
+- **Con los press kits, separar bien dos cosas distintas.** Cómo el artista ve su
+  propio trabajo —"su gran proyecto", "continúa su legado"— **sí se usa**: es su
+  mirada y eso es cierto como tal. Mia me corrigió por descartarlo. Lo que no se
+  copia es la afirmación verificable que el equipo infló: "el reconocido estudio
+  tal", "ha gestado la actual escena urbana". Esa segunda se confirma o se cae.
 - **Cruzar cada fecha con su día de la semana.** Si una nota dice "domingo 27" y el
   27 es viernes, esa nota es de otro año. Ese chequeo ya atrapó dos errores.
 - **Ojo con los resúmenes de buscador que mezclan discos o épocas.** Verificar
@@ -348,17 +353,27 @@ formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuev
 
 ## Blink Radar
 
-Formato de carrusel para presentar a un artista emergente.
+Formato de carrusel para presentar a un artista emergente. A veces el foco es el
+artista (el de Kittkatta) y a veces un disco: ahí la introducción del artista es
+corta y todo lo demás va al disco.
 
+- **Las láminas se escriben con tono, no como ficha.** Este es el error que Mia
+  marcó más fuerte: un carrusel de puros datos sueltos "parece un cuestionario de
+  Google Forms". Cada lámina se escribe en primera persona y con las mismas reglas
+  de tono del resto del archivo. Y **cada lámina se tiene que entender sola**: si
+  se lee suelta y no se sabe de qué está hablando, le falta contexto.
 - Los rótulos tienen que decir **qué es** la cosa que nombran. "El underground"
   encima de un nombre de canción no le dice nada a nadie.
 - Nada de cronologías tipo Canva: los hitos van como bloques sueltos, no como
   línea de tiempo con numeritos.
-- Las cifras van solas y grandes, no dentro de un párrafo.
+- Las cifras van solas y grandes, no dentro de un párrafo. Pero la cifra sola
+  necesita abajo una línea que diga de qué es.
 - El género que se le asigne al artista tiene que salir del artista o de su
   sello, nunca de cómo lo etiquetó otro medio.
-- La portada puede llevar un dato de origen (ciudad, años de carrera) **solo si
-  está confirmado**.
+- **La portada es un collage de varias fotos del artista**, con el titular y la
+  bajada apuntando al foco del carrusel. Puede llevar un dato de origen (ciudad,
+  años de carrera) **solo si está confirmado**. Si el Radar es de un disco, la
+  portada del disco va en la **segunda** lámina, no en la primera.
 
 ---
 

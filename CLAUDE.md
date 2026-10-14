@@ -251,7 +251,10 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
 - **Separar siempre lo confirmado de lo que no.** Entregar los guiones con un
   semáforo: qué está en fuentes independientes y qué no.
 - **Nunca atribuirle a un artista algo que no dijo él.** Ya pasó con un género que
-  saqué de otro medio y no del artista. Si es interpretación de prensa, se dice así.
+  saqué de otro medio y no del artista. Si es interpretación de prensa, se dice
+  así — pero **se dice, no se tira a la basura**. Mia me corrigió por dejar fuera
+  del guion que la prensa leía el disco de Princesa Alba como un corte con el
+  reggaetón: si varios medios lo cuentan, entra atribuido.
 - **Con los press kits, separar bien dos cosas distintas.** Cómo el artista ve su
   propio trabajo —"su gran proyecto", "continúa su legado"— **sí se usa**: es su
   mirada y eso es cierto como tal. Mia me corrigió por descartarlo. Lo que no se

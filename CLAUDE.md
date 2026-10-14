@@ -58,6 +58,9 @@ conversación y no a punteo.
 **8. Cerrar invitando, no despidiendo.**
 "Quédate por acá", "si quieres seguir esta era conmigo". Y si el reel abrió con
 una idea, el cierre la tiene que pagar.
+**"Quédate por acá conmigo" es marca de Blink.** Mia la aprobó como muletilla
+fija del cierre, así que se puede repetir reel a reel: es de las pocas cosas que
+conviene que suenen siempre igual.
 *Pero el cierre no es una tarea ni un recordatorio.* Mia cerró así el reel de
 Lollapalooza: *"esperemos que esta nueva edición nos traiga esa misma vara de
 artistas nacionales y nos sorprenda con los internacionales. No te olvides que

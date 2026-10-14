@@ -293,6 +293,11 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   sentimiento del fandom no está en ninguna nota, no se escribe "los fans están molestos"
   —eso habría que respaldarlo— sino "cada vez que sube algo yo veo los mismos comentarios".
   En primera persona es cierto, es suyo, y es justo lo que un medio no puede decir.
+- **Lo que Mia vio en Instagram sí entra, porque Instagram está bloqueado para mí.**
+  Ella sigue a los artistas y ve historias y posts que yo no puedo abrir. Cuando
+  me pasa algo así, va al guion **atribuido al artista y sin comillas** —"ella
+  contó en su Instagram que…"—, porque tenemos el hecho pero no el texto exacto.
+  Si después quiere citarlo textual, tiene que ir a buscar la frase.
 - **Lo que yo veo en una foto no es información.** Me pasó con un letrero de neón
   del estudio: lo noté revisando la imagen y lo escribí como si fuera un dato.
   Nadie necesita saber que hay un letrero rojo. Si una línea solo se sostiene en

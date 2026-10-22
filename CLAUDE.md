@@ -392,6 +392,21 @@ https://claude.ai/artifact/64yEEGEqBWUxbxeLtdcmCX
 (Antes vivía en `claude.ai/code/artifact/290b938e-…`; la plataforma cambió el
 formato de las direcciones. Si Mia tiene el link viejo guardado, pasarle el nuevo.)
 
+**El código del generador vive en el repo como `generador.html`.** Antes existía
+solo como artifact, que es mucho más frágil. Para cambiarlo: se edita ese archivo
+y se publica a la misma dirección. Al leer el artifact publicado viene envuelto en
+una carcasa —`<!doctype html>`, `<head>`, `<body>`— que pone el publicador: hay que
+sacarla antes de volver a publicar, o queda anidada.
+
+**Grabar video en el generador: dos trampas que ya costaron un arreglo.**
+- Con `captureStream(0)` la pista de video no entrega nada hasta que se le pide un
+  cuadro. Si la grabadora arranca sin ninguno, el archivo empieza con audio y sin
+  imagen, y todo queda corrido. Hay que pintar y pedir un cuadro antes de `start()`.
+- Nada de `getImageData` por cuadro. Obliga a traer el lienzo desde la tarjeta
+  gráfica y se come la mitad del presupuesto de 40 ms que hay a 25 cuadros por
+  segundo; el video se va atrasando solo. Lo que se pueda hacer con `ctx.filter`,
+  va con `ctx.filter`.
+
 ---
 
 ## Blink Radar

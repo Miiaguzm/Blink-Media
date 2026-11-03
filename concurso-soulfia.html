@@ -29,72 +29,90 @@
     object-position:50% 16%;
     filter:brightness(.92) contrast(1.04);
   }
-  /* Arriba para la cabecera, abajo para el bloque de texto. */
   .velo{
     position:absolute; inset:0;
     background:
       linear-gradient(180deg,
         rgba(10,10,10,.86) 0%,
-        rgba(10,10,10,.30) 13%,
-        rgba(10,10,10,0)   26%,
-        rgba(10,10,10,.18) 40%,
-        rgba(10,10,10,.72) 52%,
-        rgba(10,10,10,.93) 64%,
-        var(--negro)       76%);
+        rgba(10,10,10,.30) 12%,
+        rgba(10,10,10,0)   24%,
+        rgba(10,10,10,.18) 38%,
+        rgba(10,10,10,.70) 50%,
+        rgba(10,10,10,.92) 62%,
+        var(--negro)       74%);
   }
 
-  /* ------------------------------------------- la cabecera del collab */
+  /* ---------------------------------------- ZONA 1 · arriba, los logos */
   .collab{
-    position:absolute; z-index:3; top:76px; left:0; right:0;
-    display:flex; align-items:center; justify-content:center; gap:30px;
+    position:absolute; z-index:3; top:68px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:26px;
   }
   /* Las letras de BLINK ocupan el 54,3% de abajo de su PNG —medido—, porque
      el destello va encima. Sin corregir eso, al centrar las dos imágenes la
      palabra BLINK queda más abajo que FPSOULFIA. El desplazamiento las deja
      con la misma línea de letra, que es lo que se ve. */
   .collab img{ display:block; }
-  .collab .blink{ width:140px; transform:translateY(-22px); }
-  .collab .fp{ width:395px; }
+  .collab .blink{ width:110px; transform:translateY(-17px); }
+  .collab .fp{ width:311px; }
   .collab .equis{
-    font-weight:700; font-size:40px; color:var(--lima); line-height:1;
+    font-weight:700; font-size:32px; color:var(--lima); line-height:1;
   }
 
-  /* ------------------------------------------------- el bloque de abajo */
-  .bloque{
-    position:absolute; z-index:3; left:72px; right:72px; bottom:61px;
+  /* ------------------------------------ ZONA 2 · al medio, el titular */
+  .titulo{
+    position:absolute; z-index:3; left:72px; right:72px; bottom:356px;
     text-align:center;
   }
-
   .titular{
     font-family:"Anton", sans-serif;
-    font-size:160px; line-height:.95; letter-spacing:1px;
+    font-size:158px; line-height:.95; letter-spacing:1px;
     color:var(--blanco); text-transform:uppercase;
   }
   .titular span{ display:block; }
-
   .quien{
-    margin-top:30px;
-    font-weight:800; font-size:31px; letter-spacing:4.5px;
+    margin-top:26px;
+    font-weight:800; font-size:30px; letter-spacing:4.5px;
     color:var(--lima); text-transform:uppercase;
   }
 
-  .ficha{
-    margin-top:18px;
-    font-weight:600; font-size:28px; line-height:1.48;
-    color:rgba(255,255,255,.94);
+  /* ---------------------- ZONA 3 · abajo, la ficha como talón de entrada */
+  /* Antes toda la información iba apilada bajo el titular, en una sola
+     columna centrada, y se leía como un solo bloque. Acá la ficha cruza la
+     gráfica de borde a borde y se parte en tres, que además es la forma de
+     un talón de entrada: justo lo que se está sorteando. */
+  .banda{
+    position:absolute; z-index:3; left:0; right:0; bottom:168px;
+    border-top:1.5px solid rgba(255,255,255,.20);
+    border-bottom:1.5px solid rgba(255,255,255,.20);
+    display:flex; align-items:stretch;
+    padding:0 56px;
   }
-  .ficha b{ font-weight:800; }
+  .banda div{ padding:26px 20px; }
+  .banda div + div{ border-left:1.5px solid rgba(255,255,255,.20); }
+  .banda .cuando{ flex:1.2; }
+  .banda .hora{   flex:0.6; }
+  .banda .donde{  flex:1.5; }
+  .banda em{
+    display:block; font-style:normal;
+    font-weight:800; font-size:16px; letter-spacing:3.2px;
+    color:var(--lima); text-transform:uppercase;
+  }
+  .banda strong{
+    display:block; margin-top:9px;
+    font-weight:700; font-size:23px; line-height:1.22;
+    color:rgba(255,255,255,.96);
+  }
 
+  /* ------------------------------------------- ZONA 3 · el pie de todo */
   .pie{
-    margin-top:44px; padding-top:61px;
-    border-top:1.5px solid rgba(255,255,255,.22);
+    position:absolute; z-index:3; left:0; right:0; bottom:70px;
     display:flex; align-items:center; justify-content:center; gap:16px;
   }
   .pie span{
-    font-weight:800; font-size:24px; letter-spacing:3.4px;
+    font-weight:800; font-size:23px; letter-spacing:3.4px;
     color:var(--lima); text-transform:uppercase;
   }
-  .pie svg{ width:24px; height:24px; flex:none; }
+  .pie svg{ width:23px; height:23px; flex:none; }
 </style>
 </head>
 <body>
@@ -111,37 +129,36 @@
     <img class="fp" src="logo-fpsoulfia.png" alt="FPSOULFIA">
   </div>
 
-  <div class="bloque">
+  <div class="titulo">
     <div class="titular"><span>Gana una</span><span>entrada</span></div>
-
     <div class="quien">Soulfía · Yegua en vivo</div>
+  </div>
 
-    <div class="ficha">
-      <b>Sábado 7 de noviembre · 20:00 hrs</b><br>
-      Teatro Mauri SCD · Valparaíso
-    </div>
+  <div class="banda">
+    <div class="cuando"><em>Cuándo</em><strong>Sábado 7 de noviembre</strong></div>
+    <div class="hora"><em>Hora</em><strong>20:00 hrs</strong></div>
+    <div class="donde"><em>Dónde</em><strong>Teatro Mauri SCD, Valparaíso</strong></div>
+  </div>
 
-    <div class="pie">
-      <span>Lee la descripción para participar</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="#B8F870" stroke-width="3"
-           stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 4 V19 M5 12 L12 19 L19 12"/>
-      </svg>
-    </div>
+  <div class="pie">
+    <span>Lee la descripción para participar</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#B8F870" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4 V19 M5 12 L12 19 L19 12"/>
+    </svg>
   </div>
 
 </div>
 
 <script>
 (async function(){
-  await document.fonts.load("168px Anton");
-  await document.fonts.load("800 31px Montserrat");
+  await document.fonts.load("158px Anton");
+  await document.fonts.load("800 30px Montserrat");
   await document.fonts.ready;
 
   // El titular se achica solo si alguna línea no cabe a lo ancho.
-  const caja = document.getElementById("lamina");
-  caja.querySelectorAll(".titular span").forEach(s => {
-    let t = 168;
+  document.querySelectorAll(".titular span").forEach(s => {
+    let t = 158;
     while (t > 90 && s.scrollWidth > 936){ t -= 2; s.style.fontSize = t + "px"; }
   });
 

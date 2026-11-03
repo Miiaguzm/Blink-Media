@@ -126,11 +126,11 @@
   <div class="collab">
     <img class="blink" src="logo-blink.png" alt="Blink">
     <div class="equis">×</div>
-    <img class="fp" src="logo-fpsoulfia.png" alt="FPSOULFIA">
+    <img class="fp" src="logo-soulfiafp.png" alt="SOULFIAFP">
   </div>
 
   <div class="titulo">
-    <div class="titular"><span>Gana una</span><span>entrada</span></div>
+    <div class="titular"><span>Gana una</span><span>entrada doble</span></div>
     <div class="quien">Soulfía · Yegua en vivo</div>
   </div>
 
@@ -156,11 +156,15 @@
   await document.fonts.load("800 30px Montserrat");
   await document.fonts.ready;
 
-  // El titular se achica solo si alguna línea no cabe a lo ancho.
-  document.querySelectorAll(".titular span").forEach(s => {
-    let t = 158;
-    while (t > 90 && s.scrollWidth > 936){ t -= 2; s.style.fontSize = t + "px"; }
-  });
+  // Las dos líneas del titular comparten cuerpo: se busca el mayor tamaño
+  // con el que quepan las dos. Ajustándolas por separado, la corta quedaba
+  // grande y la larga achicada, y se notaba el escalón.
+  const lineas = [...document.querySelectorAll(".titular span")];
+  let t = 158;
+  while (t > 90 && lineas.some(l => l.scrollWidth > 936)){
+    t -= 2;
+    lineas.forEach(l => { l.style.fontSize = t + "px"; });
+  }
 
   document.title = "listo";
 })();

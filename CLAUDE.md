@@ -269,6 +269,11 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   contra una segunda fuente antes de dárselo.
 - **Cuidado con verbos ambiguos**: "estrenó" se lee como "salió". Si fue un
   adelanto en vivo, se dice "tocó por primera vez" o "adelantó".
+- **"Setlist" no es "tracklist".** La gráfica con los títulos que publica un artista
+  antes de un disco es el tracklist. No se escribe "el setlist" si nadie confirmó qué
+  va a tocar en el show. Y ojo con el orden: en esas gráficas los números van en cuerpo
+  mínimo y en una captura de Instagram no se alcanzan a leer. Si no se leen, se entrega
+  la lista sin numerar y se le pide el orden a ella, que tiene el post en el teléfono.
 - **Distinguir siempre confirmado / indicio / rumor.** Confirmado: "anunció…".
   Indicio: "activó una cuenta regresiva en su web…". Rumor: "entre los fans empezó
   a circular la teoría de que…". Nunca escribir "va a anunciar una gira" si no
@@ -335,6 +340,13 @@ su voz de la nuestra.
 - **Nunca alterar los colores de marca.** El morado no se aclara para ganar contraste.
 - Dato técnico: `#7B2CFF` sobre negro llega como máximo a 3.65:1 de contraste, así
   que el morado solo va en texto de tamaño titular, nunca en cuerpo.
+
+**Una imagen que ya trae texto encima no va de fondo a sangre.** La gráfica del
+tracklist de YEGUA tiene los títulos escritos sobre la espalda: puesta de fondo, se
+transparentan detrás del texto mío y se lee todo duplicado. Se enmarca —así pasa a
+ser lo que es, la gráfica del disco— y la información va afuera del marco, en
+registro Blink. Es también la respuesta cuando la imagen es horizontal y la lámina
+vertical: enmarcarla, no estirarla ni dejarla a sangre recortada.
 
 **Ojo con los tildes en Anton.** Las mayúsculas acentuadas —Á, Í— se salen por
 arriba de la caja de línea, así que con dos líneas apretadas el tilde de abajo

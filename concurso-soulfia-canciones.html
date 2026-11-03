@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Concurso Soulfía · Blink · lámina 2, las canciones</title>
+<style>
+  :root{
+    --negro:  #0A0A0A;
+    --morado: #7B2CFF;
+    --blanco: #FFFFFF;
+    /* El lima lo saqué del logo de @soulfiafp: rgb(184,248,112). Es el mismo
+       verde con el que ella escribió los títulos sobre la espalda, así que la
+       lámina y la portada del disco hablan el mismo idioma sin forzarlo. */
+    --lima:   #B8F870;
+    --linea:  rgba(255,255,255,.18);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:var(--negro); }
+
+  .lamina{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--negro);
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+
+  /* ---------------------------------------- ZONA 1 · arriba, los logos */
+  /* Mismo bloque que la lámina del concurso, sin tocar nada: es lo que hace
+     que las dos se lean como una sola publicación. */
+  .collab{
+    position:absolute; z-index:3; top:68px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:26px;
+  }
+  .collab img{ display:block; }
+  .collab .blink{ width:96px; transform:translateY(-15px); }
+  .collab .fp{ width:245px; }
+  .collab .equis{
+    font-weight:700; font-size:28px; color:var(--lima); line-height:1;
+  }
+
+  /* ---------------------------------------------- ZONA 2 · el titular */
+  .titulo{
+    position:absolute; z-index:3; left:72px; right:72px; top:198px;
+    text-align:center;
+    font-family:"Anton", sans-serif;
+    font-size:56px; line-height:1; letter-spacing:1px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+
+  /* --------------------------------------- ZONA 3 · su imagen, enmarcada */
+  /* La imagen que ella publicó es horizontal (1570x1182) y además es una
+     captura de Instagram: trae la flecha de la izquierda y los dos puntitos
+     del carrusel abajo al centro. Primero la probé de fondo a sangre y no
+     sirve: los títulos en lima que ella escribió sobre la espalda se
+     transparentan detrás del texto mío y se lee todo duplicado. Enmarcada
+     funciona, porque pasa a ser lo que es —la gráfica del disco— y la lista
+     de abajo es la que informa. El recorte empieza en x=75 y termina en
+     y=1124 para que la flecha y los puntitos queden fuera. */
+  .panel{
+    position:absolute; z-index:3; left:100px; top:282px;
+    width:880px; height:662px;
+    overflow:hidden;
+    border:1.5px solid var(--linea);
+  }
+  .panel img{ position:absolute; top:0; left:-44px; width:924px; }
+
+  .fecha{
+    position:absolute; z-index:3; left:72px; right:72px; top:968px;
+    text-align:center;
+    font-weight:800; font-size:21px; letter-spacing:3.6px;
+    color:var(--lima); text-transform:uppercase;
+  }
+
+  /* ---------------------------------------- ZONA 4 · las once canciones */
+  /* Dos columnas en vez de una lista de once líneas: en una sola columna el
+     interlineado hay que apretarlo tanto que el bloque se lee como párrafo.
+     Cada fila lleva una línea fina arriba, la misma que enmarca el panel, así
+     que la tabla no necesita ningún recuadro propio. */
+  .lista{
+    position:absolute; z-index:3; left:100px; right:100px; top:1014px;
+    display:flex; gap:40px;
+  }
+  .col{ flex:1; }
+  .fila{
+    height:46px; display:flex; align-items:center;
+    border-top:1.5px solid var(--linea);
+  }
+  .tema{
+    font-weight:700; font-size:22px; line-height:1.15;
+    color:rgba(255,255,255,.97); white-space:nowrap;
+  }
+  .tema i{
+    font-style:normal; font-weight:600; font-size:16px; color:var(--lima);
+  }
+</style>
+</head>
+<body>
+<div class="lamina" id="lamina">
+
+  <div class="collab">
+    <img class="blink" src="logo-blink.png" alt="Blink">
+    <div class="equis">×</div>
+    <img class="fp" src="logo-soulfiafp.png" alt="SOULFIAFP">
+  </div>
+
+  <div class="titulo">Las canciones de Yegua</div>
+
+  <div class="panel">
+    <img src="soulfia-tracklist.jpg" alt="">
+  </div>
+
+  <div class="fecha">El disco sale el 5 de noviembre</div>
+
+  <div class="lista">
+    <div class="col">
+      <div class="fila"><span class="tema">mañana + pecadorA <i>(feat. Baby Jey)</i></span></div>
+      <div class="fila"><span class="tema">nyc <i>(feat. Mhtresuno)</i></span></div>
+      <div class="fila"><span class="tema">OTRAS VIDAS</span></div>
+      <div class="fila"><span class="tema">lágrimas al Mar</span></div>
+      <div class="fila"><span class="tema">1111 <i>(feat. Lido Pimienta)</i></span></div>
+      <div class="fila"><span class="tema">ticket dorado</span></div>
+    </div>
+    <div class="col">
+      <div class="fila"><span class="tema">Yegua <i>(feat. Javiera Electra)</i></span></div>
+      <div class="fila"><span class="tema">Escoltada</span></div>
+      <div class="fila"><span class="tema">Neón de cielos</span></div>
+      <div class="fila"><span class="tema">SUPERESTRELLA</span></div>
+      <div class="fila"><span class="tema">caballo de troYa</span></div>
+      <div class="fila"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(async function(){
+  await document.fonts.load("56px Anton");
+  await document.fonts.load("800 21px Montserrat");
+  await document.fonts.load("700 22px Montserrat");
+  await document.fonts.ready;
+
+  // Ningún título puede irse a dos líneas: la fila mide 46px fijos para que
+  // las líneas finas de las dos columnas queden a la misma altura. Si uno se
+  // pasa de ancho, se achica solo ese.
+  document.querySelectorAll(".fila").forEach(f => {
+    const s = f.querySelector(".tema");
+    if (!s) return;
+    let c = 22;
+    while (c > 15 && s.scrollWidth > f.clientWidth){
+      c -= 0.5;
+      s.style.fontSize = c + "px";
+      s.querySelectorAll("i").forEach(i => { i.style.fontSize = (c - 6) + "px"; });
+    }
+  });
+
+  document.title = "listo";
+})();
+</script>
+</body>
+</html>

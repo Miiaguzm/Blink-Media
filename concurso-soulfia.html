@@ -65,7 +65,7 @@
   }
   .titular{
     font-family:"Anton", sans-serif;
-    font-size:158px; line-height:.95; letter-spacing:1px;
+    font-size:136px; line-height:.95; letter-spacing:1px;
     color:var(--blanco); text-transform:uppercase;
   }
   .titular span{ display:block; }
@@ -152,7 +152,7 @@
 
 <script>
 (async function(){
-  await document.fonts.load("158px Anton");
+  await document.fonts.load("136px Anton");
   await document.fonts.load("800 30px Montserrat");
   await document.fonts.ready;
 
@@ -160,7 +160,7 @@
   // con el que quepan las dos. Ajustándolas por separado, la corta quedaba
   // grande y la larga achicada, y se notaba el escalón.
   const lineas = [...document.querySelectorAll(".titular span")];
-  let t = 158;
+  let t = 136;
   while (t > 90 && lineas.some(l => l.scrollWidth > 936)){
     t -= 2;
     lineas.forEach(l => { l.style.fontSize = t + "px"; });

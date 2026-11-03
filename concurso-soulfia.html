@@ -45,22 +45,23 @@
 
   /* ------------------------------------------- la cabecera del collab */
   .collab{
-    position:absolute; z-index:3; top:62px; left:0; right:0;
-    display:flex; align-items:center; justify-content:center; gap:28px;
+    position:absolute; z-index:3; top:76px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:30px;
   }
-  .collab img{ width:166px; display:block; }
+  /* Las letras de BLINK ocupan el 54,3% de abajo de su PNG —medido—, porque
+     el destello va encima. Sin corregir eso, al centrar las dos imágenes la
+     palabra BLINK queda más abajo que FPSOULFIA. El desplazamiento las deja
+     con la misma línea de letra, que es lo que se ve. */
+  .collab img{ display:block; }
+  .collab .blink{ width:140px; transform:translateY(-22px); }
+  .collab .fp{ width:395px; }
   .collab .equis{
-    font-weight:700; font-size:30px; color:var(--lima); line-height:1;
-    padding-top:10px;
-  }
-  .collab .cuenta{
-    font-weight:800; font-size:29px; letter-spacing:2.4px;
-    color:var(--blanco); line-height:1;
+    font-weight:700; font-size:40px; color:var(--lima); line-height:1;
   }
 
   /* ------------------------------------------------- el bloque de abajo */
   .bloque{
-    position:absolute; z-index:3; left:72px; right:72px; bottom:92px;
+    position:absolute; z-index:3; left:72px; right:72px; bottom:61px;
     text-align:center;
   }
 
@@ -85,7 +86,7 @@
   .ficha b{ font-weight:800; }
 
   .pie{
-    margin-top:44px; padding-top:30px;
+    margin-top:44px; padding-top:61px;
     border-top:1.5px solid rgba(255,255,255,.22);
     display:flex; align-items:center; justify-content:center; gap:16px;
   }
@@ -105,9 +106,9 @@
   </div>
 
   <div class="collab">
-    <img src="logo-blink.png" alt="Blink">
+    <img class="blink" src="logo-blink.png" alt="Blink">
     <div class="equis">×</div>
-    <div class="cuenta">@soulfiafp</div>
+    <img class="fp" src="logo-fpsoulfia.png" alt="FPSOULFIA">
   </div>
 
   <div class="bloque">

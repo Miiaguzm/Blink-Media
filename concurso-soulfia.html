@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Concurso Soulfía · Blink</title>
+<style>
+  :root{
+    --negro:  #0A0A0A;
+    --morado: #7B2CFF;
+    --blanco: #FFFFFF;
+    /* El lima lo saqué del logo de @soulfiafp: rgb(184,248,112). */
+    --lima:   #B8F870;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:var(--negro); }
+
+  .lamina{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--negro);
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+
+  /* ---------------------------------------------------------- la foto */
+  .foto{ position:absolute; inset:0; }
+  .foto img{
+    width:1080px; height:1350px; object-fit:cover;
+    object-position:50% 16%;
+    filter:brightness(.92) contrast(1.04);
+  }
+  /* Arriba para la cabecera, abajo para el bloque de texto. */
+  .velo{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg,
+        rgba(10,10,10,.86) 0%,
+        rgba(10,10,10,.30) 13%,
+        rgba(10,10,10,0)   26%,
+        rgba(10,10,10,.18) 40%,
+        rgba(10,10,10,.72) 52%,
+        rgba(10,10,10,.93) 64%,
+        var(--negro)       76%);
+  }
+
+  /* ------------------------------------------- la cabecera del collab */
+  .collab{
+    position:absolute; z-index:3; top:62px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:28px;
+  }
+  .collab img{ width:166px; display:block; }
+  .collab .equis{
+    font-weight:700; font-size:30px; color:var(--lima); line-height:1;
+    padding-top:10px;
+  }
+  .collab .cuenta{
+    font-weight:800; font-size:29px; letter-spacing:2.4px;
+    color:var(--blanco); line-height:1;
+  }
+
+  /* ------------------------------------------------- el bloque de abajo */
+  .bloque{
+    position:absolute; z-index:3; left:72px; right:72px; bottom:92px;
+    text-align:center;
+  }
+
+  .titular{
+    font-family:"Anton", sans-serif;
+    font-size:160px; line-height:.95; letter-spacing:1px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .titular span{ display:block; }
+
+  .quien{
+    margin-top:30px;
+    font-weight:800; font-size:31px; letter-spacing:4.5px;
+    color:var(--lima); text-transform:uppercase;
+  }
+
+  .ficha{
+    margin-top:18px;
+    font-weight:600; font-size:28px; line-height:1.48;
+    color:rgba(255,255,255,.94);
+  }
+  .ficha b{ font-weight:800; }
+
+  .pie{
+    margin-top:44px; padding-top:30px;
+    border-top:1.5px solid rgba(255,255,255,.22);
+    display:flex; align-items:center; justify-content:center; gap:16px;
+  }
+  .pie span{
+    font-weight:800; font-size:24px; letter-spacing:3.4px;
+    color:var(--lima); text-transform:uppercase;
+  }
+  .pie svg{ width:24px; height:24px; flex:none; }
+</style>
+</head>
+<body>
+<div class="lamina" id="lamina">
+
+  <div class="foto">
+    <img src="soulfia-caballo.jpg" alt="">
+    <div class="velo"></div>
+  </div>
+
+  <div class="collab">
+    <img src="logo-blink.png" alt="Blink">
+    <div class="equis">×</div>
+    <div class="cuenta">@soulfiafp</div>
+  </div>
+
+  <div class="bloque">
+    <div class="titular"><span>Gana una</span><span>entrada</span></div>
+
+    <div class="quien">Soulfía · Yegua en vivo</div>
+
+    <div class="ficha">
+      <b>Sábado 7 de noviembre · 20:00 hrs</b><br>
+      Teatro Mauri SCD · Valparaíso
+    </div>
+
+    <div class="pie">
+      <span>Lee la descripción para participar</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#B8F870" stroke-width="3"
+           stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4 V19 M5 12 L12 19 L19 12"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(async function(){
+  await document.fonts.load("168px Anton");
+  await document.fonts.load("800 31px Montserrat");
+  await document.fonts.ready;
+
+  // El titular se achica solo si alguna línea no cabe a lo ancho.
+  const caja = document.getElementById("lamina");
+  caja.querySelectorAll(".titular span").forEach(s => {
+    let t = 168;
+    while (t > 90 && s.scrollWidth > 936){ t -= 2; s.style.fontSize = t + "px"; }
+  });
+
+  document.title = "listo";
+})();
+</script>
+</body>
+</html>

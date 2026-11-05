@@ -87,6 +87,7 @@ usando lo que ella ya escribió:
 | **"canciones"** | "temas" |
 | "llega el segundo estreno" | "llega el otro" |
 | "a través de sus redes sociales" | "en redes" |
+| "lo hizo completo con…" | "lo hizo entero con…" |
 | "estoy segura de que…" | hedging o entusiasmo vacío |
 | las horas en números: 19:00, 21:00 | "a las siete", "a las nueve" |
 
@@ -513,6 +514,17 @@ viene, de dónde salió este— directo y explicativo.
   cifras—. Si una lámina es solo texto, le falta.
 - **El cierre de Blink va en su propia lámina**: "Síguenos para más", la cuenta y
   "Parpadeas y te lo pierdes". Nunca pegado al final de la lámina del estreno.
+- **Cortar texto no es decir las cosas a la rápida.** Mia me devolvió la segunda
+  versión del Radar de VLNTNA B por lo contrario que la primera: un dato suelto sin
+  explicar —"2019 · su primera canción"— no dice nada, y tres hechos pegados uno
+  tras otro vuelven a sonar a punteo. El punto medio es un párrafo que enlaza los
+  hechos y los explica, no tres frases sueltas ni una pared de texto.
+- **Al nombrar colaboradores va también la canción que hicieron juntos.** La lista
+  de nombres sola no informa; el nombre con su canción al lado sí. En las pastillas
+  entra abajo, más chica y entre comillas.
+- **Los titulares de las láminas que venden algo** —un show, un estreno— tienen que
+  dar contexto y dar ganas. "Y la presenta en vivo" no vende nada; "Toda esta era,
+  en una noche" dice qué se va a ver.
 - **Si un dato no da para lámina propia, se menciona donde encaje.** No se estira
   un solo hecho a pantalla completa para rellenar.
 - Los rótulos tienen que decir **qué es** la cosa que nombran.

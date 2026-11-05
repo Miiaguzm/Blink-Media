@@ -143,6 +143,7 @@
 
   .parDeFotos{ display:flex; gap:26px; }
   .parDeFotos .recorte{ flex:1; height:300px; }
+  .parDeFotos.corta .recorte{ height:264px; }
   .parDeFotos .recorte:first-child{ transform:rotate(-2.2deg); }
   .parDeFotos .recorte:last-child{ transform:rotate(2deg); }
   .parDeFotos .recorte:first-child img{ object-position:50% 6%; }
@@ -156,8 +157,10 @@
   .sangra img{ transform:scale(1.18); object-position:50% 8%; }
 
   /* En las láminas con foto sangrada, el texto se queda en su mitad. */
+  .cuerpo.apretado{ gap:26px; }
   .cuerpo.angosto .texto, .cuerpo.angosto .destacado{ max-width:636px; }
   .cuerpo.angosto .ticket{ max-width:752px; }
+  .cuerpo.angosto .filas, .cuerpo.angosto .filasDesc{ max-width:636px; }
 
   /* una foto ancha, de borde a borde de la caja */
   .fotoAncha{ height:306px; transform:rotate(-1.4deg); }
@@ -184,7 +187,7 @@
   .filas .fila{
     display:flex; align-items:center; justify-content:space-between; gap:22px;
     border-top:1.5px solid rgba(255,255,255,.26);
-    padding:24px 2px 22px;
+    padding:18px 2px 16px;
   }
   .filas .fila b{
     font-family:"Anton", sans-serif; font-weight:400; font-size:62px;
@@ -198,18 +201,51 @@
     color:rgba(255,255,255,.88); text-transform:uppercase;
   }
 
-  /* pastillas con nombres, ladeadas: una nube en vez de una enumeración */
+  /* pastillas con nombres, ladeadas: una nube en vez de una enumeración.
+     Cada una lleva además la canción que hicieron juntos, que es el dato que
+     convierte la lista de nombres en información. */
   .chips{ display:flex; flex-wrap:wrap; gap:18px 16px; }
   .chips span{
-    display:block;
-    border:2px solid rgba(255,255,255,.40); border-radius:999px;
-    background:rgba(10,10,10,.48); padding:13px 28px 11px;
-    font-family:"Anton", sans-serif; font-size:44px; line-height:1;
-    letter-spacing:.5px; color:var(--blanco); text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:flex-start; gap:3px;
+    border:2px solid rgba(255,255,255,.40); border-radius:30px;
+    background:rgba(10,10,10,.54); padding:14px 27px 13px;
+  }
+  .chips span b{
+    font-family:"Anton", sans-serif; font-weight:400; font-size:42px;
+    line-height:1; letter-spacing:.5px; color:var(--blanco); text-transform:uppercase;
+  }
+  .chips span u{
+    text-decoration:none; font-weight:700; font-size:21px;
+    color:rgba(255,255,255,.80);
   }
   .chips span:nth-child(odd){ transform:rotate(-1.6deg); }
   .chips span:nth-child(even){ transform:rotate(1.4deg); }
-  .chips span.morada{ border-color:var(--morado); color:var(--morado); }
+  .chips span.morada{ border-color:var(--morado); }
+  .chips span.morada b{ color:var(--morado); }
+
+  /* filas con descripción: para cuando cada nombre necesita una línea que
+     explique qué es, y no solo una etiqueta */
+  .filasDesc{ display:flex; flex-direction:column; }
+  .filasDesc .fila{
+    border-top:1.5px solid rgba(255,255,255,.26);
+    padding:20px 2px 18px;
+  }
+  .filasDesc .cab{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .filasDesc .cab b{
+    font-family:"Anton", sans-serif; font-weight:400; font-size:58px;
+    line-height:1; letter-spacing:.5px; color:var(--blanco);
+  }
+  .filasDesc .cab i{
+    flex:none; font-style:normal;
+    border:1.5px solid rgba(255,255,255,.34); border-radius:999px;
+    padding:8px 20px;
+    font-weight:800; font-size:19px; letter-spacing:2.2px;
+    color:rgba(255,255,255,.88); text-transform:uppercase;
+  }
+  .filasDesc p{
+    margin-top:10px; max-width:600px;
+    font-weight:600; font-size:27px; line-height:1.34; color:rgba(255,255,255,.90);
+  }
 
   /* la entrada del show, dibujada como lo que es: un talón */
   .ticket{
@@ -328,13 +364,21 @@ function filas(items){
     '<div class="fila"><b>' + f[0] + '</b><i>' + f[1] + '</i></div>').join("") + '</div>';
 }
 
-function chips(nombres){
-  return '<div class="chips">' + nombres.map((n, i) =>
-    '<span' + (i % 3 === 1 ? ' class="morada"' : '') + '>' + n + '</span>').join("") + '</div>';
+function chips(pares){
+  return '<div class="chips">' + pares.map((n, i) =>
+    '<span' + (i % 3 === 1 ? ' class="morada"' : '') + '>' +
+    '<b>' + n[0] + '</b><u>' + n[1] + '</u></span>').join("") + '</div>';
 }
 
-function recorte(src, clase){
-  return '<div class="recorte ' + (clase || '') + '"><img src="' + src + '" alt=""></div>';
+function filasDesc(items){
+  return '<div class="filasDesc">' + items.map(f =>
+    '<div class="fila"><div class="cab"><b>' + f[0] + '</b><i>' + f[1] + '</i></div>' +
+    '<p>' + f[2] + '</p></div>').join("") + '</div>';
+}
+
+function recorte(src, clase, pos){
+  return '<div class="recorte ' + (clase || '') + '"><img src="' + src + '" alt=""' +
+    (pos ? ' style="object-position:' + pos + '"' : '') + '></div>';
 }
 
 const LAMINAS = {
@@ -357,27 +401,31 @@ const LAMINAS = {
       titular("¿Quién es", "VLNTNA B?") +
       '<div class="conFoto">' +
         '<div class="columna">' +
-          '<p class="texto">Valentina Belén León, de Antofagasta. El nombre sale de ' +
-          'las consonantes del suyo.</p>' +
-          '<div class="cifras">' +
-            '<div class="caja"><div class="numero">4</div>' +
-              '<div class="que">Proyectos</div></div>' +
-            '<div class="caja morada"><div class="numero">2019</div>' +
-              '<div class="que">Su primera canción</div></div>' +
-          '</div>' +
+          '<p class="texto">Valentina Belén León es de Antofagasta, y su nombre ' +
+          'artístico sale de las consonantes del suyo. Subió su primera canción, ' +
+          '“Cicatrices”, en 2019, y desde 2022 viene publicando un proyecto por año.</p>' +
         '</div>' +
         recorte("vlntnb4.png") +
       '</div>' +
       '<p class="texto">Su música se mueve entre el R&amp;B, el trap, el reguetón y ' +
-      'el pop sin quedarse en ninguno.</p>' +
+      'el pop sin quedarse en ninguno: lo que la ordena son las letras, que hablan ' +
+      'de nostalgia, de deseo y de relaciones.</p>' +
+      '<div class="cifras">' +
+        '<div class="caja"><div class="numero">4</div>' +
+          '<div class="que">Proyectos publicados</div></div>' +
+        '<div class="caja morada"><div class="numero">2019</div>' +
+          '<div class="que">Su primera canción</div></div>' +
+      '</div>' +
     '</div>' },
 
   3: { html:
     '<div class="cuerpo angosto">' +
       titular("Del corno francés", "a Primavera Sound") +
-      '<p class="texto">Aprendió a leer partituras en la orquesta de su colegio. En ' +
-      '2022 la anunciaron en el cartel de Primavera Sound Chile, congeló la carrera ' +
-      'que estudiaba y se fue a Santiago.</p>' +
+      '<p class="texto">Antes de la música urbana estuvo tres años tocando corno ' +
+      'francés en la orquesta de su colegio, que es donde aprendió a leer partituras. ' +
+      'Seguía estudiando Administración Pública en Antofagasta cuando la anunciaron ' +
+      'en el cartel de Primavera Sound Chile 2022: congeló quinto año y se fue a ' +
+      'vivir a Santiago para dedicarse a esto.</p>' +
       '<div class="destacado">' + DESTELLO +
         '<p><span class="dijo">“Una de las grandes brechas que existe es la súper ' +
         'poca descentralización en las artes”</span></p>' +
@@ -386,7 +434,7 @@ const LAMINAS = {
     recorte("vlntnb2.png", "sangra") },
 
   4: { html:
-    '<div class="cuerpo">' +
+    '<div class="cuerpo apretado">' +
       titular("Cuatro proyectos", "en cuatro años") +
       filas([
         ["FEELS",       "EP · 2022"],
@@ -394,37 +442,50 @@ const LAMINAS = {
         ["MAL AUGURIO", "Mixtape · 2024"],
         ["LOTO",        "EP · 2025"]
       ]) +
-      recorte("vlntnb5.png", "fotoAncha") +
+      '<p class="texto">AQUA son trece canciones sobre sus años entre Antofagasta ' +
+      'y Santiago; de LOTO, el más nuevo, salió “Rodeada de flores”.</p>' +
+      '<div class="parDeFotos corta">' +
+        recorte("vlntnb5.png", "", "50% 31%") +
+        recorte("vlntnb7.png", "", "42% 5%") +
+      '</div>' +
     '</div>' },
 
   5: { html:
     '<div class="cuerpo angosto">' +
       titular("Con quiénes", "ha grabado") +
-      chips(["Kidd Voodoo", "Easykid", "Ceaese", "DURAN", "Akatumamy",
-             "Shirel", "KYA", "Face"]) +
-      '<p class="texto">Su primer EP, FEELS, lo hizo entero con KYA.</p>' +
+      chips([
+        ["Kidd Voodoo", "“Dime”"],
+        ["Easykid",     "“Zúmbate”"],
+        ["Ceaese",      "“Dancin’”"],
+        ["DURAN",       "“Pensando en mí”"],
+        ["Akatumamy",   "“de to’”"],
+        ["Shirel",      "“Otra nota”"]
+      ]) +
+      '<p class="texto">Su primer EP, FEELS, lo hizo completo junto a KYA, y de ahí ' +
+      'salió “Jui$y”.</p>' +
     '</div>' +
     recorte("vlntnb.png", "sangra") },
 
   6: { html:
-    '<div class="cuerpo">' +
+    '<div class="cuerpo angosto">' +
       titular("2026: del R&amp;B", "al pop electrónico") +
-      '<p class="texto">Este año se fue al pop, a la electrónica y al hyperpop, con ' +
-      'la estética de los 2000: la de MTV y VH1.</p>' +
-      filas([
-        ["A MI MANERA", "Mayo"],
-        ["PACTO",       "Junio"],
-        ["TENSiON",     "Agosto"]
+      filasDesc([
+        ["A MI MANERA", "Mayo",
+         "Abrió la etapa con un sonido más oscuro y sensual que todo lo anterior."],
+        ["PACTO", "Junio",
+         "Mezcló pop, reguetón y electrónica, y metió dos ambientes distintos dentro de una misma canción."],
+        ["TENSiON", "Agosto",
+         "Se fue derecho al hyperpop, con la estética del pop de los 2000: la de MTV y VH1."]
       ]) +
-      '<div class="parDeFotos">' +
-        recorte("vlntnb6.png") + recorte("vlntnb7.png") +
-      '</div>' +
-    '</div>' },
+    '</div>' +
+    recorte("vlntnb6.png", "sangra") },
 
   7: { html:
     '<div class="cuerpo angosto">' +
-      titular("Y la presenta", "en vivo") +
-      '<p class="texto">Las canciones nuevas y las de antes, en un mismo show.</p>' +
+      titular("Toda esta era,", "en una noche") +
+      '<p class="texto">El 27 de noviembre hace IT GIRL: The Show en la Sala SCD ' +
+      'Bellavista, donde las canciones de esta etapa se van a escuchar al lado de ' +
+      'las de AQUA, MAL AUGURIO y LOTO.</p>' +
       '<div class="ticket">' +
         '<div class="lado"><b>It Girl:<em> The Show</em></b>' +
           '<span>Sala SCD Bellavista, Santiago</span></div>' +
@@ -435,12 +496,14 @@ const LAMINAS = {
     recorte("vlntnb8.png", "sangra") },
 
   8: { html:
-    '<div class="cuerpo">' +
+    '<div class="cuerpo apretado">' +
       titular("Hoy estrena", "DIVA") +
+      '<p class="texto">DIVA toma la palabra y la convierte en una declaración de ' +
+      'autonomía y de límites propios, con Charli XCX y Madonna de referencia.</p>' +
       '<div class="video">' +
         '<div class="marco">' + PLAY + '</div>' +
-        '<div class="texto-video"><b>Electropop, con Charli XCX y Madonna de ' +
-          'referencia</b><span>Producido por Nicolás Chávez y Armijo</span></div>' +
+        '<div class="texto-video"><b>“DIVA”, el nuevo single de VLNTNA B</b>' +
+          '<span>Electropop producido por Nicolás Chávez y Armijo</span></div>' +
       '</div>' +
     '</div>' },
 
@@ -485,8 +548,9 @@ caja.innerHTML = fondo() + (L.portada ? '<div class="halo"></div>' : '') + radar
   const r = caja.querySelector(".cierre .remate");
   if (r) achicar(r, 132, 70, 936);
   caja.querySelectorAll(".filas .fila b").forEach(s => achicar(s, 62, 34, 600));
+  caja.querySelectorAll(".filasDesc .cab b").forEach(s => achicar(s, 58, 32, 460));
   const t = caja.querySelector(".ticket .lado b");
-  if (t) achicar(t, 86, 44, 560);
+  if (t) achicar(t, 86, 42, 382);
 
   document.title = fuentesOk ? "listo" : "FALTAN LAS FUENTES";
 })();

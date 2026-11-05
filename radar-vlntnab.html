@@ -20,10 +20,7 @@
     font-family:"Montserrat", sans-serif;
   }
 
-  /* ---------------------------------------------------------------- FONDO
-     El mismo collage en las nueve láminas, teñido de morado: la foto en gris
-     pone la luminancia y el morado el color. El tinte va al 68% para que la
-     foto no se coma al radar ni se vuelva una mancha plana. */
+  /* ---------------------------------------------------------------- FONDO */
   .fondo{ position:absolute; inset:0; z-index:0; }
   .fondo img{
     position:absolute; inset:0; width:1080px; height:1350px;
@@ -40,27 +37,22 @@
       rgba(10,10,10,.34) 28%, rgba(10,10,10,.62) 44%,
       rgba(10,10,10,.74) 62%, rgba(10,10,10,.80) 100%);
   }
-  /* Las fotos de ella son mucho más claras que las del Radar de TANE, así que
-     el rótulo morado de la portada quedaba ilegible sobre la piel. Se arregla
-     oscureciendo el fondo detrás del bloque, nunca tocando la letra: un halo
-     que baja justo donde va el titular y se deshace antes de los bordes. */
+  /* Las fotos de ella son claras y apagaban el rótulo morado de la portada.
+     Se oscurece el fondo detrás del bloque, nunca la letra. */
   .halo{
     position:absolute; z-index:2; left:0; right:0; top:360px; height:660px;
     background:linear-gradient(180deg,
       rgba(10,10,10,0) 0%, rgba(10,10,10,.60) 22%,
       rgba(10,10,10,.60) 78%, rgba(10,10,10,0) 100%);
   }
-  .lamina.interior .fondo img{ filter:grayscale(1) contrast(1.18) brightness(.54); }
-  .lamina.interior .fondo .velo{ background:rgba(10,10,10,.60); }
+  .lamina.interior .fondo img{ filter:grayscale(1) contrast(1.18) brightness(.50); }
+  .lamina.interior .fondo .velo{ background:rgba(10,10,10,.62); }
 
-  /* ------------------------------------------------ el círculo de radar */
   .radar{ position:absolute; inset:0; z-index:1; }
-
-  /* --------------------------------------------------------- el logo */
   .logo{ position:absolute; top:40px; right:64px; width:208px; z-index:5; }
 
   /* --------------------------------------- la cabecera de la portada */
-  .cabecera{ position:absolute; top:92px; left:72px; z-index:5; }
+  .cabecera{ position:absolute; top:92px; left:72px; z-index:6; }
   .cabecera .fila{ display:flex; align-items:center; gap:22px; }
   .cabecera .destello{ width:38px; height:38px; }
   .cabecera .rotulo{
@@ -75,30 +67,32 @@
 
   /* ------------------------------------------- el centro de la portada */
   .centro{
-    position:absolute; z-index:5; left:72px; right:72px; top:0; bottom:0;
+    position:absolute; z-index:6; left:62px; right:62px; top:0; bottom:0;
     padding:230px 0 220px;
     display:flex; flex-direction:column; justify-content:center;
     text-align:center;
   }
   .centro .genero{
     font-weight:800; font-size:27px; letter-spacing:8px;
-    color:var(--morado); text-transform:uppercase; margin-bottom:20px;
+    color:var(--morado); text-transform:uppercase; margin-bottom:22px;
   }
   .centro .nombre{
     font-family:"Anton", sans-serif;
-    font-size:142px; line-height:1.0; color:var(--blanco);
+    font-size:176px; line-height:.94; color:var(--blanco);
     letter-spacing:1px; text-transform:uppercase;
   }
-  .centro .nombre em{ font-style:normal; display:block; margin-top:14px; }
+  .centro .nombre em{
+    font-style:normal; display:block; margin-top:10px;
+    font-size:112px; color:var(--morado);
+  }
   .centro .bajada{
-    margin:30px auto 0; max-width:910px;
-    font-weight:500; font-size:31px; line-height:1.42;
+    margin:32px auto 0; max-width:860px;
+    font-weight:600; font-size:31px; line-height:1.4;
     color:rgba(255,255,255,.95); text-wrap:balance;
   }
 
-  /* --------------------------------------------------------------- el pie */
   .pie{
-    position:absolute; z-index:5; left:0; right:0; bottom:84px;
+    position:absolute; z-index:6; left:0; right:0; bottom:84px;
     border-top:1.5px solid rgba(255,255,255,.20); padding-top:46px;
     display:flex; align-items:center; justify-content:center; gap:20px;
   }
@@ -111,83 +105,90 @@
   /* ------------------------------------- el cuerpo de las interiores */
   .cuerpo{
     position:absolute; z-index:5; left:72px; right:72px; top:0; bottom:0;
-    padding:212px 0 110px;
-    display:flex; flex-direction:column; justify-content:center; gap:32px;
+    padding:206px 0 104px;
+    display:flex; flex-direction:column; justify-content:center; gap:34px;
   }
   .titular{
-    font-family:"Anton", sans-serif; font-size:92px; line-height:1.02;
+    font-family:"Anton", sans-serif; font-size:100px; line-height:1.0;
     letter-spacing:.5px; text-transform:uppercase;
   }
   .titular .uno{ color:var(--blanco); display:block; }
   .titular .dos{ color:var(--morado); display:block; margin-top:12px; }
 
-  .texto{ font-weight:600; font-size:33px; line-height:1.42; color:rgba(255,255,255,.96); }
-  .texto strong{ font-weight:800; }
+  .texto{ font-weight:600; font-size:34px; line-height:1.4; color:rgba(255,255,255,.96); }
 
-  /* el bloque destacado, con la barra morada y el destello */
   .destacado{
     display:flex; align-items:flex-start; gap:22px;
     border-left:4px solid var(--morado); padding-left:26px;
   }
   .destacado .destello{ width:30px; height:30px; flex:none; margin-top:6px; }
-  .destacado p{ font-weight:700; font-size:32px; line-height:1.38; color:rgba(255,255,255,.96); }
+  .destacado p{ font-weight:700; font-size:32px; line-height:1.36; color:rgba(255,255,255,.96); }
 
-  /* --------------------------- las fotos que salen del fondo --------- */
-  /* Una foto ladeada al lado del texto, como una copia pegada encima. */
-  .conFoto{ display:flex; align-items:flex-start; gap:34px; }
-  .conFoto .columna{ flex:1; display:flex; flex-direction:column; gap:26px; }
-  .conFoto .carta{
-    flex:none; width:276px; height:360px; overflow:hidden;
-    border:5px solid rgba(255,255,255,.94); border-radius:3px;
-    transform:rotate(3.2deg);
+  /* --------------------------------------------------------- recortes */
+  /* Fotos pegadas encima, ladeadas y con borde blanco, como copias en papel.
+     Algunas se salen del lienzo a propósito: es lo que saca a la lámina de
+     parecer una página y la deja con movimiento. */
+  .recorte{
+    overflow:hidden; border:6px solid rgba(255,255,255,.95); border-radius:3px;
+    box-shadow:0 20px 44px rgba(0,0,0,.50);
   }
-  .conFoto .carta img{
-    width:100%; height:100%; object-fit:cover; object-position:50% 0%;
-    /* La captura trae el botón "Repostear" arriba a la derecha. Acercando
-       la foto desde el borde izquierdo, ese botón se va fuera del marco. */
-    transform:scale(1.34); transform-origin:10% 58%;
-  }
+  .recorte img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-  .parDeFotos{ display:flex; gap:26px; margin-top:24px; }
-  .parDeFotos figure{
-    flex:1; height:272px; overflow:hidden;
-    border:5px solid rgba(255,255,255,.94); border-radius:3px;
-  }
-  .parDeFotos figure:first-child{ transform:rotate(-1.8deg); }
-  .parDeFotos figure:last-child{ transform:rotate(1.8deg); }
-  .parDeFotos img{ width:100%; height:100%; object-fit:cover; }
-  .parDeFotos figure:first-child img{ object-position:50% 6%; }
-  .parDeFotos figure:last-child img{ object-position:42% 4%; }
+  .conFoto{ display:flex; align-items:center; gap:30px; }
+  .conFoto .columna{ flex:1; display:flex; flex-direction:column; gap:28px; }
+  .conFoto .recorte{ flex:none; width:312px; height:404px; transform:rotate(3.4deg); }
+  /* La captura trae el botón "Repostear" arriba a la derecha y las flechas
+     del carrusel a media altura: acercando la foto se van fuera del marco. */
+  .conFoto .recorte img{ transform:scale(1.34); transform-origin:10% 58%; }
 
-  /* Todo lo que dijo la artista va en cursiva. */
+  .parDeFotos{ display:flex; gap:26px; }
+  .parDeFotos .recorte{ flex:1; height:300px; }
+  .parDeFotos .recorte:first-child{ transform:rotate(-2.2deg); }
+  .parDeFotos .recorte:last-child{ transform:rotate(2deg); }
+  .parDeFotos .recorte:first-child img{ object-position:50% 6%; }
+  .parDeFotos .recorte:last-child img{ object-position:42% 4%; }
+
+  /* un recorte que se sale por el borde derecho */
+  .sangra{
+    position:absolute; z-index:6; right:-78px; bottom:96px;
+    width:330px; height:420px; transform:rotate(-4.2deg);
+  }
+  .sangra img{ transform:scale(1.18); object-position:50% 8%; }
+
+  /* En las láminas con foto sangrada, el texto se queda en su mitad. */
+  .cuerpo.angosto .texto, .cuerpo.angosto .destacado{ max-width:636px; }
+  .cuerpo.angosto .ticket{ max-width:752px; }
+
+  /* una foto ancha, de borde a borde de la caja */
+  .fotoAncha{ height:306px; transform:rotate(-1.4deg); }
+  .fotoAncha img{ object-position:50% 16%; }
+
   .dijo{ font-style:italic; }
 
   /* las cifras, en cajas */
-  .cifras{ display:flex; gap:28px; }
+  .cifras{ display:flex; gap:24px; }
   .cifras .caja{
     flex:1; text-align:center;
     border:1.5px solid rgba(255,255,255,.24); border-radius:20px;
-    background:rgba(10,10,10,.46); padding:28px 16px 24px;
+    background:rgba(10,10,10,.46); padding:24px 14px 20px;
   }
-  .cifras .numero{ font-family:"Anton", sans-serif; font-size:94px; line-height:.94; color:var(--blanco); }
+  .cifras .numero{ font-family:"Anton", sans-serif; font-size:88px; line-height:.94; color:var(--blanco); }
   .cifras .caja.morada .numero{ color:var(--morado); }
   .cifras .que{
-    margin-top:12px; font-weight:800; font-size:20px; letter-spacing:2px;
+    margin-top:10px; font-weight:800; font-size:19px; letter-spacing:2px;
     color:rgba(255,255,255,.82); text-transform:uppercase;
   }
 
-  /* filas con separadores: línea fina arriba, el nombre en Anton y la
-     etiqueta en pastilla a la derecha, que dice qué es cada cosa */
+  /* filas con separadores */
   .filas{ display:flex; flex-direction:column; }
   .filas .fila{
     display:flex; align-items:center; justify-content:space-between; gap:22px;
     border-top:1.5px solid rgba(255,255,255,.26);
-    padding:21px 2px 20px;
+    padding:24px 2px 22px;
   }
   .filas .fila b{
-    font-family:"Anton", sans-serif; font-weight:400; font-size:56px;
+    font-family:"Anton", sans-serif; font-weight:400; font-size:62px;
     line-height:1; letter-spacing:.5px; color:var(--blanco);
-    text-transform:uppercase;
   }
   .filas .fila i{
     flex:none; font-style:normal;
@@ -197,35 +198,83 @@
     color:rgba(255,255,255,.88); text-transform:uppercase;
   }
 
-  /* la ficha del show */
-  .ficha{ display:flex; flex-direction:column; gap:0; }
-  .ficha .linea{
-    display:flex; align-items:baseline; gap:24px;
-    border-top:1.5px solid rgba(255,255,255,.26);
-    padding:22px 2px;
+  /* pastillas con nombres, ladeadas: una nube en vez de una enumeración */
+  .chips{ display:flex; flex-wrap:wrap; gap:18px 16px; }
+  .chips span{
+    display:block;
+    border:2px solid rgba(255,255,255,.40); border-radius:999px;
+    background:rgba(10,10,10,.48); padding:13px 28px 11px;
+    font-family:"Anton", sans-serif; font-size:44px; line-height:1;
+    letter-spacing:.5px; color:var(--blanco); text-transform:uppercase;
   }
-  .ficha .linea em{
-    flex:none; width:168px; font-style:normal;
-    font-weight:800; font-size:19px; letter-spacing:2.8px;
+  .chips span:nth-child(odd){ transform:rotate(-1.6deg); }
+  .chips span:nth-child(even){ transform:rotate(1.4deg); }
+  .chips span.morada{ border-color:var(--morado); color:var(--morado); }
+
+  /* la entrada del show, dibujada como lo que es: un talón */
+  .ticket{
+    display:flex; align-items:stretch; transform:rotate(-1.1deg);
+    background:linear-gradient(180deg,#1C1726 0%,#0C0A12 100%);
+    border:2px solid rgba(255,255,255,.24); border-radius:18px;
+    box-shadow:0 22px 48px rgba(0,0,0,.52);
+    overflow:hidden;
+  }
+  .ticket .lado{ flex:1; padding:44px 40px 42px; }
+  .ticket .lado b{
+    display:block; font-family:"Anton", sans-serif; font-weight:400;
+    font-size:86px; line-height:.98; color:var(--blanco); text-transform:uppercase;
+  }
+  .ticket .lado b em{ font-style:normal; color:var(--morado); }
+  .ticket .lado span{
+    display:block; margin-top:16px;
+    font-weight:700; font-size:27px; color:rgba(255,255,255,.88);
+  }
+  .ticket .corte{ flex:none; width:2px; border-left:3px dashed rgba(255,255,255,.34); }
+  .ticket .talon{
+    flex:none; width:276px; padding:44px 18px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    text-align:center;
+  }
+  .ticket .talon i{
+    font-style:normal; font-weight:800; font-size:17px; letter-spacing:3px;
     color:var(--morado); text-transform:uppercase;
   }
-  .ficha .linea span{ font-weight:700; font-size:33px; color:rgba(255,255,255,.96); }
+  .ticket .talon b{
+    font-family:"Anton", sans-serif; font-weight:400; font-size:64px; line-height:1;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .ticket .talon u{
+    text-decoration:none; font-weight:800; font-size:30px;
+    color:rgba(255,255,255,.90);
+  }
 
-  /* el cierre */
+  /* el recuadro donde Mia monta el video, en 16:9 */
+  .video{ display:flex; flex-direction:column; align-items:center; gap:26px; }
+  .video .marco{
+    position:relative; width:936px; height:527px;
+    background:#000; border:2.5px solid var(--morado); border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .video .marco svg{ width:96px; height:96px; opacity:.5; }
+  .video .texto-video{ text-align:center; }
+  .video .texto-video b{
+    display:block; font-weight:800; font-size:31px; line-height:1.3; color:#FFFFFF;
+  }
+  .video .texto-video span{
+    display:block; margin-top:8px;
+    font-weight:600; font-size:28px; line-height:1.3; color:rgba(255,255,255,.82);
+  }
+
+  /* el cierre de Blink, su propia lámina */
   .cierre{
-    position:absolute; z-index:5; inset:0; padding:150px 72px 120px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:34px;
+    position:absolute; z-index:5; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px;
   }
   .cierre .remate{
-    font-family:"Anton", sans-serif; font-size:124px; line-height:1.02;
+    font-family:"Anton", sans-serif; font-size:132px; line-height:1.02;
     color:var(--blanco); text-align:center; text-transform:uppercase;
   }
-  .cierre .remate em{ color:var(--morado); font-style:normal; display:block; margin-top:16px; }
-  .cierre .bajadaCierre{
-    max-width:880px; text-align:center;
-    font-weight:600; font-size:30px; line-height:1.4; color:rgba(255,255,255,.94);
-    text-wrap:balance;
-  }
+  .cierre .remate em{ color:var(--morado); font-style:normal; display:block; margin-top:34px; }
   .cierre .cuenta{
     border:1.5px solid rgba(255,255,255,.34); border-radius:999px; padding:16px 38px;
     font-weight:800; font-size:30px; letter-spacing:2.6px; color:var(--blanco);
@@ -252,8 +301,10 @@ const FLECHA =
   'stroke-linecap="round" stroke-linejoin="round">' +
   '<path d="M2 13 H38 M28 4 L38 13 L28 22"/></svg>';
 
-// Los anillos: el mismo dibujo en todas, para que el carrusel se lea como una
-// sola pieza. Van bien marcados, que es lo que le da el nombre al formato.
+const PLAY =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="#7B2CFF" stroke-width="1.6" ' +
+  'stroke-linejoin="round"><path d="M9 7.5 L17.5 12 L9 16.5 Z"/></svg>';
+
 function radar(){
   const radios = [152, 298, 452, 612, 782, 962, 1150];
   const anillos = radios.map((r, i) =>
@@ -277,6 +328,15 @@ function filas(items){
     '<div class="fila"><b>' + f[0] + '</b><i>' + f[1] + '</i></div>').join("") + '</div>';
 }
 
+function chips(nombres){
+  return '<div class="chips">' + nombres.map((n, i) =>
+    '<span' + (i % 3 === 1 ? ' class="morada"' : '') + '>' + n + '</span>').join("") + '</div>';
+}
+
+function recorte(src, clase){
+  return '<div class="recorte ' + (clase || '') + '"><img src="' + src + '" alt=""></div>';
+}
+
 const LAMINAS = {
 
   1: { portada:true, html:
@@ -287,114 +347,106 @@ const LAMINAS = {
     '<div class="centro">' +
       '<div class="genero">Urbano · R&amp;B · Pop</div>' +
       '<div class="nombre">VLNTNA B<em>abrió otra era</em></div>' +
-      '<div class="bajada">La cantautora de Antofagasta que pasó del R&amp;B al pop ' +
-        'electrónico, y que a fin de mes presenta esa nueva versión de sí misma en ' +
-        'un show propio en Santiago</div>' +
+      '<div class="bajada">La artista de Antofagasta que este año se cambió ' +
+        'al pop electrónico</div>' +
     '</div>' +
     '<div class="pie"><span>Desliza para conocerla</span>' + FLECHA + '</div>' },
 
   2: { html:
     '<div class="cuerpo">' +
-      titular("Valentina Belén León,", "de Antofagasta") +
-      '<p class="texto">VLNTNA B es cantante y compositora, y su nombre artístico sale ' +
-      'de las consonantes de su nombre de pila. Su música se mueve entre el R&amp;B, el ' +
-      'trap, el reguetón y el pop sin quedarse en ninguno; lo que la ordena son las ' +
-      'letras, que hablan de nostalgia, de deseo y de relaciones.</p>' +
-      '<div class="cifras">' +
-        '<div class="caja"><div class="numero">4</div>' +
-          '<div class="que">Proyectos publicados</div></div>' +
-        '<div class="caja morada"><div class="numero">2019</div>' +
-          '<div class="que">Su primera canción</div></div>' +
+      titular("¿Quién es", "VLNTNA B?") +
+      '<div class="conFoto">' +
+        '<div class="columna">' +
+          '<p class="texto">Valentina Belén León, de Antofagasta. El nombre sale de ' +
+          'las consonantes del suyo.</p>' +
+          '<div class="cifras">' +
+            '<div class="caja"><div class="numero">4</div>' +
+              '<div class="que">Proyectos</div></div>' +
+            '<div class="caja morada"><div class="numero">2019</div>' +
+              '<div class="que">Su primera canción</div></div>' +
+          '</div>' +
+        '</div>' +
+        recorte("vlntnb4.png") +
       '</div>' +
+      '<p class="texto">Su música se mueve entre el R&amp;B, el trap, el reguetón y ' +
+      'el pop sin quedarse en ninguno.</p>' +
     '</div>' },
 
   3: { html:
-    '<div class="cuerpo">' +
-      titular("Antes del urbano,", "el corno francés") +
-      '<div class="conFoto">' +
-        '<div class="columna">' +
-          '<p class="texto">Antes de dedicarse a la música urbana tocó corno francés en ' +
-          'la orquesta de su colegio, y ahí aprendió a leer partituras. Por esos años ' +
-          'también le interesaban el teatro y la danza.</p>' +
-          '<p class="texto">Su primera canción, “Cicatrices”, salió en 2019 junto a los ' +
-          'productores N.A.S.A., y que funcionara fue lo que la convenció de seguir.</p>' +
-        '</div>' +
-        '<div class="carta"><img src="vlntnb4.png" alt=""></div>' +
+    '<div class="cuerpo angosto">' +
+      titular("Del corno francés", "a Primavera Sound") +
+      '<p class="texto">Aprendió a leer partituras en la orquesta de su colegio. En ' +
+      '2022 la anunciaron en el cartel de Primavera Sound Chile, congeló la carrera ' +
+      'que estudiaba y se fue a Santiago.</p>' +
+      '<div class="destacado">' + DESTELLO +
+        '<p><span class="dijo">“Una de las grandes brechas que existe es la súper ' +
+        'poca descentralización en las artes”</span></p>' +
       '</div>' +
-    '</div>' },
+    '</div>' +
+    recorte("vlntnb2.png", "sangra") },
 
   4: { html:
     '<div class="cuerpo">' +
-      titular("De Antofagasta", "a Santiago") +
-      '<p class="texto">Estudiaba Administración Pública y ya iba en quinto año cuando ' +
-      'la anunciaron en el cartel de Primavera Sound Chile 2022. Congeló la carrera y se ' +
-      'instaló en Santiago para dedicarse a la música. En ese mismo festival tocó junto ' +
-      'a Akatumamy, Akriila, Aura Bae y Shirel, bajo el nombre Mamacitas.</p>' +
-      '<div class="destacado">' + DESTELLO +
-        '<p>Sobre lo que cuesta hacer música desde regiones, ella dijo: ' +
-        '<span class="dijo">“Una de las grandes brechas que existe es la súper poca ' +
-        'descentralización en las artes”</span></p>' +
-      '</div>' +
+      titular("Cuatro proyectos", "en cuatro años") +
+      filas([
+        ["FEELS",       "EP · 2022"],
+        ["AQUA",        "Álbum · 2023"],
+        ["MAL AUGURIO", "Mixtape · 2024"],
+        ["LOTO",        "EP · 2025"]
+      ]) +
+      recorte("vlntnb5.png", "fotoAncha") +
     '</div>' },
 
   5: { html:
-    '<div class="cuerpo">' +
-      titular("Cuatro proyectos", "en cuatro años") +
-      filas([
-        ["Feels",       "EP · 2022"],
-        ["Aqua",        "Álbum · 2023"],
-        ["Mal Augurio", "Mixtape · 2024"],
-        ["Loto",        "EP · 2025"]
-      ]) +
-      '<p class="texto">AQUA es su primer álbum como solista y cuenta esos años de ' +
-      'estar entre dos ciudades; MAL AUGURIO salió de un momento en que no quería ' +
-      'escribir un hit; y LOTO es la vuelta después de un bloqueo creativo.</p>' +
-    '</div>' },
+    '<div class="cuerpo angosto">' +
+      titular("Con quiénes", "ha grabado") +
+      chips(["Kidd Voodoo", "Easykid", "Ceaese", "DURAN", "Akatumamy",
+             "Shirel", "KYA", "Face"]) +
+      '<p class="texto">Su primer EP, FEELS, lo hizo entero con KYA.</p>' +
+    '</div>' +
+    recorte("vlntnb.png", "sangra") },
 
   6: { html:
     '<div class="cuerpo">' +
-      titular("Con quiénes", "ha trabajado") +
-      '<p class="texto">Ha grabado con Kidd Voodoo en “Dime”, con Easykid en ' +
-      '“Zúmbate”, con Ceaese en “Dancin’”, con DURAN en “Pensando en mí” y con ' +
-      'Akatumamy en “de to’”. Su primer EP, FEELS, lo hizo entero con KYA.</p>' +
-      '<div class="destacado">' + DESTELLO +
-        '<p>Sobre ser mujer en la escena urbana chilena, ella dijo: ' +
-        '<span class="dijo">“Los chilenos no están acostumbrados a escuchar ' +
-        'mujeres”</span></p>' +
+      titular("2026: del R&amp;B", "al pop electrónico") +
+      '<p class="texto">Este año se fue al pop, a la electrónica y al hyperpop, con ' +
+      'la estética de los 2000: la de MTV y VH1.</p>' +
+      filas([
+        ["A MI MANERA", "Mayo"],
+        ["PACTO",       "Junio"],
+        ["TENSiON",     "Agosto"]
+      ]) +
+      '<div class="parDeFotos">' +
+        recorte("vlntnb6.png") + recorte("vlntnb7.png") +
       '</div>' +
     '</div>' },
 
   7: { html:
-    '<div class="cuerpo">' +
-      titular("2026: del R&amp;B", "al pop electrónico") +
-      '<p class="texto">Este año cambió de sonido. “A Mi Manera”, en mayo, abrió una ' +
-      'etapa más oscura y sensual; “PACTO”, en junio, mezcló pop, reguetón y ' +
-      'electrónica; y “TENSiON”, en agosto, se fue derecho al hyperpop con la estética ' +
-      'del pop de los 2000, la de MTV y VH1.</p>' +
-      '<div class="parDeFotos">' +
-        '<figure><img src="vlntnb6.png" alt=""></figure>' +
-        '<figure><img src="vlntnb7.png" alt=""></figure>' +
+    '<div class="cuerpo angosto">' +
+      titular("Y la presenta", "en vivo") +
+      '<p class="texto">Las canciones nuevas y las de antes, en un mismo show.</p>' +
+      '<div class="ticket">' +
+        '<div class="lado"><b>It Girl:<em> The Show</em></b>' +
+          '<span>Sala SCD Bellavista, Santiago</span></div>' +
+        '<div class="corte"></div>' +
+        '<div class="talon"><i>Viernes</i><b>27 Nov</b><u>20:00</u></div>' +
       '</div>' +
-    '</div>' },
+    '</div>' +
+    recorte("vlntnb8.png", "sangra") },
 
   8: { html:
     '<div class="cuerpo">' +
-      titular("IT GIRL:", "The Show") +
-      '<p class="texto">A fin de mes presenta esta etapa en vivo, en un show que junta ' +
-      'las canciones nuevas con las de su catálogo anterior.</p>' +
-      '<div class="ficha">' +
-        '<div class="linea"><em>Cuándo</em><span>Viernes 27 de noviembre</span></div>' +
-        '<div class="linea"><em>Hora</em><span>20:00</span></div>' +
-        '<div class="linea"><em>Dónde</em><span>Sala SCD Bellavista, Santiago</span></div>' +
+      titular("Hoy estrena", "DIVA") +
+      '<div class="video">' +
+        '<div class="marco">' + PLAY + '</div>' +
+        '<div class="texto-video"><b>Electropop, con Charli XCX y Madonna de ' +
+          'referencia</b><span>Producido por Nicolás Chávez y Armijo</span></div>' +
       '</div>' +
     '</div>' },
 
   9: { cierre:true, html:
     '<div class="cierre">' +
-      '<div class="remate">Hoy estrena<em>DIVA</em></div>' +
-      '<p class="bajadaCierre">Su nuevo single le da vuelta la palabra y la convierte ' +
-      'en una declaración de autonomía y de límites propios. Es electropop, con Charli ' +
-      'XCX y Madonna de referencia, y lo produjeron Nicolás Chávez y Armijo.</p>' +
+      '<div class="remate">Síguenos<em>para más</em></div>' +
       '<div class="cuenta">@blinkmediacl</div>' +
       '<div class="lema">Parpadeas y te lo pierdes</div>' +
     '</div>' }
@@ -408,8 +460,8 @@ caja.innerHTML = fondo() + (L.portada ? '<div class="halo"></div>' : '') + radar
   '<img class="logo" src="logo-blink.png" alt="Blink">' + L.html;
 
 (async function(){
-  await document.fonts.load("142px Anton");
-  await document.fonts.load("600 33px Montserrat");
+  await document.fonts.load("176px Anton");
+  await document.fonts.load("600 34px Montserrat");
   await document.fonts.ready;
 
   // document.fonts.check() miente, así que se comprueba midiendo: Anton es
@@ -419,17 +471,22 @@ caja.innerHTML = fondo() + (L.portada ? '<div class="halo"></div>' : '') + radar
   m.font = "100px Montserrat";  const anchoMont  = m.measureText("HAMBURGUESA ABCDEFG").width;
   const fuentesOk = anchoAnton < anchoMont * 0.85;
 
-  // Los titulares se achican solos si una línea no cabe a lo ancho.
   const achicar = (el, base, minimo, ancho) => {
     let t = base;
     while (t > minimo && el.scrollWidth > ancho){ t -= 1; el.style.fontSize = t + "px"; }
   };
   const n = caja.querySelector(".centro .nombre");
-  if (n) achicar(n, 142, 72, 936);
-  caja.querySelectorAll(".titular span").forEach(s => achicar(s, 92, 50, 936));
+  if (n){
+    achicar(n, 176, 96, 956);
+    const e = n.querySelector("em");
+    if (e) achicar(e, 112, 62, 956);
+  }
+  caja.querySelectorAll(".titular span").forEach(s => achicar(s, 100, 54, 936));
   const r = caja.querySelector(".cierre .remate");
-  if (r) achicar(r, 124, 70, 936);
-  caja.querySelectorAll(".filas .fila b").forEach(s => achicar(s, 56, 34, 620));
+  if (r) achicar(r, 132, 70, 936);
+  caja.querySelectorAll(".filas .fila b").forEach(s => achicar(s, 62, 34, 600));
+  const t = caja.querySelector(".ticket .lado b");
+  if (t) achicar(t, 86, 44, 560);
 
   document.title = fuentesOk ? "listo" : "FALTAN LAS FUENTES";
 })();

@@ -472,7 +472,17 @@ publicación. La base viene del Radar de Kittkatta.
 - **El casete de VHS**: carcasa, etiqueta blanca arriba con el nombre del disco,
   ventana negra con tres fotos y los dos carretes abajo.
 - **El recuadro de video**: 16:9 exacto (936×527), centrado en todo el alto, con
-  dos líneas debajo —qué es, en negrita, y dónde escucharlo, más chico—.
+  dos líneas debajo —qué es, en negrita, y dónde escucharlo, más chico—. Va con
+  borde morado y un triángulo de play tenue adentro, para que se lea como el hueco
+  donde Mia monta el video.
+- **Pastillas con nombres**: para presentar a quiénes acompañan a alguien, en vez
+  de enumerarlos en un párrafo. El nombre en Anton dentro de la pastilla, ladeadas
+  un grado para un lado y para el otro, alternando blanco y morado.
+- **El talón de entrada**: para un show. Caja oscura partida por una línea cortada
+  vertical, el nombre del show a la izquierda y la fecha y la hora en el talón.
+- **El recorte que se sale del lienzo**: una foto ladeada con borde blanco y sombra
+  que cruza el borde derecho. Es lo que saca a la lámina de parecer una página.
+  Cuando va uno, el texto de esa lámina se queda en su mitad o el recorte lo tapa.
 
 El código está en `radar-tane.html`, y el collage del fondo en
 `radar-tane-collage.html`.
@@ -496,6 +506,13 @@ viene, de dónde salió este— directo y explicativo.
   láminas seguidas no se entendía de cuál salieron las diez canciones.
 - **Nada de punteo.** Un carrusel de datos sueltos "parece un cuestionario de
   Google Forms". Tampoco cronologías tipo Canva con numeritos.
+- **Y tampoco una página del diario.** Mia devolvió el Radar de VLNTNA B por eso:
+  demasiado texto por lámina y todo plano. Cada lámina aguanta un párrafo corto,
+  no tres; el titular tiene que ser llamativo y no solo descriptivo; y **ninguna
+  lámina va sin un elemento visual** —un recorte, las pastillas, el talón, las
+  cifras—. Si una lámina es solo texto, le falta.
+- **El cierre de Blink va en su propia lámina**: "Síguenos para más", la cuenta y
+  "Parpadeas y te lo pierdes". Nunca pegado al final de la lámina del estreno.
 - **Si un dato no da para lámina propia, se menciona donde encaje.** No se estira
   un solo hecho a pantalla completa para rellenar.
 - Los rótulos tienen que decir **qué es** la cosa que nombran.

@@ -534,7 +534,11 @@ viene, de dónde salió este— directo y explicativo.
   presentarlo".
 - **Al nombrar colaboradores va también la canción que hicieron juntos.** La lista
   de nombres sola no informa; el nombre con su canción al lado sí. En las pastillas
-  entra abajo, más chica y entre comillas.
+  entra abajo, más chica y entre comillas. Dos cosas más: **el nombre completo, no
+  el corto** —FaceBrooklyn y no Face, aunque la prensa lo abrevie—, y si el nombre
+  va suelto en una bajada, al lado va quién es: "KYA, cantante chilena de R&B y
+  trap". El Radar se lee para conocer gente nueva, así que un nombre sin presentar
+  no sirve de nada.
 - **Los titulares de las láminas que venden algo** —un show, un estreno— tienen que
   dar contexto y dar ganas. "Y la presenta en vivo" no vende nada; "Toda esta era,
   en una noche" dice qué se va a ver.

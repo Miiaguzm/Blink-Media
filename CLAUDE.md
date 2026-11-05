@@ -446,7 +446,11 @@ publicación. La base viene del Radar de Kittkatta.
   línea fina, centrados bajo el medio del lienzo y saliéndose por los bordes.
   Idénticos en todas las láminas.
 - **El velo**: la portada lleva un degradado que oscurece arriba y abajo; las
-  interiores, un velo parejo más oscuro para que el texto mande.
+  interiores, un velo parejo más oscuro para que el texto mande. **El velo está
+  calibrado para fotos oscuras.** Si las del artista son claras —le pasó al de
+  VLNTNA B, que son casi todas de estudio— el rótulo morado de la portada deja de
+  leerse. Se arregla con un halo oscuro detrás del bloque central, que se deshace
+  antes de los bordes para no apagar el collage; el color del rótulo no se toca.
 - **El logo va arriba a la derecha en todas**, y ninguna lámina mete texto debajo
   de él: el cuerpo arranca unos 210px más abajo.
 - **La portada**: estrella morada + BLINK RADAR y `EDICIÓN <MES> <AÑO>` arriba
@@ -515,6 +519,11 @@ viene, de dónde salió este— directo y explicativo.
   es `alto de la foto × escala − alto de la ventana`; y
   `object-position = (alto de la cabeza × escala − 18px) / sobrante`. Deja la
   cabeza pegada al borde de arriba sin cortarla, que es como Mia la quiere.
+- **Las fotos que llegan por captura de Instagram traen la interfaz encima**: la
+  flecha del carrusel a media altura en los bordes, el botón de repostear arriba a
+  la derecha, los puntitos del carrusel abajo al centro. Hay que dejarlas fuera del
+  encuadre antes de dar una foto por buena — acercando la imagen o corriendo el
+  `object-position`, no recortando el archivo que ella mandó.
 - **Qué fotos dejar fuera.** Las que tengan droga o fajos y máquinas de contar
   billetes sobre la mesa. Son press kits reales y el artista las manda, pero a
   Mia le complican la cuenta sin aportar nada.

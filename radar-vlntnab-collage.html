@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Collage VLNTNA B</title>
+<style>
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:#0A0A0A; }
+  .lamina{ position:relative; width:1080px; height:1350px; background:#0A0A0A; overflow:hidden; }
+  .lamina img{ position:absolute; object-fit:cover; }
+
+  /* Paneles rectangulares ladeados y superpuestos que tapan el lienzo entero.
+     Es el mismo armado del Radar de TANE: lo que cambia son las fotos. Las de
+     ella son capturas de Instagram, así que los encuadres están corridos a
+     propósito para dejar las flechas del carrusel fuera del panel. */
+  .p1{ left:-60px; top:-70px; width:470px; height:650px; object-position:50% 6%;  transform:rotate(-3deg);   z-index:3; }
+  .p2{ left:336px; top:-96px; width:448px; height:636px; object-position:50% 34%; transform:rotate(2.6deg);  z-index:2; }
+  .p3{ left:712px; top:-60px; width:440px; height:618px; object-position:46% 18%; transform:rotate(-3.4deg); z-index:4; }
+  .p4{ left:-66px; top:424px; width:636px; height:604px; object-position:50% 14%; transform:rotate(3deg);    z-index:6; }
+  .p5{ left:498px; top:388px; width:660px; height:644px; object-position:50% 30%; transform:rotate(-2.6deg); z-index:5; }
+  .p6{ left:-54px; top:896px; width:584px; height:524px; object-position:50% 58%; transform:rotate(-2.6deg); z-index:7; }
+  .p7{ left:456px; top:926px; width:682px; height:496px; object-position:50% 22%; transform:rotate(2.8deg);  z-index:8; }
+</style>
+</head>
+<body>
+<div class="lamina">
+  <img class="p1" src="vlntnb.png"  alt="">
+  <img class="p2" src="vlntnb2.png" alt="">
+  <img class="p3" src="vlntnb3.png" alt="">
+  <img class="p4" src="vlntnb7.png" alt="">
+  <img class="p5" src="vlntnb6.png" alt="">
+  <img class="p6" src="vlntnb5.png" alt="">
+  <img class="p7" src="vlntnb8.png" alt="">
+</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Concurso Soulfía · historias</title>
+<style>
+  :root{
+    --negro:  #0A0A0A;
+    --blanco: #FFFFFF;
+    /* El lima del logo de @soulfiafp: rgb(184,248,112). */
+    --lima:   #B8F870;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:var(--negro); }
+
+  .historia{
+    position:relative;
+    width:1080px; height:1920px;
+    background:var(--negro);
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+
+  /* ---------------------------------------------------------- la foto */
+  .foto{ position:absolute; inset:0; }
+  .foto img{
+    width:1080px; height:1920px; object-fit:cover;
+    object-position:50% 12%;
+    filter:brightness(.92) contrast(1.04);
+  }
+  /* En historia, Instagram pone su interfaz arriba y abajo, así que el velo
+     oscurece los dos extremos y deja la foto respirando al medio. */
+  .velo{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg,
+        rgba(10,10,10,.90) 0%,
+        rgba(10,10,10,.38) 9%,
+        rgba(10,10,10,.10) 18%,
+        rgba(10,10,10,.22) 30%,
+        rgba(10,10,10,.72) 42%,
+        rgba(10,10,10,.94) 52%,
+        var(--negro)       60%);
+  }
+  .historia.pasos .velo{
+    background:
+      linear-gradient(180deg,
+        rgba(10,10,10,.90) 0%,
+        rgba(10,10,10,.40) 8%,
+        rgba(10,10,10,.18) 15%,
+        rgba(10,10,10,.62) 25%,
+        rgba(10,10,10,.92) 33%,
+        var(--negro)       40%);
+  }
+
+  /* ---------------------------------------------- arriba, los dos logos */
+  /* Mismo bloque que la gráfica del concurso: el desplazamiento de BLINK
+     corrige que sus letras ocupan solo el 54,3% de abajo de su PNG. */
+  .collab{
+    position:absolute; z-index:3; top:220px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:30px;
+  }
+  .collab img{ display:block; }
+  .collab .blink{ width:112px; transform:translateY(-17px); }
+  .collab .fp{ width:286px; }
+  .collab .equis{
+    font-weight:700; font-size:32px; color:var(--lima); line-height:1;
+  }
+
+  /* --------------------------------------------------- historia 1 */
+  .bloque{
+    position:absolute; z-index:3; left:80px; right:80px; bottom:240px;
+  }
+  .intro{
+    font-weight:700; font-size:40px; line-height:1.34;
+    color:rgba(255,255,255,.97);
+  }
+  .porEso{
+    margin-top:44px;
+    font-weight:800; font-size:26px; letter-spacing:4.2px;
+    color:var(--lima); text-transform:uppercase;
+  }
+  .plazo{
+    margin-top:30px;
+    font-family:"Anton", sans-serif; font-size:138px; line-height:.94;
+    letter-spacing:1px; color:var(--blanco); text-transform:uppercase;
+  }
+  .plazo span{ display:block; }
+  .plazo .hora{ color:var(--lima); }
+  .cierre{
+    margin-top:34px;
+    font-weight:700; font-size:36px; line-height:1.3; color:var(--lima);
+  }
+
+  /* --------------------------------------------------- historia 2 */
+  .cuerpo{
+    position:absolute; z-index:3; left:80px; right:80px; top:664px;
+  }
+  .titular{
+    font-family:"Anton", sans-serif; font-size:118px; line-height:.96;
+    letter-spacing:1px; color:var(--blanco); text-transform:uppercase;
+    padding-top:18px;
+  }
+  .aviso{
+    margin-top:26px;
+    font-weight:700; font-size:31px; line-height:1.34; color:var(--lima);
+  }
+  .pasos{ margin-top:40px; }
+  .paso{
+    display:flex; align-items:flex-start; gap:26px;
+    border-top:1.5px solid rgba(255,255,255,.22);
+    padding:34px 0 32px;
+  }
+  .paso .num{
+    flex:none; width:58px; height:58px; border-radius:50%;
+    border:2px solid var(--lima);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Anton", sans-serif; font-size:34px; line-height:1;
+    color:var(--lima); padding-top:3px;
+  }
+  .paso .que{
+    font-weight:700; font-size:34px; line-height:1.32;
+    color:rgba(255,255,255,.97);
+  }
+  .paso .que b{ color:var(--lima); font-weight:700; }
+  .paso .ojo{
+    display:block; margin-top:12px;
+    font-weight:700; font-size:26px; line-height:1.32;
+    color:rgba(184,248,112,.90);
+  }
+</style>
+</head>
+<body>
+<div class="historia" id="historia"></div>
+
+<script>
+const LOGOS =
+  '<div class="collab">' +
+    '<img class="blink" src="logo-blink.png" alt="Blink">' +
+    '<div class="equis">×</div>' +
+    '<img class="fp" src="logo-soulfiafp.png" alt="SOULFIAFP">' +
+  '</div>';
+
+function foto(){
+  return '<div class="foto"><img src="soulfia-caballo.jpg" alt="">' +
+         '<div class="velo"></div></div>';
+}
+
+const HISTORIAS = {
+
+  1: { html:
+    '<div class="bloque">' +
+      '<p class="intro">Hemos visto su entusiasmo por ganar la entrada doble al ' +
+      'show de Soulfía este 7 de noviembre en el Teatro Mauri 👀</p>' +
+      '<div class="porEso">Por eso extendimos el concurso</div>' +
+      '<div class="plazo"><span>Hasta mañana</span>' +
+        '<span class="hora">a las 14:30</span></div>' +
+      '<p class="cierre">¡Todavía tienen tiempo de seguir participando!</p>' +
+    '</div>' },
+
+  2: { pasos:true, html:
+    '<div class="cuerpo">' +
+      '<div class="titular">Cómo participar</div>' +
+      '<p class="aviso">Hay que cumplir los cuatro pasos. Si falta uno, queda ' +
+      'fuera del sorteo.</p>' +
+      '<div class="pasos">' +
+        '<div class="paso"><div class="num">1</div><div class="que">Sigue a ' +
+          '<b>@blinkmediacl</b> y <b>@soulfiafp</b>.</div></div>' +
+        '<div class="paso"><div class="num">2</div><div class="que">Dale like a ' +
+          'esta publicación.</div></div>' +
+        '<div class="paso"><div class="num">3</div><div class="que">Comparte el ' +
+          'post en tus historias con alguna canción de YEGUA que ya haya salido, ' +
+          'y menciónanos.</div></div>' +
+        '<div class="paso"><div class="num">4</div><div class="que">Comenta ' +
+          'mencionando a la persona con la que irías a este tremendo show.' +
+          '<span class="ojo">Ojo: esa persona también tiene que seguir las dos ' +
+          'cuentas.</span></div></div>' +
+      '</div>' +
+    '</div>' }
+};
+
+const N = parseInt(new URLSearchParams(location.search).get("n") || "1", 10);
+const H = HISTORIAS[N];
+const caja = document.getElementById("historia");
+if (H.pasos) caja.classList.add("pasos");
+caja.innerHTML = foto() + LOGOS + H.html;
+
+(async function(){
+  await document.fonts.load("138px Anton");
+  await document.fonts.load("700 40px Montserrat");
+  await document.fonts.ready;
+
+  // document.fonts.check() miente: se comprueba midiendo, porque Anton es
+  // condensada y tiene que medir bastante menos que Montserrat.
+  const m = document.createElement("canvas").getContext("2d");
+  m.font = "100px Anton";       const a = m.measureText("HAMBURGUESA ABCDEFG").width;
+  m.font = "100px Montserrat";  const b = m.measureText("HAMBURGUESA ABCDEFG").width;
+
+  const achicar = (el, base, minimo, ancho) => {
+    let t = base;
+    while (t > minimo && el.scrollWidth > ancho){ t -= 1; el.style.fontSize = t + "px"; }
+  };
+  caja.querySelectorAll(".plazo span").forEach(s => achicar(s, 138, 80, 920));
+  const t = caja.querySelector(".titular");
+  if (t) achicar(t, 118, 70, 920);
+
+  document.title = a < b * 0.85 ? "listo" : "FALTAN LAS FUENTES";
+})();
+</script>
+</body>
+</html>

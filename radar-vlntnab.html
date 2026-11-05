@@ -229,7 +229,7 @@
   .filasDesc{ display:flex; flex-direction:column; }
   .filasDesc .fila{
     border-top:1.5px solid rgba(255,255,255,.26);
-    padding:20px 2px 18px;
+    padding:22px 2px 20px;
   }
   .filasDesc .cab{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
   .filasDesc .cab b{
@@ -435,22 +435,20 @@ const LAMINAS = {
     recorte("vlntnb2.png", "sangra") },
 
   4: { html:
-    '<div class="cuerpo apretado arriba">' +
+    '<div class="cuerpo angosto">' +
       titular("Cuatro proyectos", "en cuatro años") +
-      filas([
-        ["FEELS",       "EP · 2022"],
-        ["AQUA",        "Álbum · 2023"],
-        ["MAL AUGURIO", "Mixtape · 2024"],
-        ["LOTO",        "EP · 2025"]
+      filasDesc([
+        ["FEELS", "EP · 2022",
+         "Un EP que hizo a medias con KYA."],
+        ["AQUA", "Álbum · 2023",
+         "Su primer disco como solista: trece canciones sobre los años en que iba y venía entre Antofagasta y Santiago."],
+        ["MAL AUGURIO", "Mixtape · 2024",
+         "Una mixtape que nació de un momento en que no quería escribir un hit."],
+        ["LOTO", "EP · 2025",
+         "El más nuevo. Para presentarlo eligió “Rodeada de flores”, que grabó con Face."]
       ]) +
-      '<p class="texto">AQUA son trece canciones sobre sus años entre dos ciudades. ' +
-      'Y de LOTO, el más nuevo, la canción elegida para presentarlo fue “Rodeada de ' +
-      'flores”, que grabó con Face.</p>' +
-      '<div class="parDeFotos corta">' +
-        recorte("vlntnb5.png", "", "50% 31%") +
-        recorte("vlntnb7.png", "", "42% 5%") +
-      '</div>' +
-    '</div>' },
+    '</div>' +
+    recorte("vlntnb7.png", "sangra") },
 
   5: { html:
     '<div class="cuerpo angosto">' +

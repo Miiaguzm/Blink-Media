@@ -473,6 +473,10 @@ publicación. La base viene del Radar de Kittkatta.
   lado. Es donde va una cita.
 - **Filas con separadores**: línea fina arriba de cada una, el nombre en Anton y
   una etiqueta en pastilla a la derecha.
+- **Filas con descripción**: las mismas filas, pero con una línea debajo del nombre
+  que explica qué es esa cosa. Es la salida cuando hay varios discos o varias
+  canciones que explicar: metidos todos en un mismo párrafo quedan densos y no se
+  entiende cuál es cuál, y repartidos en filas cada uno respira y se lee solo.
 - **El casete de VHS**: carcasa, etiqueta blanca arriba con el nombre del disco,
   ventana negra con tres fotos y los dos carretes abajo.
 - **El recuadro de video**: 16:9 exacto (936×527), centrado en todo el alto, con

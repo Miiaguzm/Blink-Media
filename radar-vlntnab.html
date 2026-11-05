@@ -143,7 +143,7 @@
 
   .parDeFotos{ display:flex; gap:26px; }
   .parDeFotos .recorte{ flex:1; height:300px; }
-  .parDeFotos.corta .recorte{ height:264px; }
+  .parDeFotos.corta .recorte{ height:240px; }
   .parDeFotos .recorte:first-child{ transform:rotate(-2.2deg); }
   .parDeFotos .recorte:last-child{ transform:rotate(2deg); }
   .parDeFotos .recorte:first-child img{ object-position:50% 6%; }
@@ -158,6 +158,7 @@
 
   /* En las láminas con foto sangrada, el texto se queda en su mitad. */
   .cuerpo.apretado{ gap:26px; }
+  .cuerpo.arriba{ justify-content:flex-start; }
   .cuerpo.angosto .texto, .cuerpo.angosto .destacado{ max-width:636px; }
   .cuerpo.angosto .ticket{ max-width:752px; }
   .cuerpo.angosto .filas, .cuerpo.angosto .filasDesc{ max-width:636px; }
@@ -434,7 +435,7 @@ const LAMINAS = {
     recorte("vlntnb2.png", "sangra") },
 
   4: { html:
-    '<div class="cuerpo apretado">' +
+    '<div class="cuerpo apretado arriba">' +
       titular("Cuatro proyectos", "en cuatro años") +
       filas([
         ["FEELS",       "EP · 2022"],
@@ -442,8 +443,9 @@ const LAMINAS = {
         ["MAL AUGURIO", "Mixtape · 2024"],
         ["LOTO",        "EP · 2025"]
       ]) +
-      '<p class="texto">AQUA son trece canciones sobre sus años entre Antofagasta ' +
-      'y Santiago; de LOTO, el más nuevo, salió “Rodeada de flores”.</p>' +
+      '<p class="texto">AQUA son trece canciones sobre sus años entre dos ciudades. ' +
+      'Y de LOTO, el más nuevo, la canción elegida para presentarlo fue “Rodeada de ' +
+      'flores”, que grabó con Face.</p>' +
       '<div class="parDeFotos corta">' +
         recorte("vlntnb5.png", "", "50% 31%") +
         recorte("vlntnb7.png", "", "42% 5%") +

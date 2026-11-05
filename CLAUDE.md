@@ -453,7 +453,10 @@ publicación. La base viene del Radar de Kittkatta.
   leerse. Se arregla con un halo oscuro detrás del bloque central, que se deshace
   antes de los bordes para no apagar el collage; el color del rótulo no se toca.
 - **El logo va arriba a la derecha en todas**, y ninguna lámina mete texto debajo
-  de él: el cuerpo arranca unos 210px más abajo.
+  de él: el cuerpo arranca unos 210px más abajo. Ojo con esto: el cuerpo va
+  centrado a lo alto, así que si el contenido se pasa crece **hacia arriba** y el
+  titular se mete debajo del logo. En las láminas cargadas el cuerpo se ancla
+  arriba (`justify-content:flex-start`) y ese choque deja de ser posible.
 - **La portada**: estrella morada + BLINK RADAR y `EDICIÓN <MES> <AÑO>` arriba
   a la izquierda; al medio del alto y centrado, un rótulo morado muy espaciado con
   el género, el titular enorme en Anton con el nombre del artista, y la bajada en
@@ -519,6 +522,12 @@ viene, de dónde salió este— directo y explicativo.
   explicar —"2019 · su primera canción"— no dice nada, y tres hechos pegados uno
   tras otro vuelven a sonar a punteo. El punto medio es un párrafo que enlaza los
   hechos y los explica, no tres frases sueltas ni una pared de texto.
+- **Nombrar una canción suelta no dice nada: hay que decir por qué esa.** "La más
+  escuchada" solo se escribe con las cifras a la vista, y casi nunca las hay — en
+  las notas no aparecen y las plataformas están bloqueadas para mí. Lo que sí se
+  puede verificar es cuál fue el *focus track*, o sea la canción que eligieron para
+  presentar el disco, y eso se escribe en castellano: "la canción elegida para
+  presentarlo".
 - **Al nombrar colaboradores va también la canción que hicieron juntos.** La lista
   de nombres sola no informa; el nombre con su canción al lado sí. En las pastillas
   entra abajo, más chica y entre comillas.

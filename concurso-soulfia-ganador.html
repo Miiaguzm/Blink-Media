@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Concurso Soulfía · ganador</title>
+<style>
+  :root{
+    --negro:  #0A0A0A;
+    --blanco: #FFFFFF;
+    /* El lima del logo de @soulfiafp: rgb(184,248,112). */
+    --lima:   #B8F870;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:var(--negro); }
+
+  .lamina{
+    position:relative;
+    width:1080px; height:1350px;
+    background:var(--negro);
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+  .lamina.historia{ height:1920px; }
+
+  /* ---------------------------------------------------------- la foto */
+  .foto{ position:absolute; inset:0; }
+  .foto img{
+    width:1080px; height:1350px; object-fit:cover;
+    object-position:50% 16%;
+    filter:brightness(.92) contrast(1.04);
+  }
+  .historia .foto img{ height:1920px; object-position:50% 12%; }
+
+  .velo{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(10,10,10,.86) 0%,
+      rgba(10,10,10,.30) 12%,
+      rgba(10,10,10,0)   24%,
+      rgba(10,10,10,.20) 36%,
+      rgba(10,10,10,.72) 48%,
+      rgba(10,10,10,.94) 58%,
+      var(--negro)       68%);
+  }
+  /* En historia Instagram pone su interfaz arriba y abajo, así que el velo
+     oscurece los dos extremos y la foto respira al medio. */
+  .historia .velo{
+    background:linear-gradient(180deg,
+      rgba(10,10,10,.90) 0%,
+      rgba(10,10,10,.38) 9%,
+      rgba(10,10,10,.10) 18%,
+      rgba(10,10,10,.22) 30%,
+      rgba(10,10,10,.70) 42%,
+      rgba(10,10,10,.94) 52%,
+      var(--negro)       60%);
+  }
+
+  /* ---------------------------------------- arriba, los dos logos */
+  /* El desplazamiento de BLINK corrige que sus letras ocupan solo el 54,3%
+     de abajo de su PNG, medido: sin eso los dos logos no comparten línea. */
+  .collab{
+    position:absolute; z-index:3; top:68px; left:0; right:0;
+    display:flex; align-items:center; justify-content:center; gap:26px;
+  }
+  .historia .collab{ top:138px; gap:30px; }
+  .collab img{ display:block; }
+  .collab .blink{ width:96px; transform:translateY(-15px); }
+  .collab .fp{ width:245px; }
+  .historia .collab .blink{ width:112px; transform:translateY(-17px); }
+  .historia .collab .fp{ width:286px; }
+  .collab .equis{ font-weight:700; font-size:28px; color:var(--lima); line-height:1; }
+  .historia .collab .equis{ font-size:32px; }
+
+  /* ------------------------------------------------- el bloque de abajo */
+  .bloque{
+    position:absolute; z-index:3; left:72px; right:72px; bottom:150px;
+    text-align:center;
+  }
+  .historia .bloque{ left:80px; right:80px; bottom:400px; }
+
+  .felicidades{
+    font-family:"Anton", sans-serif;
+    font-size:152px; line-height:.96; letter-spacing:1px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .historia .felicidades{ font-size:168px; }
+
+  .premio{
+    margin:24px auto 0; max-width:780px;
+    font-weight:700; font-size:29px; line-height:1.36; color:var(--lima);
+  }
+  .historia .premio{ max-width:840px; font-size:32px; }
+
+  /* El recuadro donde va la cuenta del ganador. Va vacío a propósito cuando
+     todavía no hay nombre: así se lee como un campo y no como un error. */
+  .caja{
+    margin:46px auto 0; max-width:720px;
+    border:2.5px solid var(--lima); border-radius:22px;
+    background:rgba(10,10,10,.52);
+    padding:28px 34px;
+    min-height:112px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .caja span{
+    font-weight:800; font-size:48px; line-height:1.1;
+    color:var(--lima); word-break:break-word;
+  }
+  .caja.vacia span{ color:rgba(184,248,112,.38); }
+  .historia .caja{ margin-top:52px; min-height:124px; }
+  .historia .caja span{ font-size:54px; }
+
+  .dm{
+    margin:34px auto 0; max-width:760px;
+    font-weight:700; font-size:26px; line-height:1.36;
+    color:rgba(255,255,255,.90);
+  }
+  .historia .dm{ font-size:29px; margin-top:38px; }
+</style>
+</head>
+<body>
+<div class="lamina" id="lamina"></div>
+
+<script>
+const P = new URLSearchParams(location.search);
+const FORMATO = P.get("f") || "feed";          // feed | historia
+const CUENTA  = (P.get("a") || "").trim();     // la cuenta del ganador, sin @
+
+const caja = document.getElementById("lamina");
+if (FORMATO === "historia") caja.classList.add("historia");
+
+caja.innerHTML =
+  '<div class="foto"><img src="soulfia-caballo.jpg" alt="">' +
+    '<div class="velo"></div></div>' +
+  '<div class="collab">' +
+    '<img class="blink" src="logo-blink.png" alt="Blink">' +
+    '<div class="equis">×</div>' +
+    '<img class="fp" src="logo-soulfiafp.png" alt="SOULFIAFP">' +
+  '</div>' +
+  '<div class="bloque">' +
+    '<div class="felicidades">Felicidades</div>' +
+    '<p class="premio">Ganaste una entrada doble para el show de Soulfía ' +
+    'este 7 de noviembre</p>' +
+    '<div class="caja' + (CUENTA ? '' : ' vacia') + '">' +
+      '<span>@' + (CUENTA || '') + '</span></div>' +
+    '<p class="dm">Te escribiremos por DM para enviarte tus entradas</p>' +
+  '</div>';
+
+(async function(){
+  await document.fonts.load("152px Anton");
+  await document.fonts.load("800 48px Montserrat");
+  await document.fonts.ready;
+
+  // document.fonts.check() miente: se comprueba midiendo, porque Anton es
+  // condensada y tiene que medir bastante menos que Montserrat al mismo cuerpo.
+  const m = document.createElement("canvas").getContext("2d");
+  m.font = "100px Anton";       const a = m.measureText("HAMBURGUESA ABCDEFG").width;
+  m.font = "100px Montserrat";  const b = m.measureText("HAMBURGUESA ABCDEFG").width;
+
+  const achicar = (el, base, minimo, ancho) => {
+    let t = base;
+    while (t > minimo && el.scrollWidth > ancho){ t -= 1; el.style.fontSize = t + "px"; }
+  };
+  const f = caja.querySelector(".felicidades");
+  achicar(f, FORMATO === "historia" ? 168 : 152, 90, FORMATO === "historia" ? 920 : 936);
+  const c = caja.querySelector(".caja span");
+  achicar(c, FORMATO === "historia" ? 54 : 48, 26, 640);
+
+  document.title = a < b * 0.85 ? "listo" : "FALTAN LAS FUENTES";
+})();
+</script>
+</body>
+</html>

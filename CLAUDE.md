@@ -422,8 +422,8 @@ sigue: para público nuevo hay que colaborar con artistas, recintos o productora
 
 ## Herramientas
 
-**Generador de gráficas** — hace portadas, láminas e historias con la plantilla de
-marca, sin depender de mí:
+**Generador de gráficas** — hace portadas, láminas, historias y **la plantilla de
+video** con la línea de marca, sin depender de mí:
 https://claude.ai/artifact/64yEEGEqBWUxbxeLtdcmCX
 
 (Antes vivía en `claude.ai/code/artifact/290b938e-…`; la plataforma cambió el
@@ -435,7 +435,12 @@ y se publica a la misma dirección. Al leer el artifact publicado viene envuelto
 una carcasa —`<!doctype html>`, `<head>`, `<body>`— que pone el publicador: hay que
 sacarla antes de volver a publicar, o queda anidada.
 
-**Grabar video en el generador: dos trampas que ya costaron un arreglo.**
+**La plantilla de video vive en el generador**, en el cuarto formato. Mia sube el
+MP4 y cambia la pastilla morada y el titular; el logo y la animación no se tocan.
+El código de referencia sigue siendo `historia-video.html`, de donde salieron las
+medidas, y el generador es la copia que usa ella.
+
+**Grabar video en el generador: tres trampas que ya costaron un arreglo.**
 - Con `captureStream(0)` la pista de video no entrega nada hasta que se le pide un
   cuadro. Si la grabadora arranca sin ninguno, el archivo empieza con audio y sin
   imagen, y todo queda corrido. Hay que pintar y pedir un cuadro antes de `start()`.
@@ -443,6 +448,9 @@ sacarla antes de volver a publicar, o queda anidada.
   gráfica y se come la mitad del presupuesto de 40 ms que hay a 25 cuadros por
   segundo; el video se va atrasando solo. Lo que se pueda hacer con `ctx.filter`,
   va con `ctx.filter`.
+- **A 25 cuadros por segundo un destello de un solo cuadro se pierde.** El titineo
+  cae entre dos dibujos y a veces no se pinta nunca. Por eso el modo video graba a
+  30 y ningún tramo de la animación baja de dos cuadros.
 
 ---
 

@@ -371,12 +371,15 @@ subirlo dos veces. Ojo igual al medirlo, porque el destello morado ocupa la part
 de arriba del PNG y la caja empieza ahí, no en las letras. Arriba lleva una sombra
 suave para que la palabra blanca no se pierda si el video es claro justo ahí.
 
-**El logo y el texto entran con la misma animación**, que es la marca de la
-plantilla: un titineo irregular de tubo de luz que cuesta prender —destello corto,
-corto, uno más largo, y recién ahí queda fijo, unos 330ms—. Nada de fundidos. El
-logo lo hace primero y el texto repite el mismo patrón 700ms después. **La sombra
-de arriba viaja en la capa del velo, no en la del logo**: si parpadeara con él se
-vería la imagen entera prendiéndose y apagándose en vez de solo la marca.
+**El logo y el texto son una sola animación**, que es la marca de la plantilla:
+un titineo irregular de tubo de luz que cuesta prender —destello corto, corto, uno
+más largo, y recién ahí queda fijo—. Nada de fundidos. Y **van siempre juntos**:
+prenden en el mismo cuadro y se apagan en el mismo cuadro, con la salida en espejo
+de la entrada. Mia me corrigió dos veces acá: escalonarlos, o dejar el logo fijo
+mientras el texto se va, no es lo que pidió. Técnicamente son la misma expresión
+`enable` de ffmpeg aplicada a las dos capas. **La sombra de arriba viaja en la capa
+del velo, no en la del logo**: si parpadeara con él se vería la imagen entera
+prendiéndose y apagándose en vez de solo la marca.
 
 **El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real
 (`ctx.filter`), no achicando y estirando la imagen. Achicar y estirar se ve bien con

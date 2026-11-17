@@ -37,14 +37,17 @@
   /* Instagram puede tapar los 250px de arriba con el nombre de la cuenta y
      los 250px de abajo con la barra de respuesta, así que el logo arranca
      recién a 270px y el bloque de texto termina antes de 1670px. */
-  .marca{ position:absolute; inset:0; }
-  .marca .sombra{
+  /* La sombra de arriba viaja en la capa del velo y no en la del logo. El
+     logo parpadea, y si la sombra parpadeara con él se vería la imagen
+     entera prendiéndose y apagándose en vez de solo la marca. */
+  .sombra{
     position:absolute; top:0; left:0; right:0; height:470px;
     background:linear-gradient(180deg,
       rgba(10,10,10,.52) 0%, rgba(10,10,10,.20) 58%, rgba(10,10,10,0) 100%);
   }
+  .marca{ position:absolute; inset:0; }
   .marca img{
-    position:absolute; top:252px; left:84px;
+    position:absolute; top:180px; right:84px;
     width:150px; display:block;
   }
 
@@ -91,12 +94,11 @@ const CUENTA  = P.get("cuenta")  || "@blinkmediacl";
 const caja = document.getElementById("capa");
 
 if (CAPA === "velo"){
-  caja.innerHTML = '<div class="velo"></div>';
+  caja.innerHTML = '<div class="velo"></div><div class="sombra"></div>';
 }
 if (CAPA === "logo"){
   caja.innerHTML =
-    '<div class="marca"><div class="sombra"></div>' +
-    '<img src="logo-blink.png" alt="Blink"></div>';
+    '<div class="marca"><img src="logo-blink.png" alt="Blink"></div>';
 }
 if (CAPA === "texto"){
   caja.innerHTML =

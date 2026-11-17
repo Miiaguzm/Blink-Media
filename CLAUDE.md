@@ -363,14 +363,20 @@ lo que tenga que leerse —logo, titulares, pastillas— vive entre `y=250` y `y
 Mia lo pidió explícitamente para la plantilla de video.
 
 **La plantilla de video de historia** (`historia-video.html`): el logo va chico
-(150px de ancho), arriba a la izquierda, apoyado en el borde de la zona segura y
-alineado con el margen del bloque de texto de abajo. Nunca centrado ni al medio
-del alto, y sin la frase de biografía al lado: solo el logo. Ojo al medirlo: el
-destello morado ocupa la parte de arriba del PNG, así que la caja completa tiene
-que entrar bajo `y=250`, no solo las letras. Lleva una sombra suave propia en el
-tercio de arriba para que la palabra blanca no se pierda si el video es claro
-justo ahí. El texto no entra con un fundido: entra **parpadeando**, con destellos
-de dos cuadros y unos 230ms en total — más lento que eso se nota pesado.
+(150px de ancho) y arriba a la **derecha**, a `y=180`. Nunca centrado ni al medio
+del alto, y sin la frase de biografía al lado: solo el logo. Los 250px de la zona
+segura son un margen con holgura: el menú de los tres puntos de Instagram termina
+bastante antes, así que a 180 el logo queda libre y Mia lo prefiere ahí — me pidió
+subirlo dos veces. Ojo igual al medirlo, porque el destello morado ocupa la parte
+de arriba del PNG y la caja empieza ahí, no en las letras. Arriba lleva una sombra
+suave para que la palabra blanca no se pierda si el video es claro justo ahí.
+
+**El logo y el texto entran con la misma animación**, que es la marca de la
+plantilla: un titineo irregular de tubo de luz que cuesta prender —destello corto,
+corto, uno más largo, y recién ahí queda fijo, unos 330ms—. Nada de fundidos. El
+logo lo hace primero y el texto repite el mismo patrón 700ms después. **La sombra
+de arriba viaja en la capa del velo, no en la del logo**: si parpadeara con él se
+vería la imagen entera prendiéndose y apagándose en vez de solo la marca.
 
 **El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real
 (`ctx.filter`), no achicando y estirando la imagen. Achicar y estirar se ve bien con

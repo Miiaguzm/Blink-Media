@@ -34,15 +34,14 @@
   }
 
   /* ------------------------------------------------ el logo de arriba */
+  /* Instagram puede tapar los 250px de arriba con el nombre de la cuenta y
+     los 250px de abajo con la barra de respuesta, así que el logo arranca
+     recién a 270px y el bloque de texto termina antes de 1670px. */
   .marca{
-    position:absolute; top:132px; left:0; right:0;
-    display:flex; flex-direction:column; align-items:center; gap:18px;
+    position:absolute; top:270px; left:0; right:0;
+    display:flex; justify-content:center;
   }
-  .marca img{ width:188px; display:block; }
-  .marca .lema{
-    font-weight:700; font-size:19px; letter-spacing:5.4px;
-    color:rgba(255,255,255,.72); text-transform:uppercase;
-  }
+  .marca img{ width:150px; display:block; }
 
   /* --------------------------------------------- el bloque de abajo */
   .bloque{
@@ -91,10 +90,7 @@ if (CAPA === "velo"){
 }
 if (CAPA === "logo"){
   caja.innerHTML =
-    '<div class="marca">' +
-      '<img src="logo-blink.png" alt="Blink">' +
-      '<div class="lema">Parpadeas y te lo pierdes</div>' +
-    '</div>';
+    '<div class="marca"><img src="logo-blink.png" alt="Blink"></div>';
 }
 if (CAPA === "texto"){
   caja.innerHTML =

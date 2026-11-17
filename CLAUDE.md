@@ -357,6 +357,11 @@ separa lo de adentro de cada línea y afloja el titular.
 
 **Formatos**: portada (1080×1350), lámina de carrusel (1080×1350), historia (1080×1920).
 
+**Los márgenes seguros de una historia**: Instagram tapa los **250px de arriba**
+con el nombre de la cuenta y los **250px de abajo** con la barra de respuesta. Todo
+lo que tenga que leerse —logo, titulares, pastillas— vive entre `y=250` y `y=1670`.
+Mia lo pidió explícitamente para la plantilla de video.
+
 **El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real
 (`ctx.filter`), no achicando y estirando la imagen. Achicar y estirar se ve bien con
 poco desenfoque, pero al subir el control deja cuadrados. Queda un achique suave

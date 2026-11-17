@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Plantilla de historia con video · Blink</title>
+<style>
+  :root{
+    --negro:  #0A0A0A;
+    --morado: #7B2CFF;
+    --blanco: #FFFFFF;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ background:transparent; }
+
+  /* Las capas se rinden por separado y con fondo transparente, para que
+     después cada una se anime distinto encima del video: el logo entra
+     suave, el velo también, y el texto entra parpadeando. */
+  .capa{
+    position:relative; width:1080px; height:1920px;
+    overflow:hidden;
+    font-family:"Montserrat", sans-serif;
+  }
+
+  /* ------------------------------------------------- el velo de abajo */
+  /* Sin esto el texto blanco se pierde cuando el video tiene una zona
+     clara justo abajo. Arranca a media altura para no tapar la acción. */
+  .velo{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(10,10,10,0)   52%,
+      rgba(10,10,10,.42) 68%,
+      rgba(10,10,10,.80) 82%,
+      rgba(10,10,10,.92) 100%);
+  }
+
+  /* ------------------------------------------------ el logo de arriba */
+  .marca{
+    position:absolute; top:132px; left:0; right:0;
+    display:flex; flex-direction:column; align-items:center; gap:18px;
+  }
+  .marca img{ width:188px; display:block; }
+  .marca .lema{
+    font-weight:700; font-size:19px; letter-spacing:5.4px;
+    color:rgba(255,255,255,.72); text-transform:uppercase;
+  }
+
+  /* --------------------------------------------- el bloque de abajo */
+  .bloque{
+    position:absolute; left:84px; right:84px; bottom:312px;
+  }
+  .rotulo{
+    display:inline-block;
+    background:var(--morado); border-radius:999px;
+    padding:13px 28px 11px;
+    font-weight:800; font-size:25px; letter-spacing:3.4px;
+    color:var(--blanco); text-transform:uppercase;
+  }
+  .titular{
+    margin-top:26px;
+    font-weight:700; font-size:50px; line-height:1.24;
+    color:var(--blanco);
+  }
+  .titular b{ font-weight:800; color:var(--morado); }
+  .cuenta{
+    margin-top:26px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .cuenta .linea{
+    width:52px; height:3px; background:var(--morado); flex:none;
+  }
+  .cuenta span{
+    font-weight:700; font-size:24px; letter-spacing:1.6px;
+    color:rgba(255,255,255,.80);
+  }
+</style>
+</head>
+<body>
+<div class="capa" id="capa"></div>
+
+<script>
+const P = new URLSearchParams(location.search);
+const CAPA    = P.get("capa")    || "texto";   // logo | velo | texto
+const ROTULO  = P.get("rotulo")  || "En vivo";
+const TITULAR = P.get("titular") || "Katteyes llenó el Movistar Arena";
+const CUENTA  = P.get("cuenta")  || "@blinkmediacl";
+
+const caja = document.getElementById("capa");
+
+if (CAPA === "velo"){
+  caja.innerHTML = '<div class="velo"></div>';
+}
+if (CAPA === "logo"){
+  caja.innerHTML =
+    '<div class="marca">' +
+      '<img src="logo-blink.png" alt="Blink">' +
+      '<div class="lema">Parpadeas y te lo pierdes</div>' +
+    '</div>';
+}
+if (CAPA === "texto"){
+  caja.innerHTML =
+    '<div class="bloque">' +
+      '<div class="rotulo">' + ROTULO + '</div>' +
+      '<div class="titular">' + TITULAR + '</div>' +
+      '<div class="cuenta"><div class="linea"></div><span>' + CUENTA + '</span></div>' +
+    '</div>';
+}
+
+(async function(){
+  await document.fonts.load("700 50px Montserrat");
+  await document.fonts.load("800 25px Montserrat");
+  await document.fonts.ready;
+
+  // document.fonts.check() miente: se comprueba midiendo, porque Anton es
+  // condensada y tiene que medir bastante menos que Montserrat al mismo cuerpo.
+  const m = document.createElement("canvas").getContext("2d");
+  m.font = "100px Anton";       const a = m.measureText("HAMBURGUESA ABCDEFG").width;
+  m.font = "100px Montserrat";  const b = m.measureText("HAMBURGUESA ABCDEFG").width;
+
+  // El titular se achica si se pasa de tres líneas, para que el bloque no
+  // le coma la imagen al video.
+  const t = caja.querySelector(".titular");
+  if (t){
+    let c = 50;
+    while (c > 32 && t.scrollHeight > 200){ c -= 1; t.style.fontSize = c + "px"; }
+  }
+
+  document.title = a < b * 0.85 ? "listo" : "FALTAN LAS FUENTES";
+})();
+</script>
+</body>
+</html>

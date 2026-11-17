@@ -638,6 +638,12 @@ corto y sin repeticiones.
   bastante menos. Verificar así antes de dar una gráfica por buena.
 - Esto **no afecta al generador**, que corre en el navegador de Mia y ahí las
   fuentes cargan bien. Solo afecta a lo que renderizo yo acá.
+- **Sí hay `ffmpeg` y `ffprobe`**, así que los videos se pueden abrir, recortar,
+  componer y volver a codificar acá. Las capas del overlay se rinden con Chromium
+  en PNG transparente —`--default-background-color=00000000`— y se montan sobre el
+  video con `overlay`, animándolas con `fade` y con `enable`. Ojo: PIL aparece
+  instalado pero está roto (le falta `_imaging`), así que para imágenes sigue sin
+  servir y numpy no está.
 - **Cómo renderizo una lámina**: Chromium sin cabeza con `--window-size=1080,1437`
   —1437 y no 1350 porque pinta de menos— y después recortar el PNG a 1080×1350.
   No hay Pillow ni numpy, así que el recorte va con un script propio de zlib y

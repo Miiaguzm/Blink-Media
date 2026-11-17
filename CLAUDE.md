@@ -362,6 +362,16 @@ con el nombre de la cuenta y los **250px de abajo** con la barra de respuesta. T
 lo que tenga que leerse —logo, titulares, pastillas— vive entre `y=250` y `y=1670`.
 Mia lo pidió explícitamente para la plantilla de video.
 
+**La plantilla de video de historia** (`historia-video.html`): el logo va chico
+(150px de ancho), arriba a la izquierda, apoyado en el borde de la zona segura y
+alineado con el margen del bloque de texto de abajo. Nunca centrado ni al medio
+del alto, y sin la frase de biografía al lado: solo el logo. Ojo al medirlo: el
+destello morado ocupa la parte de arriba del PNG, así que la caja completa tiene
+que entrar bajo `y=250`, no solo las letras. Lleva una sombra suave propia en el
+tercio de arriba para que la palabra blanca no se pierda si el video es claro
+justo ahí. El texto no entra con un fundido: entra **parpadeando**, con destellos
+de dos cuadros y unos 230ms en total — más lento que eso se nota pesado.
+
 **El fondo desenfocado no puede pixelarse.** Se hace con desenfoque gaussiano real
 (`ctx.filter`), no achicando y estirando la imagen. Achicar y estirar se ve bien con
 poco desenfoque, pero al subir el control deja cuadrados. Queda un achique suave

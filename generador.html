@@ -237,6 +237,9 @@
       <button type="button" class="formato" id="modo-historia" aria-pressed="false">
         Historia <span>1080 × 1920</span>
       </button>
+      <button type="button" class="formato" id="modo-reel" aria-pressed="false">
+        Video <span>1080 × 1920</span>
+      </button>
     </div>
 
     <div id="campos-post">
@@ -462,6 +465,52 @@
 
     </div><!-- fin campos-historia -->
 
+    <div id="campos-reel" hidden>
+
+      <fieldset>
+        <legend>El video</legend>
+        <label>Video vertical
+          <input type="file" id="r-archivo" accept="video/*">
+          <span class="pista">La plantilla se pone sola encima. Si el video no es vertical se recorta al centro</span>
+        </label>
+        <div class="aviso" id="avisoVideoR" hidden>
+          <span>🎬</span>
+          <span><strong>Video cargado.</strong> <span id="textoVideoR"></span></span>
+        </div>
+        <label class="casilla" id="filaSonidoR" hidden>
+          <input type="checkbox" id="r-sinaudio">
+          <span>Guardarlo sin sonido</span>
+        </label>
+        <button type="button" class="secundario" id="r-ensayo">Ver la animación</button>
+        <span class="pista">Reproduce el video con la plantilla puesta, sin grabar nada</span>
+        <div class="progreso" id="progresoR" hidden>
+          <div class="barra"><span id="barraInteriorR"></span></div>
+          <p id="textoProgresoR">Grabando…</p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Texto</legend>
+        <label>Pastilla morada
+          <input type="text" id="r-rotulo" value="EN VIVO">
+          <span class="pista">Dos o tres palabras: EN VIVO, YA SALIÓ, PRIMERA VEZ EN CHILE</span>
+        </label>
+        <label>Titular
+          <input type="text" id="r-titular" value="Katteyes se subió a una Ducati en el Movistar Arena">
+          <span class="pista">Se acomoda solo hasta en tres líneas</span>
+        </label>
+        <label>Cuenta
+          <input type="text" id="r-cuenta" value="@blinkmediacl">
+        </label>
+      </fieldset>
+
+      <div class="aviso">
+        <span>💡</span>
+        <span>El logo y el texto entran y salen juntos con el titineo. No hay nada que ajustar: la animación se calcula sobre lo que dura el video.</span>
+      </div>
+
+    </div><!-- fin campos-reel -->
+
     <div class="acciones">
       <button class="primario" id="descargar">Guardar la gráfica</button>
       <button class="secundario" id="limpiar">Vaciar textos</button>
@@ -514,6 +563,16 @@
     <li><strong>Si la foto se ve muy oscura</strong>, súbele el brillo del fondo antes que nada.</li>
     <li><strong>Sin foto de fondo</strong> queda el morado de la marca, que también funciona.</li>
   </ul>
+
+  <h2>En los videos</h2>
+  <ul>
+    <li><strong>Es la plantilla que va encima de un video tuyo</strong>, no una gráfica: sube el MP4, escribe la pastilla y el titular, y la animación se arma sola.</li>
+    <li><strong>El logo y el texto entran y salen juntos</strong>, con un titineo de luz. No hay nada que ajustar: la animación se calcula sobre lo que dura el video.</li>
+    <li><strong>Mira la animación antes de grabar.</strong> El botón la reproduce sin grabar nada, y así no gastas el tiempo real que cuesta la grabación.</li>
+    <li><strong>La pastilla es la categoría</strong>, no un dato: EN VIVO, YA SALIÓ, PRIMERA VEZ EN CHILE. El titular cuenta qué pasó, en hasta tres líneas.</li>
+    <li><strong>El video se recorta al centro</strong> si no viene vertical. Para que no te corte algo importante, súbelo ya en 9:16.</li>
+    <li><strong>La grabación va en tiempo real</strong>, igual que en las láminas, y no hay que cambiar de pestaña mientras corre.</li>
+  </ul>
 </div>
 
 <script>
@@ -534,14 +593,21 @@
   // La portada y la lámina aceptan imagen o video. Cuando hay video, es la
   // fuente de la pieza —y en la lámina también del fondo— cuadro a cuadro.
   let videoLamina = null, videoPortada = null, grabando = false;
+  // El modo video no acepta imágenes: es una plantilla que se monta encima.
+  let videoReel = null, ensayando = false;
 
   // Qué video manda en el formato que está abierto, y con qué controles se
   // maneja. Los dos formatos tienen su propio aviso y su propia barra porque
   // cada uno vive dentro de su panel, y el del otro está oculto.
   function videoActivo(){
-    return modo === "lamina" ? videoLamina : modo === "post" ? videoPortada : null;
+    return modo === "lamina" ? videoLamina
+         : modo === "post"   ? videoPortada
+         : modo === "reel"   ? videoReel : null;
   }
   function mandosVideo(){
+    if (modo === "reel")
+      return { aviso:"avisoVideoR", texto:"textoVideoR", fila:"filaSonidoR", sin:"r-sinaudio",
+               prog:"progresoR", barra:"barraInteriorR", tprog:"textoProgresoR" };
     return modo === "lamina"
       ? { aviso:"avisoVideo",  texto:"textoVideo",  fila:"filaSonido",  sin:"l-sinaudio",
           prog:"progreso",  barra:"barraInterior",  tprog:"textoProgreso" }
@@ -554,7 +620,8 @@
   const $ = id => document.getElementById(id);
   const campos = ["categoria","fecha","pildora","linea1","linea2","bajada","pie","zoom","pos","posx","brillo","clara",
                   "h-linea1","h-linea2","h-detalle","h-tam","h-desenfoque","h-brillo","h-halo",
-                  "l-texto","l-tam","l-fondotipo","l-desenfoque","l-brillo"];
+                  "l-texto","l-tam","l-fondotipo","l-desenfoque","l-brillo",
+                  "r-rotulo","r-titular","r-cuenta"];
 
   // Fecha de hoy en el formato de la marca
   const MESES = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
@@ -1311,12 +1378,164 @@
     }
   }
 
+  // ------------------------------------------------- VIDEO PARA HISTORIA
+  // La plantilla que se monta encima de un video vertical. Las medidas salen
+  // de historia-video.html, que es donde se afinaron con Mia: el logo arriba a
+  // la derecha y el bloque de texto abajo, los dos con el mismo titineo.
+  const RMAR = 84, R_LOGO_ANCHO = 150, R_LOGO_Y = 180;
+  const R_PISO = HH - 312;   // donde termina la última línea del bloque
+
+  // El titineo: destellos cortos antes de quedar fijo, y la salida en espejo.
+  // Los pares son segundos contados desde que arranca cada tramo.
+  const TIT_ENTRA = [[0, 0.067], [0.133, 0.200], [0.233, 0.333]];
+  const TIT_FIJO  = 0.400;
+  const TIT_SALE  = [[0.100, 0.167], [0.233, 0.300], [0.367, 0.433]];
+  const TIT_FIN   = 0.467;
+
+  // En un video corto no hay lugar para esperar casi un segundo antes de
+  // prender, y si no alcanza a quedarse fijo un rato no se apaga nunca: se
+  // queda hasta el final, que es preferible a un parpadeo encima de otro.
+  function tiemposTitineo(dur){
+    const entra = dur < 3.2 ? Math.max(0.12, dur * 0.10) : 0.80;
+    let sale = dur - TIT_FIN - 0.05;
+    if (!(sale > entra + TIT_FIJO + 0.5)) sale = Infinity;
+    return { entra: entra, sale: sale };
+  }
+  function dentroDe(tramos, t){
+    for (let i = 0; i < tramos.length; i++)
+      if (t >= tramos[i][0] && t < tramos[i][1]) return true;
+    return false;
+  }
+  function prendido(t, dur){
+    const m = tiemposTitineo(dur);
+    if (t < m.entra) return false;
+    if (t < m.entra + TIT_FIJO) return dentroDe(TIT_ENTRA, t - m.entra);
+    if (t < m.sale) return true;
+    if (t < m.sale + TIT_FIN) return dentroDe(TIT_SALE, t - m.sale);
+    return false;
+  }
+  // El velo no parpadea: entra y sale con un fundido. Si parpadeara junto con
+  // el logo se vería la imagen entera prendiéndose y apagándose, en vez de
+  // solo la marca.
+  function opacidadVelo(t, dur){
+    const m = tiemposTitineo(dur);
+    const entrada = Math.max(0, Math.min(1, (t - (m.entra - 0.10)) / 0.45));
+    if (m.sale === Infinity) return entrada;
+    const salida = Math.max(0, Math.min(1, 1 - (t - (m.sale + TIT_FIN)) / 0.40));
+    return Math.min(entrada, salida);
+  }
+
+  function dibujarReel(){
+    cx.clearRect(0, 0, HW, HH);
+    cx.fillStyle = NEGRO; cx.fillRect(0, 0, HW, HH);
+
+    const v = videoReel;
+    const dur = (v && v.duration) ? v.duration : 0;
+    // Quieto se muestra la plantilla completa, que es lo que ella necesita
+    // para encuadrar. El titineo solo corre grabando o en el ensayo.
+    const t = (v && dur && (grabando || ensayando)) ? v.currentTime : null;
+
+    if (v && v.videoWidth){
+      const m = medidas(v);
+      const esc = Math.max(HW / m.w, HH / m.h);
+      const aw = m.w * esc, ah = m.h * esc;
+      try { cx.drawImage(v, (HW - aw) / 2, (HH - ah) / 2, aw, ah); } catch (e) {}
+    } else {
+      const g = cx.createRadialGradient(HW / 2, HH / 2, 40, HW / 2, HH / 2, HW);
+      g.addColorStop(0, "rgba(123,44,255,0.30)");
+      g.addColorStop(1, "rgba(10,10,10,0)");
+      cx.fillStyle = g; cx.fillRect(0, 0, HW, HH);
+    }
+
+    const op = t === null ? 1 : opacidadVelo(t, dur);
+    if (op > 0.002){
+      cx.globalAlpha = op;
+      // Sombra de arriba: sin esto la palabra blanca del logo se pierde cuando
+      // el video tiene cielo o luces justo ahí.
+      const s = cx.createLinearGradient(0, 0, 0, 470);
+      s.addColorStop(0, "rgba(10,10,10,0.52)");
+      s.addColorStop(0.58, "rgba(10,10,10,0.20)");
+      s.addColorStop(1, "rgba(10,10,10,0)");
+      cx.fillStyle = s; cx.fillRect(0, 0, HW, 470);
+      const g = cx.createLinearGradient(0, 0, 0, HH);
+      g.addColorStop(0.52, "rgba(10,10,10,0)");
+      g.addColorStop(0.68, "rgba(10,10,10,0.42)");
+      g.addColorStop(0.82, "rgba(10,10,10,0.80)");
+      g.addColorStop(1, "rgba(10,10,10,0.92)");
+      cx.fillStyle = g; cx.fillRect(0, 0, HW, HH);
+      cx.globalAlpha = 1;
+    }
+
+    if (t !== null && !prendido(t, dur)) return;
+
+    if (logo.complete && logo.naturalWidth){
+      const alto = logo.naturalHeight * (R_LOGO_ANCHO / logo.naturalWidth);
+      cx.drawImage(logo, HW - RMAR - R_LOGO_ANCHO, R_LOGO_Y, R_LOGO_ANCHO, alto);
+    }
+
+    // El bloque se arma desde el piso hacia arriba, así la última línea queda
+    // siempre a la misma altura aunque el titular use una, dos o tres líneas.
+    const rotulo  = $("r-rotulo").value.trim().toUpperCase();
+    const titular = $("r-titular").value.trim();
+    const cuenta  = $("r-cuenta").value.trim();
+    const ancho = HW - RMAR * 2;
+    let y = R_PISO;
+
+    if (cuenta){
+      const alto = 29;
+      y -= alto;
+      cx.fillStyle = MORADO;
+      cx.fillRect(RMAR, y + alto / 2 - 1.5, 52, 3);
+      cx.font = "700 24px Montserrat, sans-serif";
+      cx.letterSpacing = "1.6px";
+      cx.fillStyle = "rgba(255,255,255,0.80)";
+      cx.textBaseline = "middle";
+      cx.fillText(cuenta, RMAR + 66, y + alto / 2 + 1);
+      cx.textBaseline = "alphabetic";
+      cx.letterSpacing = "0px";
+      y -= 26;
+    }
+
+    if (titular){
+      let cuerpo = 50, lineas;
+      while (true){
+        cx.font = "700 " + cuerpo + "px Montserrat, sans-serif";
+        lineas = partir(titular, ancho);
+        if (lineas.length <= 3 || cuerpo <= 32) break;
+        cuerpo -= 2;
+      }
+      const altoLinea = Math.round(cuerpo * 1.24);
+      y -= altoLinea * lineas.length;
+      cx.fillStyle = BLANCO;
+      for (let i = 0; i < lineas.length; i++)
+        cx.fillText(lineas[i], RMAR, lineaBase(y + i * altoLinea, altoLinea));
+      y -= 26;
+    }
+
+    if (rotulo){
+      const tR = encoger(rotulo, 25, 15, ancho - 56, "Montserrat, sans-serif", "800", "3.4px");
+      cx.font = "800 " + tR + "px Montserrat, sans-serif";
+      cx.letterSpacing = "3.4px";
+      const alto = 55, anchoPastilla = cx.measureText(rotulo).width + 56;
+      y -= alto;
+      cx.beginPath();
+      cx.roundRect(RMAR, y, anchoPastilla, alto, alto / 2);
+      cx.fillStyle = MORADO; cx.fill();
+      cx.fillStyle = BLANCO;
+      cx.textBaseline = "middle";
+      cx.fillText(rotulo, RMAR + 28, y + alto / 2 + 1);
+      cx.textBaseline = "alphabetic";
+      cx.letterSpacing = "0px";
+    }
+  }
+
   // Lo que se pinta depende del formato abierto. Vive en una sola función
   // porque la grabación de video también la necesita: antes ahí estaba escrito
   // "dibujarLamina" a secas y una portada con video terminaba grabando la
   // lámina, con su texto y sin la imagen.
   function dibujarActual(){
-    if (modo === "historia") dibujarHistoria();
+    if (modo === "reel") dibujarReel();
+    else if (modo === "historia") dibujarHistoria();
     else if (modo === "lamina") dibujarLamina();
     else dibujar();
   }
@@ -1353,7 +1572,8 @@
   const FORMATOS = {
     post:     { w: 1080, h: 1350, campos: "campos-post",     boton: "Guardar la gráfica" },
     lamina:   { w: 1080, h: 1350, campos: "campos-lamina",   boton: "Guardar la lámina" },
-    historia: { w: 1080, h: 1920, campos: "campos-historia", boton: "Guardar la historia" }
+    historia: { w: 1080, h: 1920, campos: "campos-historia", boton: "Guardar la historia" },
+    reel:     { w: 1080, h: 1920, campos: "campos-reel",     boton: "Sube un video primero" }
   };
 
   function cambiarModo(nuevo){
@@ -1365,7 +1585,8 @@
       $("modo-" + k).setAttribute("aria-pressed", String(activo));
     });
     const f = FORMATOS[modo];
-    cv.classList.toggle("historia", modo === "historia");
+    cv.classList.toggle("historia", modo === "historia" || modo === "reel");
+    if (modo !== "reel") detenerEnsayo();
     cv.width = f.w;
     cv.height = f.h;
     etiquetarBotones();
@@ -1473,14 +1694,50 @@
     { aviso:"avisoVideoP", texto:"textoVideoP", fila:"filaSonidoP" },
     (v, img) => { videoPortada = v; foto = img; });
 
+  alSubirMedio("r-archivo",
+    { aviso:"avisoVideoR", texto:"textoVideoR", fila:"filaSonidoR" },
+    (v) => { videoReel = v; });
+
+  // El ensayo es el mismo dibujo que la grabación, pero sin grabadora: sirve
+  // para mirar el titineo antes de gastar el tiempo real que cuesta grabar.
+  function detenerEnsayo(){
+    if (!ensayando) return;
+    ensayando = false;
+    if (videoReel) videoReel.pause();
+    $("r-ensayo").textContent = "Ver la animación";
+  }
+  $("r-ensayo").addEventListener("click", () => {
+    if (grabando) return;
+    if (ensayando){ detenerEnsayo(); actualizar(); return; }
+    const v = videoReel;
+    if (!v){ mostrarEstadoVideo(); return; }
+    ensayando = true;
+    $("r-ensayo").textContent = "Detener";
+    v.muted = true;
+    try { v.currentTime = 0; } catch (e) {}
+    const paso = () => {
+      if (!ensayando) return;
+      try { dibujarReel(); } catch (e) {}
+      if (v.ended){ detenerEnsayo(); actualizar(); return; }
+      requestAnimationFrame(paso);
+    };
+    const arranque = v.play();
+    if (arranque && arranque.then)
+      arranque.then(() => requestAnimationFrame(paso)).catch(() => detenerEnsayo());
+    else requestAnimationFrame(paso);
+  });
+
   // ---- grabación de video ----
   // El dibujo se limita a esto pase lo que pase. Un video a 60 cuadros por
   // segundo hacía redibujar y codificar 60 veces por segundo un lienzo de
   // 1080x1350: el doble de trabajo del necesario, sin que se note en el
   // resultado. Eso explicaba que la grabación se cayera a distinto tiempo
   // según el archivo.
-  const CUADROS_POR_SEGUNDO = 25;
-  const MS_ENTRE_CUADROS = 1000 / CUADROS_POR_SEGUNDO;
+  // El modo video va a 30 porque ahí el dibujo es liviano —un cuadro y dos
+  // degradados, sin desenfoque— y porque el titineo necesita esa resolución:
+  // a 25 se perdían destellos enteros entre un dibujo y el siguiente.
+  function cuadrosPorSegundo(){ return modo === "reel" ? 30 : 25; }
+  function msEntreCuadros(){ return 1000 / cuadrosPorSegundo(); }
 
   const MIMES = [
     'video/mp4;codecs="avc1.42E01E,mp4a.40.2"',
@@ -1564,6 +1821,7 @@
   }
 
   function grabarVideo(){
+    detenerEnsayo();
     const formato = mejorFormato();
     const vid = videoActivo(), mandos = mandosVideo();
     if (!vid || !formato || !cv.captureStream){
@@ -1587,7 +1845,7 @@
       // Sin requestFrame no queda otra que dejar que el navegador tome los
       // cuadros solo. Ahí sí depende de que el lienzo se esté pintando.
       flujo.getTracks().forEach(t => t.stop());
-      flujo = cv.captureStream(CUADROS_POR_SEGUNDO);
+      flujo = cv.captureStream(cuadrosPorSegundo());
     }
     const sinAudio = $(mandos.sin).checked;
 
@@ -1641,7 +1899,7 @@
     const pintar = (forzar) => {
       if (!grabando) return;
       const ahora = Date.now();
-      if (!forzar && ahora - ultimoCuadro < MS_ENTRE_CUADROS) return;
+      if (!forzar && ahora - ultimoCuadro < msEntreCuadros()) return;
       try { dibujarActual(); } catch (e) {}
       if (pedirCuadro) pedirCuadro();
       ultimoCuadro = ahora;
@@ -1698,7 +1956,7 @@
           if (grabadora.state === "recording") grabadora.stop();
           return;
         }
-        if (Date.now() - ultimoCuadro > MS_ENTRE_CUADROS * 2) pintar(true);
+        if (Date.now() - ultimoCuadro > msEntreCuadros() * 2) pintar(true);
       }, 40);
 
       vid.addEventListener("ended", () => {
@@ -1713,7 +1971,8 @@
   }
 
   function nombreArchivo(){
-    const origen = modo === "historia" ? ($("h-linea2").value || $("h-linea1").value)
+    const origen = modo === "reel"     ? $("r-titular").value
+                 : modo === "historia" ? ($("h-linea2").value || $("h-linea1").value)
                  : modo === "lamina"    ? $("l-texto").value
                  : $("linea1").value;
     const base = (origen || "blink").toLowerCase()
@@ -1764,6 +2023,14 @@
   }
 
   function descargar(){
+    // En el modo video no hay nada que guardar sin un video: la plantilla se
+    // monta encima de uno, no existe por su cuenta.
+    if (modo === "reel" && !videoReel){
+      $("textoVideoR").textContent =
+        "Primero sube el video. Esta plantilla se monta encima de uno.";
+      $("avisoVideoR").hidden = false;
+      return;
+    }
     if (videoActivo()){ grabarVideo(); return; }
     if (!guardador){
       descargarNavegador();
@@ -1784,7 +2051,8 @@
   $("descargar2").addEventListener("click", descargar);
 
   $("limpiar").addEventListener("click", () => {
-    const ids = modo === "historia" ? ["h-linea1","h-linea2","h-detalle"]
+    const ids = modo === "reel"     ? ["r-rotulo","r-titular"]
+              : modo === "historia" ? ["h-linea1","h-linea2","h-detalle"]
               : modo === "lamina"    ? ["l-texto"]
               : ["pildora","linea1","linea2","bajada"];
     ids.forEach(id => $(id).value = "");

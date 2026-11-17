@@ -490,6 +490,26 @@
       </fieldset>
 
       <fieldset>
+        <legend>Encuadre</legend>
+        <div class="deslizador">
+          <div class="fila"><span>Acercamiento</span><span class="valor" id="vRZoom">1.00×</span></div>
+          <input type="range" id="r-zoom" min="1" max="2.5" step="0.01" value="1">
+        </div>
+        <div class="deslizador">
+          <div class="fila"><span>Posición horizontal</span><span class="valor" id="vRPosX">50%</span></div>
+          <input type="range" id="r-posx" min="0" max="100" step="1" value="50">
+        </div>
+        <div class="deslizador">
+          <div class="fila"><span>Posición vertical</span><span class="valor" id="vRPos">50%</span></div>
+          <input type="range" id="r-pos" min="0" max="100" step="1" value="50">
+        </div>
+        <div class="aviso" id="avisoEncuadreR" hidden>
+          <span>↔️</span>
+          <span id="textoEncuadreR"></span>
+        </div>
+      </fieldset>
+
+      <fieldset>
         <legend>Texto</legend>
         <label>Pastilla morada
           <input type="text" id="r-rotulo" value="EN VIVO">
@@ -570,7 +590,7 @@
     <li><strong>El logo y el texto entran y salen juntos</strong>, con un titineo de luz. No hay nada que ajustar: la animación se calcula sobre lo que dura el video.</li>
     <li><strong>Mira la animación antes de grabar.</strong> El botón la reproduce sin grabar nada, y así no gastas el tiempo real que cuesta la grabación.</li>
     <li><strong>La pastilla es la categoría</strong>, no un dato: EN VIVO, YA SALIÓ, PRIMERA VEZ EN CHILE. El titular cuenta qué pasó, en hasta tres líneas.</li>
-    <li><strong>El video se recorta al centro</strong> si no viene vertical. Para que no te corte algo importante, súbelo ya en 9:16.</li>
+    <li><strong>Sirve igual con un video horizontal.</strong> No hay que elegir nada: si lo que subes es más ancho que una historia, los controles de encuadre pasan a mover el video de lado, y el aviso te dice cuánto queda fuera. Con uno vertical ya entra completo y recién se mueven si le subes el acercamiento.</li>
     <li><strong>La grabación va en tiempo real</strong>, igual que en las láminas, y no hay que cambiar de pestaña mientras corre.</li>
   </ul>
 </div>
@@ -621,7 +641,7 @@
   const campos = ["categoria","fecha","pildora","linea1","linea2","bajada","pie","zoom","pos","posx","brillo","clara",
                   "h-linea1","h-linea2","h-detalle","h-tam","h-desenfoque","h-brillo","h-halo",
                   "l-texto","l-tam","l-fondotipo","l-desenfoque","l-brillo",
-                  "r-rotulo","r-titular","r-cuenta"];
+                  "r-rotulo","r-titular","r-cuenta","r-zoom","r-posx","r-pos"];
 
   // Fecha de hoy en el formato de la marca
   const MESES = ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
@@ -1425,6 +1445,39 @@
     return Math.min(entrada, salida);
   }
 
+  // Cuánto mide el video dentro del lienzo y cuánto sobra por cada lado. El
+  // acercamiento va encima del ajuste que ya tapa la historia entera.
+  function encuadreReel(v){
+    const m = medidas(v);
+    const esc = Math.max(HW / m.w, HH / m.h) * parseFloat($("r-zoom").value);
+    const aw = m.w * esc, ah = m.h * esc;
+    return { aw: aw, ah: ah, sobraX: aw - HW, sobraY: ah - HH };
+  }
+
+  // No hay botón de "vertical u horizontal": el aviso dice qué control sirve
+  // para el video que subió, que es lo mismo pero sin que ella tenga que elegir.
+  function avisoEncuadreReel(){
+    const caja = $("avisoEncuadreR"), v = videoReel;
+    if (modo !== "reel" || !v || !v.videoWidth){ caja.hidden = true; return; }
+    const e = encuadreReel(v);
+    const sx = Math.round(e.sobraX), sy = Math.round(e.sobraY);
+    let t;
+    if (sx > 8 && sy > 8)
+      t = "Quedan " + sx + "px fuera a los lados y " + sy + "px arriba y abajo: "
+        + "los dos controles de posición eligen qué entra.";
+    else if (sx > 8)
+      t = "Este video es más ancho que una historia, así que quedan " + sx
+        + "px fuera. Muévelo de lado para elegir qué parte entra.";
+    else if (sy > 8)
+      t = "Este video es más alto que una historia, así que quedan " + sy
+        + "px fuera. Muévelo de arriba abajo para elegir qué parte entra.";
+    else
+      t = "Este video ya calza vertical y entra completo. Los controles de "
+        + "posición recién sirven si le subes el acercamiento.";
+    $("textoEncuadreR").textContent = t;
+    caja.hidden = false;
+  }
+
   function dibujarReel(){
     cx.clearRect(0, 0, HW, HH);
     cx.fillStyle = NEGRO; cx.fillRect(0, 0, HW, HH);
@@ -1436,10 +1489,13 @@
     const t = (v && dur && (grabando || ensayando)) ? v.currentTime : null;
 
     if (v && v.videoWidth){
-      const m = medidas(v);
-      const esc = Math.max(HW / m.w, HH / m.h);
-      const aw = m.w * esc, ah = m.h * esc;
-      try { cx.drawImage(v, (HW - aw) / 2, (HH - ah) / 2, aw, ah); } catch (e) {}
+      const e = encuadreReel(v);
+      // El sobrante se reparte según los controles. En un video que ya viene
+      // vertical no sobra nada y no mueven nada, que es justo lo que tiene que
+      // pasar: no hay dos modos, lo decide el archivo.
+      const x = -e.sobraX * (parseFloat($("r-posx").value) / 100);
+      const y = -e.sobraY * (parseFloat($("r-pos").value) / 100);
+      try { cx.drawImage(v, x, y, e.aw, e.ah); } catch (err) {}
     } else {
       const g = cx.createRadialGradient(HW / 2, HH / 2, 40, HW / 2, HH / 2, HW);
       g.addColorStop(0, "rgba(123,44,255,0.30)");
@@ -1558,6 +1614,10 @@
     $("vLTam").textContent = $("l-tam").value + "%";
     $("vLDesenfoque").textContent = $("l-desenfoque").value + " px";
     $("vLBrillo").textContent = parseFloat($("l-brillo").value).toFixed(2);
+    $("vRZoom").textContent = parseFloat($("r-zoom").value).toFixed(2) + "×";
+    $("vRPosX").textContent = $("r-posx").value + "%";
+    $("vRPos").textContent = $("r-pos").value + "%";
+    avisoEncuadreReel();
     fondoDeLamina();
     avisoAcercamiento();
     avisoEncuadre();
@@ -1696,7 +1756,10 @@
 
   alSubirMedio("r-archivo",
     { aviso:"avisoVideoR", texto:"textoVideoR", fila:"filaSonidoR" },
-    (v) => { videoReel = v; });
+    (v) => {
+      videoReel = v;
+      $("r-zoom").value = 1; $("r-posx").value = 50; $("r-pos").value = 50;
+    });
 
   // El ensayo es el mismo dibujo que la grabación, pero sin grabadora: sirve
   // para mirar el titineo antes de gastar el tiempo real que cuesta grabar.

@@ -440,6 +440,13 @@ MP4 y cambia la pastilla morada y el titular; el logo y la animación no se toca
 El código de referencia sigue siendo `historia-video.html`, de donde salieron las
 medidas, y el generador es la copia que usa ella.
 
+**Acepta video horizontal y vertical, y no se elige con un botón.** Mia lo pidió
+así: el encuadre se calcula del archivo —acercamiento, posición horizontal y
+vertical, como en la portada— y el aviso dice cuál de los controles sirve para ese
+video. Si viene horizontal sobra ancho y se mueve de lado; si ya viene vertical no
+sobra nada y los controles recién se mueven con acercamiento. **Esto vale como
+criterio general: cuando algo se puede deducir del archivo, no se le pregunta.**
+
 **Grabar video en el generador: tres trampas que ya costaron un arreglo.**
 - Con `captureStream(0)` la pista de video no entrega nada hasta que se le pide un
   cuadro. Si la grabadora arranca sin ninguno, el archivo empieza con audio y sin

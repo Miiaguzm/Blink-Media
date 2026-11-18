@@ -14,84 +14,84 @@
     font-family:"Montserrat", sans-serif;
   }
 
-  /* La portada es casi cuadrada y la cara ocupa el centro, así que a sangre el
-     titular se la come. Va enmarcada arriba y el texto abajo, igual que en una
-     lámina, y el fondo es la misma foto ampliada y desenfocada para que la
-     gráfica se lea como una pieza y no como una foto pegada sobre negro. */
+  /* La foto manda: ocupa todo el ancho y dos tercios del alto. El texto vive
+     abajo, en su propia zona, y no le pisa nada. Arriba queda una banda para
+     el encabezado, porque el fondo de la foto es gris claro y el logo blanco
+     ahí no se leería. */
   .fondo{ position:absolute; inset:0; overflow:hidden; }
   .fondo img{
-    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(1.35);
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(1.4);
     width:1080px; height:1350px; object-fit:cover;
-    filter:blur(26px) brightness(.62) saturate(1.1);
+    filter:blur(30px) brightness(.26) saturate(1.2);
   }
-  .velo{
-    position:absolute; inset:0;
-    background:
-      radial-gradient(120% 70% at 50% 8%, rgba(123,44,255,.20) 0%, rgba(10,10,10,0) 60%),
-      linear-gradient(180deg,
-        rgba(10,10,10,.72) 0%, rgba(10,10,10,.46) 14%,
-        rgba(10,10,10,.46) 62%, rgba(10,10,10,.88) 78%, var(--negro) 96%);
+
+  .retrato{ position:absolute; z-index:2; left:0; right:0; top:150px; height:830px;
+            overflow:hidden; }
+  /* El encuadre no va a ojo: la foto mide 1170x1163 y a ancho completo escala
+     0,923, así que la cabeza queda entre y=78 y y=729 y entra entera con aire. */
+  .retrato img{ width:1080px; height:1073px; object-fit:cover; object-position:50% 0%;
+                display:block; }
+  .retrato .base{
+    position:absolute; left:0; right:0; bottom:0; height:300px;
+    background:linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,.30) 42%,
+      rgba(10,10,10,.82) 78%, var(--negro) 100%);
+  }
+  .retrato .tope{
+    position:absolute; left:0; right:0; top:0; height:90px;
+    background:linear-gradient(180deg, rgba(10,10,10,.42) 0%, rgba(10,10,10,0) 100%);
   }
 
   /* ------------------------------------------------------- encabezado */
-  .cabecera{ position:absolute; z-index:3; top:62px; left:72px; right:72px;
-             display:flex; align-items:flex-start; justify-content:space-between; }
-  .categoria{ display:flex; align-items:center; gap:12px;
-              font-weight:800; font-size:25px; letter-spacing:3.6px;
-              color:var(--morado); text-transform:uppercase; }
-  .fecha{ margin-top:12px; font-weight:600; font-size:24px; letter-spacing:2.4px;
-          color:rgba(255,255,255,.72); }
-  .cabecera img{ width:132px; display:block; }
+  .piso{ position:absolute; z-index:3; left:0; right:0; top:960px; bottom:0;
+         background:var(--negro); }
 
-  /* ------------------------------------------------------------ foto */
-  .marco{
-    position:absolute; z-index:3; left:200px; top:176px;
-    width:680px; height:680px; border-radius:26px; overflow:hidden;
-    box-shadow:0 26px 70px rgba(0,0,0,.55);
-  }
-  .marco img{ width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+  .cabecera{ position:absolute; z-index:4; top:48px; left:72px; right:72px;
+             display:flex; align-items:center; justify-content:space-between; }
+  .categoria{ display:flex; align-items:center; gap:11px;
+              font-weight:800; font-size:24px; letter-spacing:3.6px;
+              color:var(--morado); text-transform:uppercase; }
+  .fecha{ margin-top:9px; font-weight:600; font-size:22px; letter-spacing:2.4px;
+          color:rgba(255,255,255,.70); }
+  .cabecera img{ width:124px; display:block; }
 
   /* ---------------------------------------------------------- bloque */
-  .bloque{ position:absolute; z-index:3; left:72px; right:72px; bottom:150px; }
+  .bloque{ position:absolute; z-index:4; left:72px; right:72px; bottom:74px; }
   .pildora{
     display:inline-block; background:var(--morado); border-radius:999px;
-    padding:14px 30px 12px;
-    font-weight:800; font-size:24px; letter-spacing:3.4px;
+    padding:13px 28px 11px;
+    font-weight:800; font-size:23px; letter-spacing:3.4px;
     color:var(--blanco); text-transform:uppercase;
   }
   .titular{
-    margin-top:24px;
-    font-family:"Anton", sans-serif; font-size:96px; line-height:.95;
+    margin-top:22px;
+    font-family:"Anton", sans-serif; font-size:88px; line-height:.96;
     letter-spacing:1px; color:var(--blanco); text-transform:uppercase;
   }
   .titular span{ display:block; }
   .titular .morado{ color:var(--morado); }
   .dato{
-    margin-top:26px; font-weight:700; font-size:28px; letter-spacing:1.4px;
-    color:rgba(255,255,255,.90);
+    margin-top:20px; font-weight:700; font-size:27px; letter-spacing:1.2px;
+    color:rgba(255,255,255,.88);
   }
-
-  /* ------------------------------------------------------------- pie */
-  .pie{
-    position:absolute; z-index:3; left:72px; right:72px; bottom:66px;
-    padding-top:30px; border-top:1.5px solid rgba(255,255,255,.20);
-    display:flex; align-items:center; justify-content:center; gap:16px;
-  }
-  .pie span{ font-weight:800; font-size:22px; letter-spacing:3.4px;
-             color:var(--morado); text-transform:uppercase; }
-  .pie svg{ width:22px; height:22px; flex:none; }
 </style>
 </head>
 <body>
 <div class="lamina">
 
   <div class="fondo"><img src="benja-koi-portada.jpg" alt=""></div>
-  <div class="velo"></div>
+
+  <div class="piso"></div>
+
+  <div class="retrato">
+    <img src="benja-koi-portada.jpg" alt="">
+    <div class="tope"></div>
+    <div class="base"></div>
+  </div>
 
   <div class="cabecera">
     <div>
       <div class="categoria">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#7B2CFF">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="#7B2CFF">
           <path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/>
         </svg>
         Lanzamiento
@@ -101,36 +101,26 @@
     <img src="logo-blink.png" alt="Blink">
   </div>
 
-  <div class="marco"><img src="benja-koi-portada.jpg" alt=""></div>
-
   <div class="bloque">
-    <div class="pildora">Nuevo álbum</div>
-    <div class="titular"><span>KOI abre una</span><span class="morado">nueva etapa</span></div>
+    <div class="pildora">Ya tiene fecha</div>
+    <div class="titular"><span>KOI, el tercer disco</span><span class="morado">de Benja Valencia</span></div>
     <div class="dato">Jueves 26 de noviembre · 21:00</div>
-  </div>
-
-  <div class="pie">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#7B2CFF" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 4 V19 M5 12 L12 19 L19 12"/>
-    </svg>
-    <span>Abajo te contamos los detalles</span>
   </div>
 
 </div>
 
 <script>
 (async function(){
-  await document.fonts.load("96px Anton");
-  await document.fonts.load("800 24px Montserrat");
-  await document.fonts.load("700 28px Montserrat");
+  await document.fonts.load("88px Anton");
+  await document.fonts.load("800 23px Montserrat");
+  await document.fonts.load("700 27px Montserrat");
   await document.fonts.ready;
 
   // Las dos líneas del titular comparten cuerpo: ajustadas por separado, la
   // corta queda grande y la larga achicada, y se nota el escalón.
   const lineas = [...document.querySelectorAll(".titular span")];
-  let t = 96;
-  while (t > 72 && lineas.some(l => l.scrollWidth > 936)){
+  let t = 88;
+  while (t > 62 && lineas.some(l => l.scrollWidth > 936)){
     t -= 2;
     lineas.forEach(l => { l.style.fontSize = t + "px"; });
   }

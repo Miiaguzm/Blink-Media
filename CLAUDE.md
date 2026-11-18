@@ -115,6 +115,24 @@ Eso no la vuelve un comunicado. Lo que la separa de una cuenta de noticias:
 - **Nada de adornos que no sean información.** Si una línea solo se sostiene en
   algo que yo vi en una foto, se cae.
 
+### En una gráfica de lanzamiento manda la foto, no el texto
+
+Mia devolvió la primera gráfica de KOI porque el bloque de texto tapaba la imagen.
+El reparto que sí quiso: **el retrato ocupa unos dos tercios del lienzo** y el texto
+vive abajo, en su propia zona negra, compacto — píldora, titular de dos líneas y
+**una sola línea de dato**. La bajada de tres líneas no va: esa información es del
+copy. "La mayoría de la información va a estar en el copy", textual.
+
+**El titular de un anuncio tiene que sonar a anuncio.** "KOI abre una nueva etapa"
+se lee como si el disco ya hubiera salido hoy. Se arregla con un titular nominal que
+diga qué es y de quién —"KOI, el tercer disco de Benja Valencia"— y dejando el aviso
+de que todavía no sale en la píldora: "Ya tiene fecha". Y el nombre del artista entra
+en el titular: sin él, la gráfica no se entiende sola.
+
+**Una foto casi cuadrada con la cara al centro no va a sangre con el titular encima**
+—se la come— ni tampoco achicada con aire negro alrededor. Va a todo el ancho, cortada
+arriba y abajo, con el texto en el negro de abajo.
+
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)
 - "te acordái" y el voseo chileno marcado

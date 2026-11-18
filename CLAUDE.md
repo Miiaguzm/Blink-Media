@@ -115,23 +115,28 @@ Eso no la vuelve un comunicado. Lo que la separa de una cuenta de noticias:
 - **Nada de adornos que no sean información.** Si una línea solo se sostiene en
   algo que yo vi en una foto, se cae.
 
-### En una gráfica de lanzamiento manda la foto, no el texto
+### La gráfica de feed sale del generador, no de una plantilla nueva
 
-Mia devolvió la primera gráfica de KOI porque el bloque de texto tapaba la imagen.
-El reparto que sí quiso: **el retrato ocupa unos dos tercios del lienzo** y el texto
-vive abajo, en su propia zona negra, compacto — píldora, titular de dos líneas y
-**una sola línea de dato**. La bajada de tres líneas no va: esa información es del
-copy. "La mayoría de la información va a estar en el copy", textual.
+**Para KOI me inventé dos plantillas y Mia devolvió las dos.** La publicación de
+feed se hace con el **modo publicación del generador**: foto a sangre, velo y
+titular encima. **Una foto enmarcada es una lámina**, que es otro formato y se nota
+al tiro — "pusiste la imagen en un cuadro, o sea, aparece una lámina". Si algo no
+calza se ajusta con los controles que el generador ya trae —acercamiento, posición,
+foto clara—, nunca con una plantilla nueva.
 
 **El titular de un anuncio tiene que sonar a anuncio.** "KOI abre una nueva etapa"
-se lee como si el disco ya hubiera salido hoy. Se arregla con un titular nominal que
-diga qué es y de quién —"KOI, el tercer disco de Benja Valencia"— y dejando el aviso
-de que todavía no sale en la píldora: "Ya tiene fecha". Y el nombre del artista entra
-en el titular: sin él, la gráfica no se entiende sola.
+se lee como si el disco ya hubiera salido hoy. "KOI ya tiene fecha" dice lo mismo y
+deja claro que todavía no sale. Y la bajada va corta, de una o dos líneas: "la
+mayoría de la información va a estar en el copy", textual de ella.
 
-**Una foto casi cuadrada con la cara al centro no va a sangre con el titular encima**
-—se la come— ni tampoco achicada con aire negro alrededor. Va a todo el ancho, cortada
-arriba y abajo, con el texto en el negro de abajo.
+**Si la cara no cabe sobre el titular, el titular va en una línea y el nombre del
+artista se va a la píldora.** En la portada de KOI la cara iba de `y=210` a `y=960`
+y un titular de dos líneas arranca en `y=780`: no hay acercamiento que lo arregle,
+porque subir la cara con `pos=100` también la agranda y el mentón baja casi lo mismo
+que sube. Con una sola línea el titular arranca en `y=910` y la cara entera entra con
+acercamiento 1,10. **Esto se mide pintando una regla de líneas cada 100px sobre el
+render** —`drawbox` de ffmpeg, porque no existe `drawline`—; a ojo probé tres zooms
+y los tres estaban mal.
 
 ### Palabras que Mia ya rechazó
 - "el tipo" (para referirse a un artista)

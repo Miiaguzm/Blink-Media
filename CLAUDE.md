@@ -327,6 +327,13 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   me pasa algo así, va al guion **atribuido al artista y sin comillas** —"ella
   contó en su Instagram que…"—, porque tenemos el hecho pero no el texto exacto.
   Si después quiere citarlo textual, tiene que ir a buscar la frase.
+- **No interpretar lo que dice la descripción de un post.** Es distinto de
+  inventarle una frase al artista: acá la frase es suya, pero el significado lo
+  pongo yo. Sinaka escribió "porque con él ya no es nada nuevo" y yo lo traduje a
+  "la dupla ya venía de antes, esto es la continuación" — eso no lo dijo. Un
+  hashtag tampoco es un anuncio: de `#click` saqué que la canción se llamaba así.
+  Se escribe lo que el post dice y lo que se ve, y punto; si el sentido no está
+  explícito, se deja la frase sin explicar o se deja afuera.
 - **Lo que yo veo en una foto no es información.** Me pasó con un letrero de neón
   del estudio: lo noté revisando la imagen y lo escribí como si fuera un dato.
   Nadie necesita saber que hay un letrero rojo. Si una línea solo se sostiene en

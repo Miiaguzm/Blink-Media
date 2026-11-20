@@ -1950,10 +1950,17 @@
     // flujo no toma nada por su cuenta y cada cuadro se pide a mano después de
     // dibujarlo, así que da igual si se ve o no. Y va un solo flujo: antes
     // quedaban dos capturas vivas sobre el mismo lienzo.
-    let flujo = cv.captureStream(0);
+    // Safari tiene requestFrame, pero su pista deja de aceptar cuadros a los
+    // pocos segundos: la imagen se congela y el audio sigue corriendo. Ahí sale
+    // mejor dejar que el navegador tome los cuadros solo del lienzo.
+    const ES_SAFARI = /^((?!chrome|chromium|crios|android|edg).)*safari/i
+                        .test(navigator.userAgent || "");
+    let flujo = cv.captureStream(ES_SAFARI ? cuadrosPorSegundo() : 0);
     const pistaVideo = flujo.getVideoTracks()[0];
     let pedirCuadro = null;
-    if (pistaVideo && typeof pistaVideo.requestFrame === "function"){
+    if (ES_SAFARI){
+      pedirCuadro = null;   // los cuadros los toma el navegador
+    } else if (pistaVideo && typeof pistaVideo.requestFrame === "function"){
       pedirCuadro = () => { try { pistaVideo.requestFrame(); } catch (e) {} };
     } else {
       // Sin requestFrame no queda otra que dejar que el navegador tome los

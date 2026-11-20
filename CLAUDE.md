@@ -488,6 +488,15 @@ criterio general: cuando algo se puede deducir del archivo, no se le pregunta.**
 - **A 25 cuadros por segundo un destello de un solo cuadro se pierde.** El titineo
   cae entre dos dibujos y a veces no se pinta nunca. Por eso el modo video graba a
   30 y ningún tramo de la animación baja de dos cuadros.
+- **El intervalo de `start(1000)` solo sirve en WebM.** En MP4 cada trozo sale
+  fragmentado y al pegarlos con `new Blob()` el archivo se reproduce un par de
+  segundos y se corta — WebKit lo tiene documentado como bug. En MP4 va `start()`
+  pelado, aunque eso acumule el buffer. **Este fue el corte de audio a los dos
+  segundos que me reportó Mia.**
+- **Los nodos de Web Audio hay que referenciarlos desde JS o el recolector se los
+  lleva.** La fuente de `createMediaElementSource` quedaba en una variable local:
+  cuando el recolector pasa, el audio grabado se corta y el video sigue. Van
+  guardados en el elemento y en un `Set` del módulo.
 
 ---
 

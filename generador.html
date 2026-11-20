@@ -1823,6 +1823,11 @@
   // Audio, que funciona en los dos: la salida del video se enchufa a un destino
   // de flujo (lo que se graba) y también a los parlantes (para que se oiga).
   let audioCtx = null;
+  // Los nodos de Web Audio se recolectan si nadie los referencia desde JS, y
+  // cuando eso pasa el audio grabado se corta a los pocos segundos — el video
+  // sigue y el sonido desaparece. Guardarlos solo en el elemento no bastó: van
+  // también acá, que vive mientras viva la página.
+  const nodosAudio = new Set();
 
   function pistaDeAudio(v){
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -1831,13 +1836,16 @@
       if (!audioCtx) audioCtx = new AC();
       if (audioCtx.state === "suspended") audioCtx.resume();
       // createMediaElementSource se puede llamar una sola vez por elemento, así
-      // que el destino queda guardado en el propio video.
+      // que los nodos quedan guardados en el propio video.
       if (!v._destinoAudio){
         const fuente = audioCtx.createMediaElementSource(v);
         const destino = audioCtx.createMediaStreamDestination();
         fuente.connect(destino);
         fuente.connect(audioCtx.destination);
         v._destinoAudio = destino;
+        v._fuenteAudio = fuente;
+        nodosAudio.add(fuente);
+        nodosAudio.add(destino);
       }
       return v._destinoAudio.stream.getAudioTracks()[0] || null;
     } catch (e) {
@@ -1941,7 +1949,9 @@
       const nota = sinAudio ? " Sin sonido, como pediste."
                  : conAudio ? " Con sonido."
                  : " OJO: no se pudo tomar el audio de este video.";
-      progreso(1, "Listo, " + (blob.size / 1048576).toFixed(1) + " MB." + nota + " Guardando…");
+      const ff = formato.indexOf("mp4") !== -1 ? "MP4" : "WebM";
+      progreso(1, "Listo, " + (blob.size / 1048576).toFixed(1) + " MB en " + ff + "."
+                  + nota + " Guardando…");
       entregar(blob, nombreArchivo().replace(/\.png$/, "." + ext));
       setTimeout(() => { $(mandos.prog).hidden = true; }, 9000);
     };
@@ -1949,7 +1959,13 @@
     grabando = true;
     vid.currentTime = 0;
 
-    const arranque = vid.play();
+    // El contexto de audio puede arrancar suspendido y resume() es asíncrono:
+    // si la grabadora parte antes de que termine, lo que entra es silencio.
+    const audioListo = (conAudio && audioCtx && audioCtx.state !== "running")
+      ? Promise.resolve(audioCtx.resume()).catch(() => {})
+      : Promise.resolve();
+
+    const arranque = audioListo.then(() => vid.play());
 
     // El dibujo se encadenaba con requestAnimationFrame: cada cuadro pedía el
     // siguiente. Si uno fallaba, o si el navegador dejaba de pintar —otra
@@ -1985,10 +2001,13 @@
       try { dibujarActual(); } catch (e) {}
       if (pedirCuadro) pedirCuadro();
 
-      // Con un intervalo, el navegador entrega lo grabado cada segundo en
-      // vez de mantener un buffer único que crece sin parar. En grabaciones
-      // largas esa acumulación es la que termina ahogando al codificador.
-      grabadora.start(1000);
+      // El intervalo entrega lo grabado cada segundo en vez de acumular todo en
+      // memoria, pero **solo sirve en WebM**, donde los trozos se concatenan.
+      // En MP4 cada trozo sale fragmentado y al pegarlos el archivo queda
+      // reproduciéndose un par de segundos y después se corta — el síntoma que
+      // Mia tuvo con el sonido. En MP4 se graba de una sola pieza.
+      if (formato.indexOf("mp4") === -1) grabadora.start(1000);
+      else grabadora.start();
       ultimoCuadro = Date.now();
 
       // requestVideoFrameCallback avisa por cada cuadro decodificado del
@@ -2020,6 +2039,11 @@
           return;
         }
         if (Date.now() - ultimoCuadro > msEntreCuadros() * 2) pintar(true);
+        // Si el navegador suspende el contexto a mitad de grabación, el audio
+        // se corta en silencio y el archivo queda mudo de ahí en adelante.
+        if (conAudio && audioCtx && audioCtx.state === "suspended"){
+          try { audioCtx.resume(); } catch (e) {}
+        }
       }, 40);
 
       vid.addEventListener("ended", () => {

@@ -465,6 +465,21 @@ y se publica a la misma dirección. Al leer el artifact publicado viene envuelto
 una carcasa —`<!doctype html>`, `<head>`, `<body>`— que pone el publicador: hay que
 sacarla antes de volver a publicar, o queda anidada.
 
+**Si el generador falla con un video, el montaje se hace acá con
+`hacer-historia.py`.** Es la salida de verdad y hay que ofrecerla temprano, no
+después de cuatro parches: toma el video, el rótulo y el titular, rinde las tres
+capas con Chromium y las monta con ffmpeg. No usa MediaRecorder, así que **no se
+congela la imagen ni se corta el audio**, y da el mismo archivo siempre. Probado
+con un .MOV HEVC de 40 s: 1200 cuadros de 1200, cero congelamientos, cero
+silencios. Mia manda el archivo subiéndolo al repo, que es público, porque por
+el chat hay tope de 30 MB.
+
+**Y la regla de fondo, que me costó la paciencia de Mia:** cuando un arreglo del
+navegador no se puede reproducir acá, el tercer intento a ciegas ya no es
+trabajo, es ruido. Ahí se cambia de camino y se entrega el resultado por otra
+vía. **Decirle que recorte el video no es una solución**, es pedirle que cambie
+su contenido para acomodar mi bug.
+
 **La plantilla de video vive en el generador**, en el cuarto formato. Mia sube el
 MP4 y cambia la pastilla morada y el titular; el logo y la animación no se tocan.
 El código de referencia sigue siendo `historia-video.html`, de donde salieron las

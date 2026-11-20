@@ -497,6 +497,16 @@ criterio general: cuando algo se puede deducir del archivo, no se le pregunta.**
   lleva.** La fuente de `createMediaElementSource` quedaba en una variable local:
   cuando el recolector pasa, el audio grabado se corta y el video sigue. Van
   guardados en el elemento y en un `Set` del módulo.
+- **Un video que el navegador no sabe decodificar no dispara `loadeddata` ni
+  `error`: se queda callado.** Desde fuera parece que la herramienta se colgó, y
+  eso fue lo que Mia reportó como "se queda pegado y no carga el video". Por eso
+  la carga avisa de entrada y tiene un plazo de 20 s que explica qué pasó. **Los
+  .MOV del iPhone fallan en Chrome y funcionan en Safari**, así que esa es la
+  primera pregunta cuando algo no carga.
+- **Cuando algo falla solo en su máquina, lo que hay que entregar es
+  diagnóstico, no otro arreglo a ciegas.** Acá probé dos hipótesis sin poder
+  reproducir ninguna y la segunda la dejó peor; lo que hacía falta era que la
+  herramienta dijera en pantalla qué estaba pasando.
 
 ---
 

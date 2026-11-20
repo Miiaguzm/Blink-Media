@@ -110,6 +110,9 @@ def main():
     p.add_argument("--posx", type=float, default=50)
     p.add_argument("--pos", type=float, default=50)
     p.add_argument("--sin-audio", action="store_true")
+    # 23 deja el archivo cerca del peso del original. Bajarlo engorda el archivo
+    # sin que se note, porque la calidad no puede subir más que la del video que ella mandó.
+    p.add_argument("--crf", default="23")
     a = p.parse_args()
 
     for f in (PLANTILLA, os.path.join(AQUI, "logo-blink.png")):
@@ -150,7 +153,7 @@ def main():
             cmd += ["-map", "0:a", "-c:a", "aac", "-b:a", "192k", "-ar", "48000"]
         else:
             cmd += ["-an"]
-        cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", "20",
+        cmd += ["-c:v", "libx264", "-preset", "slow", "-crf", a.crf,
                 "-profile:v", "high", "-pix_fmt", "yuv420p",
                 "-movflags", "+faststart", "-shortest", a.salida, "-y"]
         correr(cmd)

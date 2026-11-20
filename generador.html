@@ -1715,7 +1715,12 @@
       const f = e.target.files && e.target.files[0];
       if (!f) return;
       const url = URL.createObjectURL(f);
-      if (f.type.indexOf("video/") === 0){
+      // Safari a veces entrega el tipo vacío en los .MOV del iPhone. Sin esto
+      // el archivo se iba por el camino de las imágenes, fallaba en silencio y
+      // no pasaba absolutamente nada en pantalla.
+      const esVideo = (f.type || "").indexOf("video/") === 0 ||
+                      (!f.type && /\.(mov|mp4|m4v|webm|avi|mkv|qt)$/i.test(f.name || ""));
+      if (esVideo){
         const v = document.createElement("video");
         v.muted = true; v.playsInline = true; v.preload = "auto";
         v.setAttribute("playsinline", "");
@@ -1731,22 +1736,34 @@
         let resuelto = false;
         const plazo = setTimeout(() => {
           if (resuelto) return;
-          $(mandos.texto).textContent = puede === ""
-            ? "Este navegador no sabe abrir este archivo (" + (f.type || "formato desconocido")
-              + "). Los .MOV del iPhone fallan en Chrome: ábrelo en Safari o pásalo a MP4."
-            : "El archivo no terminó de cargar. Si es muy largo o muy pesado, prueba con uno más corto.";
+          $(mandos.texto).textContent =
+            v.readyState === 0
+              ? "El navegador no empezó siquiera a abrir " + nombre + " ("
+                + (f.type || "sin formato declarado") + "). Si es un .MOV del iPhone, "
+                + "compártelo desde Fotos eligiendo \u201cMás compatible\u201d, o pásalo a MP4."
+              : "El archivo se está abriendo pero no termina. Si es muy largo o muy pesado, "
+                + "prueba con uno más corto.";
           $(mandos.aviso).hidden = false;
-        }, 20000);
+        }, 15000);
 
         v.src = url;
-        v.addEventListener("loadeddata", () => {
+        // Safari no arranca la descarga de un elemento que no se ve si nadie se
+        // la pide, así que se pide explícitamente.
+        try { v.load(); } catch (err) {}
+        const listo = () => {
+          if (resuelto) return;
           resuelto = true; clearTimeout(plazo);
           guardar(v, null);
           // Se posiciona en un cuadro con contenido: el primero suele venir negro.
           try { v.currentTime = Math.min(0.2, (v.duration || 1) / 2); } catch (err) {}
           mostrarEstadoVideo();
           actualizar();
-        }, { once: true });
+        };
+        // En Safari "loadeddata" puede no llegar nunca con el elemento oculto;
+        // "loadedmetadata" sí, y con eso ya se tienen medidas y duración.
+        v.addEventListener("loadeddata", listo, { once: true });
+        v.addEventListener("loadedmetadata", listo, { once: true });
+        v.addEventListener("canplay", listo, { once: true });
         v.addEventListener("seeked", () => { if (!grabando) actualizar(); });
         v.addEventListener("error", () => {
           resuelto = true; clearTimeout(plazo);
@@ -1886,7 +1903,9 @@
     if (!v) return false;
     if (typeof v.mozHasAudio === "boolean") return v.mozHasAudio;
     if (v.audioTracks && typeof v.audioTracks.length === "number") return v.audioTracks.length > 0;
-    if (typeof v.webkitAudioDecodedByteCount === "number") return v.webkitAudioDecodedByteCount > 0;
+    // webkitAudioDecodedByteCount recién sube cuando el video ya sonó, así que
+    // antes de reproducir siempre vale cero: usarlo acá hacía que un archivo
+    // con audio perfecto saliera anunciado como mudo.
     return true;   // sin forma de saberlo, se asume que sí
   }
 

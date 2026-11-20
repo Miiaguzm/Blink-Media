@@ -1478,7 +1478,110 @@
     caja.hidden = false;
   }
 
+  // Pintar el velo y el bloque de texto en cada cuadro es carísimo a 1080x1920:
+  // dos degradados de pantalla completa más todo el texto, treinta veces por
+  // segundo. Medido, el navegador se caía a 16 cuadros por segundo y la
+  // grabación terminaba atorándose. Se pintan una sola vez en dos lienzos
+  // aparte y por cuadro solo se pegan, que es lo que el navegador sí aguanta.
+  const capaVelo = document.createElement("canvas");
+  const capaMarca = document.createElement("canvas");
+  let capasListas = false;
+  function ensuciarCapasReel(){ capasListas = false; }
+
+  function rehacerCapasReel(){
+    capaVelo.width = capaMarca.width = HW;
+    capaVelo.height = capaMarca.height = HH;
+    const a = capaVelo.getContext("2d");
+    const b = capaMarca.getContext("2d");
+    a.clearRect(0, 0, HW, HH);
+    b.clearRect(0, 0, HW, HH);
+
+    // ---- el velo: sombra arriba para el logo, degradado abajo para el texto
+    const sg = a.createLinearGradient(0, 0, 0, 470);
+    sg.addColorStop(0, "rgba(10,10,10,0.52)");
+    sg.addColorStop(0.58, "rgba(10,10,10,0.20)");
+    sg.addColorStop(1, "rgba(10,10,10,0)");
+    a.fillStyle = sg; a.fillRect(0, 0, HW, 470);
+    const vg = a.createLinearGradient(0, 0, 0, HH);
+    vg.addColorStop(0.52, "rgba(10,10,10,0)");
+    vg.addColorStop(0.68, "rgba(10,10,10,0.42)");
+    vg.addColorStop(0.82, "rgba(10,10,10,0.80)");
+    vg.addColorStop(1, "rgba(10,10,10,0.92)");
+    a.fillStyle = vg; a.fillRect(0, 0, HW, HH);
+
+    // ---- la marca: logo arriba a la derecha y el bloque abajo
+    if (logo.complete && logo.naturalWidth){
+      const alto = logo.naturalHeight * (R_LOGO_ANCHO / logo.naturalWidth);
+      b.drawImage(logo, HW - RMAR - R_LOGO_ANCHO, R_LOGO_Y, R_LOGO_ANCHO, alto);
+    }
+
+    const rotulo  = $("r-rotulo").value.trim().toUpperCase();
+    const titular = $("r-titular").value.trim();
+    const cuenta  = $("r-cuenta").value.trim();
+    const ancho = HW - RMAR * 2;
+    let y = R_PISO;
+
+    // El bloque se arma desde el piso hacia arriba, así la última línea queda
+    // siempre a la misma altura aunque el titular use una, dos o tres líneas.
+    if (cuenta){
+      const alto = 29;
+      y -= alto;
+      b.fillStyle = MORADO;
+      b.fillRect(RMAR, y + alto / 2 - 1.5, 52, 3);
+      b.font = "700 24px Montserrat, sans-serif";
+      b.letterSpacing = "1.6px";
+      b.fillStyle = "rgba(255,255,255,0.80)";
+      b.textBaseline = "middle";
+      b.fillText(cuenta, RMAR + 66, y + alto / 2 + 1);
+      b.textBaseline = "alphabetic";
+      b.letterSpacing = "0px";
+      y -= 26;
+    }
+
+    if (titular){
+      // Se mide con el contexto de siempre, porque partir() y lineaBase() usan
+      // ese, y se pinta en el lienzo de la capa.
+      let cuerpo = 50, lineas;
+      while (true){
+        cx.font = "700 " + cuerpo + "px Montserrat, sans-serif";
+        lineas = partir(titular, ancho);
+        if (lineas.length <= 3 || cuerpo <= 32) break;
+        cuerpo -= 2;
+      }
+      const altoLinea = Math.round(cuerpo * 1.24);
+      y -= altoLinea * lineas.length;
+      b.font = "700 " + cuerpo + "px Montserrat, sans-serif";
+      b.fillStyle = BLANCO;
+      for (let i = 0; i < lineas.length; i++)
+        b.fillText(lineas[i], RMAR, lineaBase(y + i * altoLinea, altoLinea));
+      y -= 26;
+    }
+
+    if (rotulo){
+      const tR = encoger(rotulo, 25, 15, ancho - 56, "Montserrat, sans-serif", "800", "3.4px");
+      cx.font = "800 " + tR + "px Montserrat, sans-serif";
+      cx.letterSpacing = "3.4px";
+      const alto = 55, anchoPastilla = cx.measureText(rotulo).width + 56;
+      cx.letterSpacing = "0px";
+      y -= alto;
+      b.beginPath();
+      b.roundRect(RMAR, y, anchoPastilla, alto, alto / 2);
+      b.fillStyle = MORADO; b.fill();
+      b.font = "800 " + tR + "px Montserrat, sans-serif";
+      b.letterSpacing = "3.4px";
+      b.fillStyle = BLANCO;
+      b.textBaseline = "middle";
+      b.fillText(rotulo, RMAR + 28, y + alto / 2 + 1);
+      b.textBaseline = "alphabetic";
+      b.letterSpacing = "0px";
+    }
+
+    capasListas = true;
+  }
+
   function dibujarReel(){
+    if (!capasListas) rehacerCapasReel();
+
     cx.clearRect(0, 0, HW, HH);
     cx.fillStyle = NEGRO; cx.fillRect(0, 0, HW, HH);
 
@@ -1506,83 +1609,10 @@
     const op = t === null ? 1 : opacidadVelo(t, dur);
     if (op > 0.002){
       cx.globalAlpha = op;
-      // Sombra de arriba: sin esto la palabra blanca del logo se pierde cuando
-      // el video tiene cielo o luces justo ahí.
-      const s = cx.createLinearGradient(0, 0, 0, 470);
-      s.addColorStop(0, "rgba(10,10,10,0.52)");
-      s.addColorStop(0.58, "rgba(10,10,10,0.20)");
-      s.addColorStop(1, "rgba(10,10,10,0)");
-      cx.fillStyle = s; cx.fillRect(0, 0, HW, 470);
-      const g = cx.createLinearGradient(0, 0, 0, HH);
-      g.addColorStop(0.52, "rgba(10,10,10,0)");
-      g.addColorStop(0.68, "rgba(10,10,10,0.42)");
-      g.addColorStop(0.82, "rgba(10,10,10,0.80)");
-      g.addColorStop(1, "rgba(10,10,10,0.92)");
-      cx.fillStyle = g; cx.fillRect(0, 0, HW, HH);
+      cx.drawImage(capaVelo, 0, 0);
       cx.globalAlpha = 1;
     }
-
-    if (t !== null && !prendido(t, dur)) return;
-
-    if (logo.complete && logo.naturalWidth){
-      const alto = logo.naturalHeight * (R_LOGO_ANCHO / logo.naturalWidth);
-      cx.drawImage(logo, HW - RMAR - R_LOGO_ANCHO, R_LOGO_Y, R_LOGO_ANCHO, alto);
-    }
-
-    // El bloque se arma desde el piso hacia arriba, así la última línea queda
-    // siempre a la misma altura aunque el titular use una, dos o tres líneas.
-    const rotulo  = $("r-rotulo").value.trim().toUpperCase();
-    const titular = $("r-titular").value.trim();
-    const cuenta  = $("r-cuenta").value.trim();
-    const ancho = HW - RMAR * 2;
-    let y = R_PISO;
-
-    if (cuenta){
-      const alto = 29;
-      y -= alto;
-      cx.fillStyle = MORADO;
-      cx.fillRect(RMAR, y + alto / 2 - 1.5, 52, 3);
-      cx.font = "700 24px Montserrat, sans-serif";
-      cx.letterSpacing = "1.6px";
-      cx.fillStyle = "rgba(255,255,255,0.80)";
-      cx.textBaseline = "middle";
-      cx.fillText(cuenta, RMAR + 66, y + alto / 2 + 1);
-      cx.textBaseline = "alphabetic";
-      cx.letterSpacing = "0px";
-      y -= 26;
-    }
-
-    if (titular){
-      let cuerpo = 50, lineas;
-      while (true){
-        cx.font = "700 " + cuerpo + "px Montserrat, sans-serif";
-        lineas = partir(titular, ancho);
-        if (lineas.length <= 3 || cuerpo <= 32) break;
-        cuerpo -= 2;
-      }
-      const altoLinea = Math.round(cuerpo * 1.24);
-      y -= altoLinea * lineas.length;
-      cx.fillStyle = BLANCO;
-      for (let i = 0; i < lineas.length; i++)
-        cx.fillText(lineas[i], RMAR, lineaBase(y + i * altoLinea, altoLinea));
-      y -= 26;
-    }
-
-    if (rotulo){
-      const tR = encoger(rotulo, 25, 15, ancho - 56, "Montserrat, sans-serif", "800", "3.4px");
-      cx.font = "800 " + tR + "px Montserrat, sans-serif";
-      cx.letterSpacing = "3.4px";
-      const alto = 55, anchoPastilla = cx.measureText(rotulo).width + 56;
-      y -= alto;
-      cx.beginPath();
-      cx.roundRect(RMAR, y, anchoPastilla, alto, alto / 2);
-      cx.fillStyle = MORADO; cx.fill();
-      cx.fillStyle = BLANCO;
-      cx.textBaseline = "middle";
-      cx.fillText(rotulo, RMAR + 28, y + alto / 2 + 1);
-      cx.textBaseline = "alphabetic";
-      cx.letterSpacing = "0px";
-    }
+    if (t === null || prendido(t, dur)) cx.drawImage(capaMarca, 0, 0);
   }
 
   // Lo que se pinta depende del formato abierto. Vive en una sola función
@@ -1617,6 +1647,7 @@
     $("vRZoom").textContent = parseFloat($("r-zoom").value).toFixed(2) + "×";
     $("vRPosX").textContent = $("r-posx").value + "%";
     $("vRPos").textContent = $("r-pos").value + "%";
+    ensuciarCapasReel();
     avisoEncuadreReel();
     fondoDeLamina();
     avisoAcercamiento();

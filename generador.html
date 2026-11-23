@@ -650,14 +650,18 @@
     $("fecha").value = String(h.getDate()).padStart(2,"0") + "." + MESES[h.getMonth()] + "." + h.getFullYear();
   })();
 
-  function estrella(x, y, tamano, color, alpha){
-    cx.save();
-    cx.globalAlpha = alpha === undefined ? 1 : alpha;
-    cx.fillStyle = color;
-    cx.translate(x, y);
-    cx.scale(tamano / 24, tamano / 24);
-    cx.fill(new Path2D(ESTRELLA));
-    cx.restore();
+  // El contexto va al final y es opcional: así las llamadas de siempre siguen
+  // pintando en el lienzo principal, y las capas cacheadas pueden pedir que se
+  // pinte en el suyo.
+  function estrella(x, y, tamano, color, alpha, ctx){
+    const c = ctx || cx;
+    c.save();
+    c.globalAlpha = alpha === undefined ? 1 : alpha;
+    c.fillStyle = color;
+    c.translate(x, y);
+    c.scale(tamano / 24, tamano / 24);
+    c.fill(new Path2D(ESTRELLA));
+    c.restore();
   }
 
   // Mismo mínimo que la plantilla: bajo 44px el titular deja de mandar.
@@ -687,13 +691,14 @@
     return t;
   }
 
-  function partir(texto, maxAncho){
+  function partir(texto, maxAncho, ctx){
+    const c = ctx || cx;
     const palabras = texto.split(/\s+/).filter(Boolean);
     const lineas = [];
     let actual = "";
     for (const p of palabras){
       const prueba = actual ? actual + " " + p : p;
-      if (cx.measureText(prueba).width > maxAncho && actual){
+      if (c.measureText(prueba).width > maxAncho && actual){
         lineas.push(actual); actual = p;
       } else { actual = prueba; }
     }
@@ -705,12 +710,12 @@
   // tope: así la última palabra no queda sola abajo. Es lo mismo que hace
   // text-wrap:balance en la plantilla. Se van estrechando las líneas mientras
   // el texto siga cabiendo en la misma cantidad.
-  function partirBalanceado(texto, maxAncho){
-    const base = partir(texto, maxAncho);
+  function partirBalanceado(texto, maxAncho, ctx){
+    const base = partir(texto, maxAncho, ctx);
     if (base.length < 2) return base;
     let mejor = base;
     for (let w = maxAncho - 8; w > maxAncho * 0.45; w -= 8){
-      const p = partir(texto, w);
+      const p = partir(texto, w, ctx);
       if (p.length !== base.length) break;
       mejor = p;
     }
@@ -720,8 +725,8 @@
   // La caja de línea del navegador reparte el sobrante arriba y abajo del
   // texto. Sin esto el titular queda unos píxeles más alto que en la
   // plantilla y el bloque completo se corre.
-  function lineaBase(topeCaja, altoCaja){
-    const m = cx.measureText("Hg");
+  function lineaBase(topeCaja, altoCaja, ctx){
+    const m = (ctx || cx).measureText("Hg");
     const asc = m.fontBoundingBoxAscent, desc = m.fontBoundingBoxDescent;
     if (!asc) return topeCaja + altoCaja * 0.78;
     return topeCaja + (altoCaja - (asc + desc)) / 2 + asc;
@@ -887,10 +892,38 @@
     const radio = desenfoque * 0.6;
 
     if (HAY_FILTRO){
-      cx.save();
-      cx.filter = "blur(" + radio.toFixed(1) + "px)";
-      cx.drawImage(lienzoA, -desborde, -desborde, bw, bh);
-      cx.restore();
+      // El gaussiano va en el lienzo CHICO y recién después se agranda. Antes
+      // era al revés —se agrandaba y se desenfocaba el resultado—, así que el
+      // filtro corría sobre 1496×1766, o sea 2,6 millones de píxeles por
+      // cuadro, en vez de los 73 mil del lienzo reducido. Grabando una lámina
+      // con video eso es la diferencia entre alcanzar los 30 cuadros por
+      // segundo y no alcanzarlos.
+      //
+      // Y no es "achicar y estirar", que es lo que deja cuadrados: el
+      // desenfoque sigue siendo gaussiano de verdad, sólo que con el radio
+      // equivalente en la escala chica. Al agrandarlo ya no quedan bordes
+      // duros que marcar, porque el gaussiano los borró antes.
+      const radioChico = radio / reduccion;
+      if (radioChico >= 0.4){
+        if (lienzoB.width !== aw || lienzoB.height !== ah){
+          lienzoB.width = aw; lienzoB.height = ah;
+        }
+        const cb = lienzoB.getContext("2d");
+        cb.clearRect(0, 0, aw, ah);
+        cb.save();
+        cb.filter = "blur(" + radioChico.toFixed(2) + "px)";
+        cb.drawImage(lienzoA, 0, 0);
+        cb.restore();
+        cx.drawImage(lienzoB, -desborde, -desborde, bw, bh);
+      } else {
+        // Con una reducción grande y poco desenfoque el radio chico queda por
+        // debajo de medio píxel, donde el filtro no hace nada: ahí conviene
+        // el camino de siempre, que además es barato porque el radio es mínimo.
+        cx.save();
+        cx.filter = "blur(" + radio.toFixed(1) + "px)";
+        cx.drawImage(lienzoA, -desborde, -desborde, bw, bh);
+        cx.restore();
+      }
       return;
     }
 
@@ -906,10 +939,68 @@
   const LW = 1080, LH = 1350, LMAR = 72, ANCHO_L = LW - LMAR * 2;
   const TOPE_L = 195;
 
+  // Grabando una lámina con video esto corre 30 veces por segundo, y lo que
+  // más costaba era partirBalanceado(): mide el texto con measureText palabra
+  // por palabra y lo repite estrechando el ancho, así que son decenas de
+  // mediciones por cuadro para repartir un texto que no cambia nunca durante
+  // una grabación. Lo mismo el calce de la imagen y las líneas base.
+  //
+  // Se cachea el CÁLCULO, no los píxeles. Cachear capas enteras en lienzos
+  // aparte sale peor: dos drawImage de 1080×1350 con transparencia por cuadro
+  // cuestan más que los gradientes que ahorran — medido, la lámina quedaba más
+  // lenta que el reel, que tiene más píxeles.
+  let lamListo = false, lamLayout = null;
+  function ensuciarCapasLamina(){ lamListo = false; }
+
+  function medirLamina(){
+    const fuente = videoLamina || imgLamina;
+    const texto = $("l-texto").value.trim();
+
+    cx.font = "600 33px Montserrat, sans-serif";
+    const lineas = texto ? partirBalanceado(texto, 880) : [];
+    const altoT = lineas.length * 47.9;
+    const gap = altoT ? 34 : 0;
+    const disponible = LH - TOPE_L - 70;
+
+    // El control de tamaño es una fracción de LO MÁS GRANDE QUE CABE, no del
+    // ancho de la lámina. Antes se calculaba sobre el ancho y después se
+    // recortaba para que entrara: con una foto vertical ese recorte se comía
+    // todo el tramo de arriba del control y moverlo no cambiaba nada. Midiendo
+    // primero el calce —por ancho o por alto, el que apriete— el 100% es
+    // siempre "lo más grande posible" y el control responde en todo su rango,
+    // sea la imagen cuadrada, apaisada o vertical.
+    let anchoImg = 0, altoImg = 0;
+    if (fuente){
+      const m = medidas(fuente);
+      const altoLibre = disponible - gap - altoT;
+      if (m.w && m.h && altoLibre > 0){
+        const calce = Math.min(ANCHO_L / m.w, altoLibre / m.h);
+        const tam = parseFloat($("l-tam").value) / 100;
+        anchoImg = m.w * calce * tam;
+        altoImg  = m.h * calce * tam;
+      }
+    }
+    const total = altoImg + gap + altoT;
+    let y = TOPE_L + Math.max(0, (disponible - total) / 2);
+    const centro = LW / 2;
+
+    const rect = altoImg ? { x: centro - anchoImg / 2, y: y, w: anchoImg, h: altoImg } : null;
+    if (altoImg) y += altoImg + gap;
+
+    // Las líneas base también salen de un measureText, así que se resuelven acá.
+    const bases = lineas.map((_, i) => lineaBase(y + i * 47.9, 47.9));
+
+    lamLayout = { lineas: lineas, rect: rect, bases: bases, centro: centro };
+    lamListo = true;
+  }
+
   function dibujarLamina(){
     cx.clearRect(0, 0, LW, LH);
     cx.fillStyle = NEGRO;
     cx.fillRect(0, 0, LW, LH);
+
+    if (!lamListo) medirLamina();
+    const L = lamLayout;
 
     const desenfoque = parseFloat($("l-desenfoque").value);
     const brillo = parseFloat($("l-brillo").value);
@@ -946,56 +1037,22 @@
       cx.drawImage(logo, LW - 64 - ancho, 28, ancho, alto);
     }
 
-    // ---- bloque imagen + línea ----
-    const texto = $("l-texto").value.trim();
-    cx.font = "600 33px Montserrat, sans-serif";
-    const lineasT = texto ? partirBalanceado(texto, 880) : [];
-    const altoT = lineasT.length * 47.9;
-    const gap = altoT ? 34 : 0;
-
-    const disponible = LH - TOPE_L - 70;
-
-    // El control de tamaño es una fracción de LO MÁS GRANDE QUE CABE, no del
-    // ancho de la lámina. Antes se calculaba sobre el ancho y después se
-    // recortaba para que entrara: con una foto vertical ese recorte se comía
-    // todo el tramo de arriba del control y moverlo no cambiaba nada. Midiendo
-    // primero el calce —por ancho o por alto, el que apriete— el 100% es
-    // siempre "lo más grande posible" y el control responde en todo su rango,
-    // sea la imagen cuadrada, apaisada o vertical.
-    let anchoImg = 0, altoImg = 0;
-    if (fuente){
-      const m = medidas(fuente);
-      const altoLibre = disponible - gap - altoT;
-      if (m.w && m.h && altoLibre > 0){
-        const calce = Math.min(ANCHO_L / m.w, altoLibre / m.h);
-        const tam = parseFloat($("l-tam").value) / 100;
-        anchoImg = m.w * calce * tam;
-        altoImg  = m.h * calce * tam;
-      }
-    }
-    const total = altoImg + gap + altoT;
-
-    let y = TOPE_L + Math.max(0, (disponible - total) / 2);
-    const centro = LW / 2;
-
-    if (altoImg){
-      const x = centro - anchoImg / 2;
+    // ---- bloque imagen + línea, con las medidas ya resueltas ----
+    if (fuente && L.rect){
+      const r = L.rect;
       cx.save();
-      cx.beginPath(); cx.roundRect(x, y, anchoImg, altoImg, 24); cx.clip();
-      cx.drawImage(fuente, x, y, anchoImg, altoImg);
+      cx.beginPath(); cx.roundRect(r.x, r.y, r.w, r.h, 24); cx.clip();
+      cx.drawImage(fuente, r.x, r.y, r.w, r.h);
       cx.restore();
-      cx.beginPath(); cx.roundRect(x, y, anchoImg, altoImg, 24);
+      cx.beginPath(); cx.roundRect(r.x, r.y, r.w, r.h, 24);
       cx.lineWidth = 1.5; cx.strokeStyle = "rgba(255,255,255,0.16)"; cx.stroke();
-      y += altoImg + gap;
     }
 
-    if (lineasT.length){
+    if (L.lineas.length){
       cx.textAlign = "center";
       cx.font = "600 33px Montserrat, sans-serif";
       cx.fillStyle = "rgba(255,255,255,0.90)";
-      lineasT.forEach((linea, i) => {
-        cx.fillText(linea, centro, lineaBase(y + i * 47.9, 47.9));
-      });
+      L.lineas.forEach((linea, i) => cx.fillText(linea, L.centro, L.bases[i]));
       cx.textAlign = "left";
     }
   }
@@ -1648,6 +1705,7 @@
     $("vRPosX").textContent = $("r-posx").value + "%";
     $("vRPos").textContent = $("r-pos").value + "%";
     ensuciarCapasReel();
+    ensuciarCapasLamina();
     avisoEncuadreReel();
     fondoDeLamina();
     avisoAcercamiento();
@@ -2031,10 +2089,33 @@
                  : conAudio ? " Con sonido."
                  : " OJO: no se pudo tomar el audio de este video.";
       const ff = formato.indexOf("mp4") !== -1 ? "MP4" : "WebM";
-      progreso(1, "Listo, " + (blob.size / 1048576).toFixed(1) + " MB en " + ff + "."
-                  + nota + " Guardando…");
+
+      // La grabación corre en tiempo real: si el navegador no alcanza a dibujar
+      // todos los cuadros, el audio sigue igual pero la imagen se queda atrás y
+      // termina congelándose. Hasta ahora eso pasaba en silencio y se descubría
+      // mirando el archivo, o peor, ya subido. Acá se compara lo que se dibujó
+      // contra lo que correspondía y se dice en pantalla.
+      const esperados = Math.round((vid.duration || 0) * cuadrosPorSegundo());
+      const ritmo = esperados ? cuadrosDibujados / esperados : 1;
+      const malo = esperados > 0 && ritmo < 0.85;
+
       entregar(blob, nombreArchivo().replace(/\.png$/, "." + ext));
-      setTimeout(() => { $(mandos.prog).hidden = true; }, 9000);
+
+      if (malo){
+        progreso(1,
+          "OJO: este navegador alcanzó a dibujar " + Math.round(ritmo * 100) + "% de los cuadros ("
+          + cuadrosDibujados + " de " + esperados + "), así que la imagen va a verse "
+          + "atrasada o congelada aunque el sonido esté completo. El archivo se guardó igual, "
+          + "pero revísalo antes de publicarlo. Si se ve mal: cierra las otras pestañas y las "
+          + "otras aplicaciones y vuelve a intentar; si sigue igual, sube el video al repo y "
+          + "pídeme que te lo monte, que acá se arma cuadro por cuadro y no se pega.");
+        // Un aviso así no se esconde solo: tiene que quedar hasta que ella
+        // toque algo, porque es la diferencia entre publicar o no publicar.
+      } else {
+        progreso(1, "Listo, " + (blob.size / 1048576).toFixed(1) + " MB en " + ff + "."
+                    + nota + " Cuadros: " + cuadrosDibujados + " de " + esperados + ". Guardando…");
+        setTimeout(() => { $(mandos.prog).hidden = true; }, 9000);
+      }
     };
 
     grabando = true;

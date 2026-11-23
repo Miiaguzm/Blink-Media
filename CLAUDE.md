@@ -41,10 +41,26 @@ De dónde es el artista, qué día de la semana cae el show, su edad: nada de es
 entra salvo que diga algo. "Llenó doce veces el Arena antes de atreverse con un
 estadio" sí dice algo.
 
-**5. Primera persona, siempre — en lo que ella dice con su voz.**
+**5. Primera persona, pero una vez, no en cada bloque.**
 "Lo que más me gusta", "me parece lo más lindo", "lo que quiero que te quedes",
 "yo creo". Un medio dice qué pasó; Blink dice qué le pasó a ella con lo que pasó.
 *Pero eso es del reel y del copy, no de la gráfica* — ver el bloque de abajo.
+**Y es para una opinión de verdad, no para rellenar.** Mia me devolvió el primer
+guion del reel de VLNTNA B por esto: *"no hables todo el rato como lo que más me
+tiene esperando, lo que me parece más lindo… no me gusta ese lenguaje"*. Le había
+puesto una frase emocional por bloque. En un reel de minuto y medio va **una**, y
+en el lugar donde ella de verdad opina algo; el resto se informa.
+
+**El reel informativo se escribe en registro de medio.** Textual de ella sobre
+ese mismo guion: *"es serio, es cero medio de prensa, tienes que ocupar un
+lenguaje medio de prensa"*. No contradice lo de arriba: lo que sobra son las
+fórmulas muertas —"cabe destacar", "se presentará"—, no la seriedad. Blink es
+cercano porque elige bien el dato y opina, no porque hable en diminutivo.
+
+**Y si una frase no se entiende sola, se cae.** Escribí "también va a estar lo que
+ya le conoces" y Mia preguntó qué significaba. Quería decir sus canciones
+conocidas. Antes de entregar, leer cada frase preguntándose si alguien que no
+estuvo en la conversación entendería qué dice.
 
 **6. Cero fórmulas de prensa.**
 Fuera "el artista nacional", "cabe destacar", "se presentará", "dicho recinto".
@@ -291,6 +307,14 @@ Mia publica esto. Un dato malo le cuesta a ella, no a mí.
   mirada y eso es cierto como tal. Mia me corrigió por descartarlo. Lo que no se
   copia es la afirmación verificable que el equipo infló: "el reconocido estudio
   tal", "ha gestado la actual escena urbana". Esa segunda se confirma o se cae.
+- **Pero el press kit nunca se nombra en la publicación.** Escribí "su propio
+  equipo describe su música como…" y Mia lo sacó: *"eso nosotros sabemos, que el
+  equipo nos dio esa información, pero no podemos poner eso"*. Que el manager nos
+  mande un PDF es información interna y además deja a la vista la relación
+  comercial. El dato se escribe como hecho —"su música se mueve entre el
+  reggaetón, el R&B, el pop y los sonidos alternativos"— porque viene de la fuente
+  autorizada. **Atribuir en voz alta es para la prensa**, que el espectador puede
+  ir a ver: "la prensa viene contando". Para el equipo del artista, no.
 - **Cruzar cada fecha con su día de la semana.** Si una nota dice "domingo 27" y el
   27 es viernes, esa nota es de otro año. Ese chequeo ya atrapó dos errores.
 - **Ojo con los resúmenes de buscador que mezclan discos o épocas.** Verificar

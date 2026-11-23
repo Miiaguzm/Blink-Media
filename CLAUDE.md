@@ -163,10 +163,14 @@ y los tres estaban mal.
 - **Nunca ordenar por fecha ni por lista.** Eso es lo que hace que suene a punteo.
   Agrupar por idea: lo de afuera versus lo de acá, lo que ya pasó versus lo que viene.
 - **La tesis va en los primeros diez segundos**, para que la gente se quede.
-- **Si el reel es sobre la era actual de un artista, va 100% sobre esa era.** El pasado
-  entra como punto de referencia en una línea —las canciones que todos conocen— y nada
-  más. Nada de por dónde empezó, quién lo descubrió ni qué premios ganó hace años: eso
-  convierte el reel en biografía y se pierde el tema.
+- **Si el reel es sobre la era actual de un artista, o sobre un show, va 100% sobre
+  eso.** El pasado entra como punto de referencia en una línea —las canciones que todos
+  conocen, las que van a sonar esa noche— y nada más. Nada de por dónde empezó, quién lo
+  descubrió ni qué premios ganó hace años: eso convierte el reel en biografía y se pierde
+  el tema. Mia lo pidió textual para el reel del show de VLNTNA B: *"siempre el foco debe
+  ser el show, 100%"*. Y hay una razón de más: si ese artista ya tuvo su Blink Radar, la
+  trayectoria ya se contó ahí, así que repetirla es gastar una publicación en algo que
+  los seguidores leyeron la semana pasada.
 - **Nombrar una obra sin decir qué es la deja colgando.** "Y de ahí salió ANNA" y punto
   no significa nada para quien no la escuchó. Va una línea de qué es: a qué suena, o
   mejor, qué representa. El dato bueno casi nunca es la etiqueta de género — que además
@@ -372,6 +376,12 @@ su voz de la nuestra.
 - Dato técnico: `#7B2CFF` sobre negro llega como máximo a 3.65:1 de contraste, así
   que el morado solo va en texto de tamaño titular, nunca en cuerpo.
 
+**Esto vale igual para un video.** El promocional que manda una productora suele
+traer su propio texto quemado encima —nombre del show, fecha, "entradas
+disponibles"—, así que no va debajo de la plantilla de historia: el titular de
+Blink choca con el de ellos y se lee todo duplicado. Ese material entra como
+b-roll adentro de un reel, o se sube tal cual a las historias.
+
 **Una imagen que ya trae texto encima no va de fondo a sangre.** La gráfica del
 tracklist de YEGUA tiene los títulos escritos sobre la espalda: puesta de fondo, se
 transparentan detrás del texto mío y se lee todo duplicado. Se enmarca —así pasa a
@@ -527,8 +537,11 @@ criterio general: cuando algo se puede deducir del archivo, no se le pregunta.**
 
 ## Blink Radar
 
-Carrusel mensual que presenta a un artista emergente. Dos variantes: **foco en el
-artista** (el de Kittkatta) o **foco en un disco** (el de TANE). En el segundo, la
+Carrusel mensual que presenta a un artista emergente. **Los que ya salieron:
+Kittkatta, TANE (octubre 2026) y VLNTNA B (noviembre 2026)** — revisar esta lista
+antes de proponer un Radar, porque ya propuse uno que estaba hecho y publicado.
+Dos variantes: **foco en el artista** (el de Kittkatta) o **foco en un disco**
+(el de TANE). En el segundo, la
 presentación del artista es una lámina y todo lo demás va al disco. Ocho o nueve
 láminas; más que eso se hace largo.
 

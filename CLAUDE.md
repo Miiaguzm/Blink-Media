@@ -475,10 +475,15 @@ y se publica a la misma dirección. Al leer el artifact publicado viene envuelto
 una carcasa —`<!doctype html>`, `<head>`, `<body>`— que pone el publicador: hay que
 sacarla antes de volver a publicar, o queda anidada.
 
-**Si el generador falla con un video, el montaje se hace acá con
-`hacer-historia.py`.** Es la salida de verdad y hay que ofrecerla temprano, no
-después de cuatro parches: toma el video, el rótulo y el titular, rinde las tres
-capas con Chromium y las monta con ffmpeg. No usa MediaRecorder, así que **no se
+**Si el generador falla con un video, el montaje se hace acá: `hacer-historia.py`
+para la historia vertical y `hacer-lamina.py` para la lámina de carrusel con un
+video adentro.** Es la salida de verdad y hay que ofrecerla temprano, no
+después de cuatro parches: toman el video y los textos, rinden las capas con
+Chromium y las montan con ffmpeg. `hacer-lamina.py` replica las medidas de
+`dibujarLamina()` del generador —margen 72, tope 195, texto Montserrat 600 de
+33px con 47.9 de interlínea, marco con 24px de radio— y **mide en el navegador
+cuántas líneas ocupa el texto en vez de estimarlo**, porque una línea de más
+corre el video 48px. No usa MediaRecorder, así que **no se
 congela la imagen ni se corta el audio**, y da el mismo archivo siempre. Probado
 con un .MOV HEVC de 40 s: 1200 cuadros de 1200, cero congelamientos, cero
 silencios. Mia manda el archivo subiéndolo al repo, que es público, porque por
@@ -532,6 +537,34 @@ criterio general: cuando algo se puede deducir del archivo, no se le pregunta.**
   diagnóstico, no otro arreglo a ciegas.** Acá probé dos hipótesis sin poder
   reproducir ninguna y la segunda la dejó peor; lo que hacía falta era que la
   herramienta dijera en pantalla qué estaba pasando.
+- **El desenfoque va en el lienzo chico, antes de agrandar.** Estaba al revés:
+  se agrandaba a 1496×1766 y recién ahí se aplicaba el `blur`, o sea el filtro
+  corría sobre 2,6 millones de píxeles por cuadro en vez de sobre los 73 mil del
+  lienzo reducido. Después del cambio el control de desenfoque dejó de costar:
+  0, 26 y 60 dan el mismo ritmo. No contradice la regla de arriba, porque el
+  gaussiano sigue siendo real: lo que no se puede es agrandar *sin* gaussiano.
+- **Cachear el cálculo, no los píxeles.** `partirBalanceado()` mide con
+  `measureText` palabra por palabra y lo repite estrechando el ancho: decenas de
+  mediciones por cuadro para repartir un texto que durante una grabación no
+  cambia nunca. Eso se guarda y listo. **Probé además cachear capas enteras en
+  lienzos aparte y sale PEOR**: dos `drawImage` de 1080×1350 con transparencia
+  por cuadro cuestan más que los gradientes que ahorran.
+- **Cómo medir esto, porque es fácil medir mal.** Un micro-benchmark que dispara
+  `input` no sirve: ese evento llama a `actualizar()`, que invalida las cachés, o
+  sea mide justo lo que no pasa al grabar. Lo que vale es **grabar de verdad con
+  Playwright y contar los cuadros del archivo** contra los que correspondían.
+- **El número absoluto de acá no es el de su máquina.** Este contenedor no tiene
+  GPU y no pasa de 13-15 cuadros por segundo ni con el código perfecto. Lo
+  comparable es la mejora, no el número; decírselo así.
+- **La grabación corre en tiempo real, y eso no se puede arreglar con
+  optimizaciones.** Si el navegador no alcanza, el audio sigue y la imagen se
+  queda atrás. Por eso al terminar compara los cuadros dibujados contra los que
+  correspondían y, si falta más del 15%, lo dice en pantalla con el porcentaje y
+  la salida. Antes eso pasaba en silencio y se descubría con el archivo subido.
+- **WebCodecs sería el arreglo de raíz y no se puede probar acá**: este Chromium
+  no trae `VideoEncoder` ni `AudioEncoder`, y no hay acceso a npm ni a los CDN
+  para traer un muxer. Escribirlo sería otro arreglo a ciegas, así que no va
+  hasta poder verificarlo.
 
 ---
 

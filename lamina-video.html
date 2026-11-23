@@ -1,0 +1,75 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Capa de la lámina de video</title>
+<!--
+  Las capas de la lámina de carrusel (1080×1350) con un video adentro, para
+  montarlas con ffmpeg. Son las mismas medidas que usa el generador en
+  dibujarLamina(): LMAR 72, TOPE_L 195, texto Montserrat 600 33px con 47.9 de
+  interlínea, y el marco del video con 24px de radio.
+
+  Se pide una capa a la vez con ?capa=velo|marca, y el rectángulo del video se
+  pasa con ?rx,?ry,?rw,?rh porque lo calcula el script, que es quien conoce la
+  proporción del archivo.
+-->
+<style>
+  @font-face{ font-family:"Anton"; src:local("Anton"); }
+  html,body{ margin:0; padding:0; background:transparent; }
+  body{ width:1080px; height:1350px; position:relative; overflow:hidden;
+        font-family:"Montserrat", system-ui, sans-serif; }
+  .capa{ position:absolute; inset:0; display:none; }
+  .capa.on{ display:block; }
+
+  /* El velo del generador: degradado vertical que oscurece arriba y abajo. */
+  .velo{ position:absolute; inset:0;
+    background:linear-gradient(to bottom,
+      rgba(10,10,10,0.80) 0%,
+      rgba(10,10,10,0.66) 22%,
+      rgba(10,10,10,0.58) 50%,
+      rgba(10,10,10,0.70) 78%,
+      rgba(10,10,10,0.88) 100%); }
+
+  /* Halo morado abajo y destello arriba a la izquierda del logo. */
+  .halo{ position:absolute; left:50%; transform:translateX(-50%);
+    bottom:-200px; width:1240px; height:840px;
+    background:radial-gradient(closest-side, rgba(123,44,255,0.38), rgba(123,44,255,0) 100%); }
+
+  .logo{ position:absolute; right:64px; top:28px; height:152px; }
+
+  /* El borde fino del marco, que en el generador se dibuja con stroke. */
+  .borde{ position:absolute; border:1.5px solid rgba(255,255,255,0.16);
+          border-radius:24px; box-sizing:border-box; }
+
+  .texto{ position:absolute; left:100px; right:100px;
+    text-align:center; color:rgba(255,255,255,0.90);
+    font-weight:600; font-size:33px; line-height:47.9px;
+    letter-spacing:0.1px; }
+</style>
+
+<div class="capa" id="velo">
+  <div class="velo"></div>
+  <div class="halo"></div>
+</div>
+
+<div class="capa" id="marca">
+  <img class="logo" src="logo-blink.png" alt="">
+  <div class="borde" id="borde"></div>
+  <div class="texto" id="texto"></div>
+</div>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const capa = p.get("capa") || "velo";
+  document.getElementById(capa === "marca" ? "marca" : "velo").classList.add("on");
+
+  const rx = +(p.get("rx") || 72),  ry = +(p.get("ry") || 433);
+  const rw = +(p.get("rw") || 936), rh = +(p.get("rh") || 527);
+
+  const b = document.getElementById("borde");
+  b.style.left = rx + "px"; b.style.top = ry + "px";
+  b.style.width = rw + "px"; b.style.height = rh + "px";
+
+  const t = document.getElementById("texto");
+  t.textContent = p.get("texto") || "";
+  // El texto arranca 34px debajo del marco, igual que el gap del generador.
+  t.style.top = (ry + rh + 34) + "px";
+</script>

@@ -110,6 +110,11 @@ def main():
     p.add_argument("--posx", type=float, default=50)
     p.add_argument("--pos", type=float, default=50)
     p.add_argument("--sin-audio", action="store_true")
+    # Para cortar un video largo. El punto no se elige por reloj: se buscan los
+    # cambios de escena con select='gt(scene,0.25)' y se cruza con el nivel del
+    # audio por ventanas de 1 s, para no cortar a alguien a mitad de una frase.
+    p.add_argument("--hasta", type=float, default=None,
+                   help="corta el video a estos segundos")
     # 23 deja el archivo cerca del peso del original. Bajarlo engorda el archivo
     # sin que se note, porque la calidad no puede subir más que la del video que ella mandó.
     p.add_argument("--crf", default="23")
@@ -120,6 +125,10 @@ def main():
             sys.exit("falta " + f)
 
     w, h, dur, hay_audio = sondear(a.entrada)
+    # El recorte se aplica antes de calcular los tiempos, para que la animación
+    # de salida caiga dentro del trozo que queda y no del video entero.
+    if a.hasta and a.hasta < dur:
+        dur = a.hasta
     esc = max(ANCHO / w, ALTO / h) * a.zoom
     aw, ah = w * esc, h * esc
     x, y = (aw - ANCHO) * a.posx / 100, (ah - ALTO) * a.pos / 100
@@ -145,7 +154,10 @@ def main():
                  x=round(x), y=round(y),
                  vi=max(0, entra - 0.10), vo=velo_sale, g=gate)
 
-        cmd = ["ffmpeg", "-v", "error", "-i", a.entrada]
+        cmd = ["ffmpeg", "-v", "error"]
+        if a.hasta:
+            cmd += ["-t", "%.3f" % dur]
+        cmd += ["-i", a.entrada]
         for capa in ("velo", "logo", "texto"):
             cmd += ["-loop", "1", "-t", "%.3f" % (dur + 1), "-i", c[capa]]
         cmd += ["-filter_complex", filtro, "-map", "[out]"]

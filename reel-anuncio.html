@@ -1,0 +1,95 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Capas del reel de anuncio</title>
+<!--
+  Capas para un reel de anuncio de 1080×1920, pensado para cuando Mia no alcanza
+  a grabarse: el reel se arma con fotos del artista y el texto va en pantalla,
+  así que acá no habla nadie y el registro es informativo, como en una lámina.
+
+  Se pide una capa a la vez con ?capa=velo|logo|texto. El velo y el logo son los
+  mismos de historia-video.html —logo de 150px arriba a la derecha a y=180,
+  dentro de la zona segura de Instagram— para que las dos piezas se reconozcan
+  como la misma marca.
+-->
+<style>
+  html,body{ margin:0; padding:0; background:transparent; }
+  body{ width:1080px; height:1920px; position:relative; overflow:hidden;
+        font-family:"Montserrat", system-ui, sans-serif; }
+  .capa{ position:absolute; inset:0; display:none; }
+  .capa.on{ display:block; }
+
+  /* El velo vive aparte del logo y del texto: así puede estar siempre puesto
+     mientras la marca parpadea, y no se ve la foto entera prendiéndose. */
+  .sombra{ position:absolute; left:0; right:0; top:0; height:470px;
+    background:linear-gradient(to bottom, rgba(10,10,10,0.62), rgba(10,10,10,0)); }
+  .pie{ position:absolute; left:0; right:0; bottom:0; height:1000px;
+    background:linear-gradient(to top,
+      rgba(10,10,10,0.92) 0%,
+      rgba(10,10,10,0.78) 22%,
+      rgba(10,10,10,0.42) 55%,
+      rgba(10,10,10,0) 100%); }
+
+  .logo{ position:absolute; top:180px; right:84px; width:150px; }
+
+  .bloque{ position:absolute; left:84px; right:84px; bottom:312px; }
+
+  .pildora{
+    display:inline-block; background:#7B2CFF; color:#fff;
+    font-size:23px; font-weight:800; letter-spacing:3.4px;
+    text-transform:uppercase; padding:11px 22px; border-radius:999px;
+    margin-bottom:26px;
+  }
+  .titular{
+    margin:0; color:#fff; font-weight:700; line-height:1.24;
+    letter-spacing:-0.2px;
+    /* Sin esto la última palabra queda sola en su línea: "…IT GIRL: THE /
+       SHOW". Reparte el texto entre las líneas en vez de llenar la primera. */
+    text-wrap:balance;
+  }
+  .cuenta{ display:flex; align-items:center; gap:14px; margin-top:26px; }
+  .cuenta i{ display:block; width:52px; height:3px; background:#7B2CFF; }
+  .cuenta span{ font-size:24px; color:rgba(255,255,255,0.82); font-weight:600; }
+</style>
+
+<div class="capa" id="velo">
+  <div class="sombra"></div>
+  <div class="pie"></div>
+</div>
+
+<div class="capa" id="logo">
+  <img class="logo" src="logo-blink.png" alt="">
+</div>
+
+<div class="capa" id="texto">
+  <div class="bloque">
+    <div class="pildora" id="p"></div>
+    <p class="titular" id="t"></p>
+    <div class="cuenta" id="c"><i></i><span></span></div>
+  </div>
+</div>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  const capa = q.get("capa") || "texto";
+  const el = document.getElementById(capa);
+  if (el) el.classList.add("on");
+
+  const pil = q.get("pildora") || "";
+  const p = document.getElementById("p");
+  if (pil) p.textContent = pil; else p.style.display = "none";
+
+  const cuenta = q.get("cuenta") || "";
+  const c = document.getElementById("c");
+  if (cuenta) c.querySelector("span").textContent = cuenta; else c.style.display = "none";
+
+  // El titular se achica solo hasta que entre en tres líneas, igual que en la
+  // plantilla de historia: así un texto largo nunca se sale del bloque.
+  const t = document.getElementById("t");
+  t.textContent = q.get("titular") || "";
+  let tam = 54;
+  t.style.fontSize = tam + "px";
+  while (tam > 32 && t.getBoundingClientRect().height > 54 * 1.24 * 3 + 2){
+    tam -= 1;
+    t.style.fontSize = tam + "px";
+  }
+</script>
